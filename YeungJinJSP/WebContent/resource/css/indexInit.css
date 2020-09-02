@@ -17,6 +17,7 @@
 	    display: block;
 	    top: 0px;
 	    position: fixed;
+	    z-index: 100;
 	}
 	
 	/* 헤더 메뉴들  */
@@ -71,7 +72,7 @@
 		margin-top: 70px;
 	}
 	
-	#index_div > nav {
+	#nav {
 		width: 200px;
 		height: 450px;
 		background-color: blue;
@@ -79,7 +80,6 @@
 		position: fixed;
 		font-size: medium;
 		top: 120px;
-		left: 0px;
 	}
 	
 	#content {
@@ -109,8 +109,17 @@
 	
 	footer {
 	    width: 100%;
-	    height: 150px;
+	    height: 250px;
 	    background-color: aqua;
 	    display: block;
+	}
+	
+	#policy {
+		height: 30%;
+		background-color: navy;
+	}
+	
+	#info {
+		height: 70%;
 	}
 }

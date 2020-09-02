@@ -30,7 +30,7 @@
 	</header>
 	
 	<div id="index_div">
-		<nav>
+		<nav id="nav">
 		
 		</nav>
 		
@@ -49,7 +49,11 @@
 	</div>
 	
 	<footer>
-		<div>
+		<div id="policy">
+			
+		</div>
+		
+		<div id="info">
 			
 		</div>
 	</footer>
