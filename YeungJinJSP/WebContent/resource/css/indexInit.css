@@ -8,81 +8,109 @@
     text-decoration: none;
 }
 
-/* 헤더 */
-header{
-    width: 100%;
-    height: 100px;
-    background-color: red;
-    display: block;
-}
-
-/* 헤더 메뉴들  */
-
-#index_logo {
-	position: absolute;
-	width: 400px;
-    height: 100px;;
-    top:0px;
-    left: 5%;
-}
-
-#index_menu_bar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100px;
-    width: 500px;
-    line-height: 95px;
-}
-
-#index_menu_bar > a {
-    display: inline-block;
-    color: black;
-    background-color: gray;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 18px;
-}
-
-#index_menu_bar > span {
-	display: inline-block;
-    width: 1px;
-    height: 9px;
-    background-color: aqua;
-}
-
-/* 메뉴바 + 섹션(컨텍스트) */
-
-#index_div {
-	width: 100%;
-	height: 1000px;
-	background: yellow;
-	display: block;
-	font-size: 0px;
-}
-
-#index_div > nav {
-    width: 25%;
-    height: 400px;
-    background-color: blue;
-    display: inline-block;
-    vertical-align: top;
-}
-
-#index_div > section {
-    width: 75%;
-    height: 1000px;
-    background-color: green;
-    display: inline-block;
-    vertical-align: top;
-    font-size: medium;
-}
-
-/* 푸터  */
-
-footer {
-    width: 100%;
-    height: 100px;
-    background-color: aqua;
-    display: block;
+@media (min-width: 1025px) {
+	/* 헤더 */
+	#indexHeader{
+	    width: 100%;
+	    height: 70px;
+	    background: linear-gradient(45deg, rgb(0, 128, 192), aqua);
+	    display: block;
+	    top: 0px;
+	    position: fixed;
+	}
+	
+	/* 헤더 메뉴들  */
+	
+	#index_logo {
+	    position: absolute;
+	    width: 400px;
+	    height: 70px;
+	    top: 0px;
+	    left: calc(10% - 100px);
+	}
+	
+	#index_menu_bar {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    height: 90px;
+	    width: 500px;
+	    line-height: 65px;
+	}
+	
+	#index_menu_bar > a {
+		display: inline-block;
+		color: white;
+		text-align: center;
+		vertical-align: middle;
+		font-size: 15px;
+		border: thin solid white;
+		border-radius: 7.5px;
+		line-height: 250%;
+		width: 105px;
+	}
+	
+	#index_menu_bar > a:hover {
+		background-color: #5bffdd;
+	}
+	
+	#index_menu_bar > span {
+		display: inline-block;
+	    width: 1px;
+	    height: 9px;
+	    background-color: black;
+	}
+	
+	/* 메뉴바 + 섹션(컨텍스트) */
+	
+	#index_div {
+		width: 100%;
+		background: yellow;
+		display: block;
+		font-size: 0px;
+		margin-top: 70px;
+	}
+	
+	#index_div > nav {
+		width: 200px;
+		height: 450px;
+		background-color: blue;
+		display: inline-block;
+		position: fixed;
+		font-size: medium;
+		top: 120px;
+		left: 0px;
+	}
+	
+	#content {
+	    width: 70%;
+	    height: 1000px;
+	    background-color: green;
+	    display: inline-block;
+	    vertical-align: top;
+	    font-size: medium;
+	    margin-left: 200px;
+	}
+	
+	#add {
+	    width: calc(30% - 200px);
+	    height: 600px;
+	    background-color: black;
+	    display: inline-block;
+	    vertical-align: top;
+	}
+	
+	#add > a > img {
+		width: 100%;
+		height: 100%;
+	}
+	
+	/* 푸터  */
+	
+	footer {
+	    width: 100%;
+	    height: 150px;
+	    background-color: aqua;
+	    display: block;
+	}
 }

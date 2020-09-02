@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Browser" id="47" x="48" y="32" width="1105" height="553" text="Browser&#xA;http://..." measuredWidth="1105" measuredHeight="553">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" id="49" x="48" y="85" width="1105" height="53" measuredWidth="1105" measuredHeight="53" background="#00f"/>
+  <widgets xsi:type="model:TextField" id="50" x="640" y="99" width="105" text="로그인" measuredWidth="105" measuredHeight="25" textAlignment="Center" background="#0ff">
+    <font size="13px"/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="54" x="768" y="98" width="105" text="아이디 찾기" measuredWidth="105" measuredHeight="25" textAlignment="Center" background="#0ff">
+    <font size="13px"/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="55" x="888" y="99" width="105" text="비밀번호 찾기" measuredWidth="105" measuredHeight="25" textAlignment="Center" background="#0ff">
+    <font size="13px"/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="56" x="1024" y="99" width="105" text="회원가입" measuredWidth="105" measuredHeight="25" textAlignment="Center" background="#0ff">
+    <font size="13px"/>
+  </widgets>
+  <widgets xsi:type="model:Image" id="57" x="176" y="84" width="313" height="43" measuredWidth="313" measuredHeight="43" border="true" src="WebContent/resource/images/index/index_logo.png"/>
+  <widgets xsi:type="model:Panel" id="58" x="48" y="184" width="257" height="265" measuredWidth="257" measuredHeight="265"/>
+  <widgets xsi:type="model:TextField" id="59" x="124" y="216" width="105" text="로그인" measuredWidth="105" measuredHeight="25" textAlignment="Center" background="#0ff">
+    <font size="13px"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" id="60" x="48" y="264" width="257" measuredWidth="257" measuredHeight="6"/>
+  <widgets xsi:type="model:Panel" id="61" x="48" y="488" width="1105" height="97" measuredWidth="1105" measuredHeight="97"/>
+  <widgets xsi:type="model:VLine" id="62" x="48" y="136" height="353" measuredWidth="6" measuredHeight="353"/>
+  <widgets xsi:type="model:VLine" id="63" x="1152" y="85" height="404" measuredWidth="6" measuredHeight="404"/>
+  <widgets xsi:type="model:Panel" id="64" x="1024" y="137" width="134" height="352" measuredWidth="134" measuredHeight="352"/>
+  <widgets xsi:type="model:Panel" id="65" x="304" y="137" width="721" height="352" measuredWidth="721" measuredHeight="352"/>
+  <widgets xsi:type="model:Image" id="68" x="1024" y="137" width="119" height="352" measuredWidth="119" measuredHeight="352" src="WebContent/resource/images/index/add.png"/>
+  <hRuler>
+    <guides/>
+  </hRuler>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
