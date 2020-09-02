@@ -4,17 +4,16 @@
 
 $(function() {
 	// css 제어
-	onScroll();
-	
+	onScroll($('#content').height(), $('#nav').height());
 	
 });
 
-function onScroll() {
+function onScroll(conH, navH) {
 	$(window).scroll(function() {
-		if(window.scrollY > $("#content").height() - 50 - $('#nav').height()) {	// 1000 + 70 - 450
+		if(window.scrollY > conH - 50 - navH) {	// 1000 + 70 - 450
 			$('#nav').css({
 				position: "absolute",
-				top: $('#content').height() + 70 - $('#nav').height() + "px"
+				top: conH + 70 - navH + "px"
 			});
 		} else {
 			$('#nav').css({
