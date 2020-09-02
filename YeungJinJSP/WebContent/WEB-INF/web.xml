@@ -6,7 +6,7 @@
 		http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID">
 	
-	<display-name>studyjsp</display-name>
+	<display-name>YeungJinJSP</display-name>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

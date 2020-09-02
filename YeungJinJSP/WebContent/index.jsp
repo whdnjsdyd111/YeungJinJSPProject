@@ -13,18 +13,20 @@
 		<jsp:include page="/common/header.jsp" />
 	</header>
 	
-	<nav>
+	<div id="index_div">
+		<nav>
 		
-	</nav>
-	
-	<section>
-		<c:if test="${ cont == null }">
-			<meta http-equiv="Refresh" content="0; url=/YeungJinJSP/index.do">
-		</c:if>
-		<c:if test="${ cont != null }">
-			<jsp:include page="${ cont }" />
-		</c:if>
-	</section>
+		</nav>
+		
+		<section>
+			<c:if test="${ cont == null }">
+				<meta http-equiv="Refresh" content="0; url=/YeungJinJSP/index.do">
+			</c:if>
+			<c:if test="${ cont != null }">
+				<jsp:include page="${ cont }" />
+			</c:if>
+		</section>
+	</div>
 	
 	<footer>
 		
