@@ -24,8 +24,7 @@ import main.command.CommandAction;
  * Servlet implementation class conroller
  */
 @WebServlet(
-		urlPatterns = { 
-				"/Controller", 
+		urlPatterns = {
 				"*.do"
 		}, 
 		initParams = { 
@@ -109,6 +108,7 @@ public class Controller extends HttpServlet {
 	private void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String view = null;
 		CommandAction com = null;
+		RequestDispatcher dispatcher = null;
 		
 		try {
 			String command = request.getRequestURI();
@@ -121,8 +121,10 @@ public class Controller extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		System.out.println(view);
 		request.setAttribute("cont", view);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+		
+		dispatcher = request.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(request, response);
 	}
 }

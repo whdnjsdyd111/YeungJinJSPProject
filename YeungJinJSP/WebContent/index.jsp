@@ -7,9 +7,9 @@
 <meta charset="UTF-8">
 <title>YeungJin 커뮤니티</title>
 <script type="text/javascript" src="resource/js/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/YeungJinJSP/resource/css/indexInit.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinCrazyBone/resource/css/indexInit.css">
 
-<script type="text/javascript" src="common/index.js"></script>
+<script type="text/javascript" src="member/index.js"></script>
 </head>
 <body>
 	<header id="indexHeader">

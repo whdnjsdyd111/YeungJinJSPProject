@@ -1,4 +1,4 @@
-package main.command.login;
+package main.command.member.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +9,6 @@ public class LoginProAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
-		return "/common/loginPro.jsp";
+		return "/member/login/loginPro.jsp";
 	}
 }
