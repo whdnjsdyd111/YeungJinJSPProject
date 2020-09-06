@@ -5,10 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.command.CommandAction;
 
-public class FindPwAction implements CommandAction {
+public class FindPwFormAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		// TODO Auto-generated method stub
-		return null;
+		return "/member/login/findPasswdForm.jsp";
 	}
 }

@@ -22,7 +22,7 @@
 		<div id="index_menu_bar">
 			<a href="loginForm.do">로그인</a>
 			<span></span>
-			<a href="">비밀번호 찾기</a>
+			<a href="findPasswdForm.do">비밀번호 찾기</a>
 			<span></span>
 			<a href="registerForm.do">회원가입</a>
 		</div>

@@ -10,15 +10,9 @@
 		<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/index.do">	
 	</c:when>
 	<c:when test="${ checkDB != 1 }">
-		<script>
-			alert("서버에 정보 입력을 실패하였습니다.");
-		</script>
-		<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/registerForm.do">
+		<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/DBFail.do">
 	</c:when>
 	<c:when test="${ checkMail != 1 }">
-		<script>
-			alert("메일 전송을 실패하였습니다.");
-		</script>
-		<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/registerForm.do">		
+		<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/emailFail.do">		
 	</c:when>
 </c:choose>

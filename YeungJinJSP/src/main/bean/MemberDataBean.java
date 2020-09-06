@@ -7,6 +7,7 @@ public class MemberDataBean {
 	private String mem_email;
 	private String mem_passwd;
 	private String mem_nickname;
+	private byte mem_auth;
 	private int mem_ex;
 	private int mem_level;
 	private Timestamp mem_date;
@@ -54,5 +55,11 @@ public class MemberDataBean {
 		this.mem_date = mem_date;
 	}
 	
+	public byte getMem_auth() {
+		return mem_auth;
+	}
 	
+	public void setMem_auth(byte mem_auth) {
+		this.mem_auth = mem_auth;
+	}
 }

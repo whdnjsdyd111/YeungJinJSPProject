@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="member/login/register.js"></script>
 <form id="reg_form" method="post" action="registerPro.do">
+	<h1>회원가입</h1><br>
 	<label>이메일</label>
 	<input type="text" id="reg_email" name="email"><label id="check_email"></label><br>
 	<label>패스워드</label>

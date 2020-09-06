@@ -121,6 +121,12 @@ public class Controller extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		if(view.equals("/error/emailFail.jsp") || view.equals("/error/DBFail.jsp")) {
+			dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+			return;
+		}
+		
 		request.setAttribute("cont", view);
 		
 		dispatcher = request.getRequestDispatcher("/index.jsp");

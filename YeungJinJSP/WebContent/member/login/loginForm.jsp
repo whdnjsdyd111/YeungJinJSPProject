@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <form >
-	<h1>로그인</h1>
+	<h1>로그인</h1><br>
 	<label>아이디</label>
 	<input type="text" id="id" name="id"><br>
 	<label>비밀번호</label>
