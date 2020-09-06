@@ -4,17 +4,11 @@
 
 $(function() {
 	// css 제어
-	onScroll($('#content').height(), $('#nav').height());
-	
-	
-});
-
-function onScroll(conH, navH) {
 	$(window).scroll(function() {
-		if(window.scrollY > conH - 50 - navH) {	// 1000 + 70 - 450
+		if(window.scrollY > $('#content').height() - 50 - $('#nav').height()) {	// 1000 + 70 - 450
 			$('#nav').css({
 				position: "absolute",
-				top: conH + 70 - navH + "px"
+				top: $('#content').height() + 70 - $('#nav').height() + "px"
 			});
 		} else {
 			$('#nav').css({
@@ -23,4 +17,6 @@ function onScroll(conH, navH) {
 			});
 		}
 	});
-}
+	
+	
+});

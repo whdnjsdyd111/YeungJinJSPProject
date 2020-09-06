@@ -6,6 +6,7 @@
     margin: 0;
     box-sizing: border-box;
     text-decoration: none;
+    word-break: keep-all;
 }
 
 @media (min-width: 1025px) {
@@ -48,7 +49,7 @@
 		border: thin solid white;
 		border-radius: 7.5px;
 		line-height: 250%;
-		width: 105px;
+		width: 120px;
 	}
 	
 	#index_menu_bar > a:hover {
@@ -60,6 +61,7 @@
 	    width: 1px;
 	    height: 9px;
 	    background-color: black;
+	    margin: 1px;
 	}
 	
 	/* 메뉴바 + 섹션(컨텍스트) */
@@ -84,7 +86,6 @@
 	
 	#content {
 	    width: 70%;
-	    height: 1200px;
 	    background-color: green;
 	    display: inline-block;
 	    vertical-align: top;
@@ -109,17 +110,57 @@
 	
 	footer {
 	    width: 100%;
-	    height: 250px;
-	    background-color: aqua;
+	    height: 200px;
 	    display: block;
 	}
 	
 	#policy {
 		height: 30%;
-		background-color: navy;
+		border-top: 1px solid #e4e4e4;
+		border-bottom: 1px solid #e4e4e4;
+		background-color: #e4e4e4;
+	}
+	
+	#pol_ul {
+		margin-left: 200px;
+		line-height: 60px;
+	}	
+	
+	#pol_ul > li {
+		display: inline-block;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	
+	#pol_ul > li > a {
+		color: #3b3b3b;
+	}
+	
+	#pol_ul > span {
+		width: 1px;
+		height: 9px;
+		background-color: black;
+		display: inline-block;
 	}
 	
 	#info {
 		height: 70%;
+	}
+	
+	#company {
+		width: calc(70% - 200px);
+	    margin-left: 200px;
+	    height: 100%;
+	    padding: 50px;
+	    padding-left: calc(20% - 150px);
+	    display: inline-block;
+	    vertical-align: top;
+	}
+	
+	#sns {
+		display: inline-block;
+		width: 25%;
+		height: 100%;
+		line-height: 200px;
 	}
 }

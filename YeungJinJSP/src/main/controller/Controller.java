@@ -121,7 +121,6 @@ public class Controller extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		System.out.println(view);
 		request.setAttribute("cont", view);
 		
 		dispatcher = request.getRequestDispatcher("/index.jsp");

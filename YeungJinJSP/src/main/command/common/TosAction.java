@@ -1,20 +1,14 @@
-package main.command.member.login;
+package main.command.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.bean.MemberDBBean;
 import main.command.CommandAction;
 
-public class LoginProAction implements CommandAction {
+public class TosAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-
-		
-		MemberDBBean mem = MemberDBBean.getInstance();
-		
-		
-		
-		return "/member/login/loginPro.jsp";
+		// TODO Auto-generated method stub
+		return "/common/tos.html";
 	}
 }

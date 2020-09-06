@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="YeungJinCrazyBone">
+    <wb-module deploy-name="YeungJinFunnyBone">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/YeungJinCrazyBone/build/classes"/>
-        <property name="context-root" value="YeungJinCrazyBone"/>
+        <property name="java-output-path" value="/YeungJinFunnyBone/build/classes"/>
+        <property name="context-root" value="YeungJinFunnyBone"/>
     </wb-module>
 </project-modules>
