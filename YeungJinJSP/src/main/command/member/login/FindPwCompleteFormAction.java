@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.bean.AES256Util;
-import main.bean.MemberDBBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
 
@@ -18,8 +17,7 @@ public class FindPwCompleteFormAction implements CommandAction {
 		String enc = request.getParameter("token");
 		String timeEnc = request.getParameter("timeToken");
 		int checkMail = 0;
-		
-		MemberDBBean mem = MemberDBBean.getInstance();
+
 		SHA256 sha = SHA256.getInstance();
 		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_findPassword_key"));
 		
@@ -37,6 +35,7 @@ public class FindPwCompleteFormAction implements CommandAction {
 		}
 		
 		request.setAttribute("checkMail", new Integer(checkMail));
+		request.setAttribute("enc", enc);
 		return "/member/login/findPasswdCompleteForm.jsp";
 	}
 }

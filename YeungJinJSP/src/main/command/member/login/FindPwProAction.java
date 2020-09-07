@@ -38,6 +38,12 @@ public class FindPwProAction implements CommandAction {
 		String enc = aes.aesEncode(String.valueOf(member.getMem_id()));
 		String timeEnc = aes.aesEncode(String.valueOf(new Timestamp(System.currentTimeMillis())));
 		
+		enc = enc.replace("+", "%2B");
+		enc = enc.replace("&", "%26");
+		
+		timeEnc = timeEnc.replace("+", "%2B");
+		timeEnc = timeEnc.replace("&", "%26");
+		
 		Properties p = new Properties();
 		
 		p.put("mail.smtp.host","smtp.naver.com");

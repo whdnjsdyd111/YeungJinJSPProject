@@ -1,13 +1,10 @@
 package main.command.member.login;
 
-import java.sql.Timestamp;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.bean.AES256Util;
 import main.bean.MemberDBBean;
-import main.bean.MemberDataBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
 
@@ -18,6 +15,8 @@ public class FindPwCompleteProAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 		String passwd = request.getParameter("password");
 		String enc = request.getParameter("enc");
+		
+		System.out.println(enc);
 		
 		MemberDBBean mem = MemberDBBean.getInstance();
 		SHA256 sha = SHA256.getInstance();
