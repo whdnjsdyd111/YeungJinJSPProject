@@ -123,7 +123,7 @@ public class MemberDBBean {
 		return check;
 	}
 	
-	public int userCheck(String mem_email, String mem_passwd) {
+	public int userCheck(String mem_email, String mem_passwd) {	// 유저 체크
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -154,6 +154,13 @@ public class MemberDBBean {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
 		}
 		
 		return check;
@@ -192,7 +199,7 @@ public class MemberDBBean {
 		return check;
 	}
 	
-	public int getMem_id(String mem_email) {
+	public int getMem_id(String mem_email) {	// 이메일로 유저 번호 얻기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -213,12 +220,19 @@ public class MemberDBBean {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
 		}
 		
 		return mem_id;
 	}
 	
-	public int updateAuth(int mem_id) {
+	public int updateAuth(int mem_id) {	// 권한 부여
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int check = 0;
@@ -233,12 +247,17 @@ public class MemberDBBean {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
 		}
 		
 		return check;
 	}
 	
-	public int updatePassword(int mem_id, String passwd) {
+	public int updatePassword(int mem_id, String passwd) {	// 비번 변경
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int check = 0;
@@ -259,12 +278,17 @@ public class MemberDBBean {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
 		}
 		
 		return check;
 	}
 	
-	public MemberDataBean getMember(String email) {
+	public MemberDataBean getMember(String email) {	// 이메일로 빈 얻기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -291,12 +315,19 @@ public class MemberDBBean {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
 		}
 		
 		return mem;
 	}
 	
-	public MemberDataBean getMember(int mem_id) {
+	public MemberDataBean getMember(int mem_id) {	// 유저 번호로 빈 얻기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -323,6 +354,13 @@ public class MemberDBBean {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
 		}
 		
 		return mem;

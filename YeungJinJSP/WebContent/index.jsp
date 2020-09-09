@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/dialog.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/memberLogin.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardWrite.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/writeBoard.css">
 
 <script type="text/javascript" src="member/index.js"></script>
 </head>

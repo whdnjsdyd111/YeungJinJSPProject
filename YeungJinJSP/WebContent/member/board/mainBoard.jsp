@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${ kind == null || sort == null }">
+	<script>
+		window.location.href = "index.do?kind=all&sort=pop";
+	</script>
+</c:if>
+<script type="text/javascript" src="member/board/mainBoard.js"></script>
 <div class="board_menu">
 	<div class="board_menu1" >	<!-- 인기글 등의 메뉴, 검색, 글쓰기 기능 -->
 		<h3>모든 게시판</h3>
@@ -12,8 +18,8 @@
 		</c:if>
 	</div>
 	<div class="board_menu2">
-		<a>인기글</a>
-		<a>최신글</a>
+		<a href="index.do?kind=${ kind }&sort=pop">인기글</a>
+		<a href="index.do?kind=${ kind }&sort=recent">최신글</a>
 		<a>TODAY</a>
 		<a>최악글</a>
 		<select>
@@ -28,20 +34,24 @@
 
 </div>
 <section class="board_whole">
-	<article class="board_obj">
+	<c:forEach var="board" items="${ boardList }" >
+		<article class="board_obj">
 		<div class="board_rec">
 			<div>추천 수</div>
-			<div>1000</div>
+			<div>${ board.getBoard_reco() }</div>
 		</div>
-		<div class="board_title">
-			<div>게시판 타이틀</div>
-			<div>작성자 이름   작성일    게시판 종류</div>
+		<div class="board_info">
+			<div id="board_title">${ board.getBoard_title() }</div>
+			<div class="board_publisher">${ board.getMem_nickname() }</div><div class="board_level">${ board.getMem_level() }</div>
+			<div class="board_date">${ board.getBoard_date() }</div>
+			<div class="board_kind">${ board.getKind_name() }</div>
 		</div>
 		<div class="board_read">
 			<div>조회수</div>
-			<div>1000</div>
+			<div>${ board.getBoard_readcount() }</div>
 		</div>
-	</article>
+		</article>
+	</c:forEach>
 	<article class="board_obj">
 		<div class="board_rec">추천 수</div>
 		<div class="board_title">내용</div>
@@ -88,3 +98,6 @@
 		<div class="board_read">조회수</div>
 	</article>
 </section>
+<div class="next_page">
+	<button value="${ page }" id="next_pageBtn">다음 페이지</button>
+</div>

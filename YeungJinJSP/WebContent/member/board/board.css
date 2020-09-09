@@ -66,13 +66,32 @@
 		text-align: center;
 	}
 	
-	.board_title {
+	.board_info {
 		background-color: maroon;
 		width:70%;
+	}
+	
+	.board_info > div {
+		display: inline-block;
+	}
+	
+	#board_title {
+		display: block;
 	}
 	
 	.board_read {
 		background-color: olive;
 		width: 15%;
 	}
+	
+	.next_page > button {
+		background: #fff;
+		height: 50px;
+		width: 150px;
+		display: inline-block;
+		border-radius: 10px;
+		margin-left: calc(50% - 75px);
+	}
+	
+	
 }
