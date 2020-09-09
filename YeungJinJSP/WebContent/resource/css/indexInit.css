@@ -52,6 +52,16 @@
 		width: 120px;
 	}
 	
+	#index_menu_bar > label {
+		display: inline-block;
+		color: white;
+		text-align: center;
+		vertical-align: middle;
+		font-size: 15px;
+		line-height: 250%;
+		width: 120px;
+	}
+	
 	#index_menu_bar > a:hover {
 		background-color: #5bffdd;
 	}
@@ -81,7 +91,7 @@
 		display: inline-block;
 		position: fixed;
 		font-size: medium;
-		top: 120px;
+		top: 110px;
 	}
 	
 	#content {

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.write_whole {
+	width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.write_input {
+	width: 100%;
+}

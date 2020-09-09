@@ -9,28 +9,30 @@
 <script type="text/javascript" src="resource/js/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/indexInit.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/dialog.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/memberLogin.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardWrite.css">
 
 <script type="text/javascript" src="member/index.js"></script>
 </head>
 <body>
 	<header id="indexHeader">
-		<!-- 고정되어 움직이는 헤더 -->
 		<a href="index.do">
 			<img id="index_logo" src="resource/images/index/index_logo.png">
 		</a>
 		
-		<div id="index_menu_bar">
-			<a href="loginForm.do">로그인</a>
-			<span></span>
-			<a href="findPasswdForm.do">비밀번호 찾기</a>
-			<span></span>
-			<a href="registerForm.do">회원가입</a>
-		</div>
+		<c:if test="${ empty sessionScope.YJFBID_SES }">
+			<jsp:include page="/index/index_menu_NoId.html" />
+		</c:if>
+		<c:if test="${ !empty sessionScope.YJFBID_SES }">
+			<jsp:include page="/index/index_menu_hasId.jsp" />
+		</c:if>
 	</header>
 	
 	<div id="index_div">
 		<nav id="nav">
-		
+			
 		</nav>
 		
 		<section id="content">

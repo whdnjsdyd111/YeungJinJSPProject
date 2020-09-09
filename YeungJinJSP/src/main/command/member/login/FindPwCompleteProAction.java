@@ -18,11 +18,11 @@ public class FindPwCompleteProAction implements CommandAction {
 		
 		System.out.println(enc);
 		
-		MemberDBBean mem = MemberDBBean.getInstance();
+		MemberDBBean memProcess = MemberDBBean.getInstance();
 		SHA256 sha = SHA256.getInstance();
 		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_findPassword_key"));
 
-		int checkDB = mem.updatePassword(Integer.valueOf(aes.aesDecode(enc)), passwd);
+		int checkDB = memProcess.updatePassword(Integer.valueOf(aes.aesDecode(enc)), passwd);
 		
 		request.setAttribute("checkDB", new Integer(checkDB));
 		return "/member/login/findPasswdCompletePro.jsp";

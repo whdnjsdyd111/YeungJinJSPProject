@@ -123,6 +123,42 @@ public class MemberDBBean {
 		return check;
 	}
 	
+	public int userCheck(String mem_email, String mem_passwd) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SHA256 sha = SHA256.getInstance();
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT mem_passwd, mem_auth FROM member WHERE mem_email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem_email);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(BCrypt.checkpw(sha.getSha256(mem_passwd), rs.getString("mem_passwd"))) {
+					if(rs.getString("mem_auth").equals("Y")) {
+						check = 1;
+					} else {
+						check = 2;
+					}
+				} else {
+					check = 0;
+				}
+			} else {
+				check = 0;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return check;
+	}
+	
 	public int insertMember(String mem_email, String mem_passwd, String mem_nickname) {	// 데이터 인서트
 		Connection conn = null;
 		PreparedStatement pstmt = null;

@@ -13,8 +13,8 @@ public class ConfirmEmailAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
 		
-		MemberDBBean mem = MemberDBBean.getInstance();
-		int check = mem.checkEmail(email);
+		MemberDBBean memProcess = MemberDBBean.getInstance();
+		int check = memProcess.checkEmail(email);
 		
 		request.setAttribute("check", new Integer(check));
 		return "/member/login/confirmEmail.jsp";

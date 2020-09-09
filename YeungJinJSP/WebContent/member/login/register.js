@@ -7,6 +7,11 @@ $(function() {
 	
 	// 이메일 체크
 	$('#reg_email').on("propertychange change keyup paste input", function() {
+		if($('#reg_email').val() == "") {
+			$('#check_email').text("");
+			return;
+		}
+		
 		if(validateEmail($('#reg_email').val())) {
 			
 			var query = {
@@ -41,8 +46,12 @@ $(function() {
 	});
 	
 	// 비밀번호 체크
-	
 	$('#reg_passwd').on("propertychange change keyup paste input", function() {
+		if($('#reg_passwd').val() == "") {
+			$('#check_passwd').text("");
+			return;
+		}
+		
 		var pw = $("#reg_passwd").val();
 		var num = pw.search(/[0-9]/g);
 		var eng = pw.search(/[a-z]/ig);
@@ -68,6 +77,12 @@ $(function() {
 	
 	$('#reg_nick').on("propertychange change keyup paste input", function() {
 		var nick = $('#reg_nick').val();
+		
+		if(nick == "") {
+			$('#check_nick').text("");
+			return;
+		}
+		
 		var spe = nick.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 		
 		if(nick.length < 3 || nick.length > 20) {

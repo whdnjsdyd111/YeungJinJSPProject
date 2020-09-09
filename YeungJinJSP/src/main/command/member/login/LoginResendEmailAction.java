@@ -1,6 +1,5 @@
 package main.command.member.login;
 
-import java.sql.Timestamp;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -19,30 +18,21 @@ import main.bean.MemberDataBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
 
-public class FindPwProAction implements CommandAction {
+public class LoginResendEmailAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-
-		MemberDBBean memProcess = MemberDBBean.getInstance();
+		
 		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_findPassword_key"));
-		MemberDataBean member = new MemberDataBean();
+		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_register_key"));
+		MemberDBBean memProcess = MemberDBBean.getInstance();
 		
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
+		MemberDataBean mem = memProcess.getMember(email);
 		
-		member = memProcess.getMember(email);
-		
+		String nick = mem.getMem_nickname();
+		String enc = aes.aesEncode(String.valueOf(mem.getMem_id()));
 		int checkMail = 0;
-		
-		String enc = aes.aesEncode(String.valueOf(member.getMem_id()));
-		String timeEnc = aes.aesEncode(String.valueOf(new Timestamp(System.currentTimeMillis())));
-		
-		enc = enc.replace("+", "%2B");
-		enc = enc.replace("&", "%26");
-		
-		timeEnc = timeEnc.replace("+", "%2B");
-		timeEnc = timeEnc.replace("&", "%26");
 		
 		Properties p = new Properties();
 		
@@ -63,14 +53,14 @@ public class FindPwProAction implements CommandAction {
 			ses.setDebug(true);
 			MimeMessage msg = new MimeMessage(ses);
 			
-			msg.setSubject("YJFB의 비밀번호를 재설정하세요!");
+			msg.setSubject("YJFB의 회원가입을 완료하세요!");
 			
 			StringBuffer buffer = new StringBuffer();
-			buffer.append("<h1>비밀번호 재설정</h1><br>");
-			buffer.append("<p>" + member.getMem_nickname() +"님의 이메일 주소가 " + email +"이(가) 맞다면 증명하여 비밀번호를 재설정하기 위해 아래 링크로 이동해주세요.<br>");
-			buffer.append("<p>10분 이내로 완료하십시오.</p><br>");
-			buffer.append("<a href='http://localhost:8001/YeungJinFunnyBone/findPasswdCompleteForm.do?token=" + 
-					enc + "&timeToken=" + timeEnc + "'>비밀번호 재설정</a>");
+			buffer.append("<h1>이메일 인증</h1><br>");
+			buffer.append("<p>" + nick +"님의 이메일 주소가 " + email +"이(가) 맞다면 증명하여 회웝가입을 완료하여 주십시오.<br>");
+			buffer.append("<p>1시간 이내로 완료하십시오.</p><br>");
+			buffer.append("<a href='http://localhost:8001/YeungJinFunnyBone/registerComplete.do?token=" + 
+					enc + "'>회원가입 완료</a>");
 			msg.setFrom(SMTPAuthenticator.from);
 			
 			Address toAddr = new InternetAddress(email);
@@ -81,9 +71,17 @@ public class FindPwProAction implements CommandAction {
 			checkMail = 1;
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			request.setAttribute("checkMail", new Integer(checkMail));
+			
+			return "/member/login/loginResendEmail.jsp";
 		}
-
+		
 		request.setAttribute("checkMail", new Integer(checkMail));
-		return "/member/login/findPasswdPro.jsp";
+		
+		return "/member/login/loginResendEmail.jsp";
+		
+		
+		
 	}
 }

@@ -21,7 +21,7 @@ public class RegisterProAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		MemberDBBean mem = MemberDBBean.getInstance();
+		MemberDBBean memProcess = MemberDBBean.getInstance();
 		SHA256 sha = SHA256.getInstance();
 		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_register_key"));
 		
@@ -31,10 +31,10 @@ public class RegisterProAction implements CommandAction {
 		String nick = request.getParameter("nick");
 		
 		
-		int checkDB = mem.insertMember(email, passwd, nick);
+		int checkDB = memProcess.insertMember(email, passwd, nick);
 		int checkMail = 0;
 		
-		int mem_id = mem.getMem_id(email);
+		int mem_id = memProcess.getMem_id(email);
 		
 		if(mem_id == 0 || checkDB != 1) {
 			request.setAttribute("checkDB", new Integer(checkDB));

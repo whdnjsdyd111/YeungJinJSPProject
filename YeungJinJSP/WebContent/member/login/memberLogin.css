@@ -1,2 +1,93 @@
 @charset "UTF-8";
 
+@media (min-width: 1025px) {
+	.login_form {
+		background-color: white;
+		height: 600px;
+	}
+	
+	.login_label {
+		color: #d8d8d8;
+		left: calc(50% - 200px);
+	    position: relative;
+	}
+	
+	.login_reg {
+		display: inline-block;
+		width: 100%;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		text-align: center;
+	}
+	
+	.login_h1 {
+		width: 100%;
+	    text-align: center;
+	    font-size: 50px;
+	    padding-top: 50px;
+	}
+	
+	.login_input {
+		border-width: 0px;
+	    border-bottom: 1px solid #d8d8d8;
+	    position: relative;
+	    width: 400px;
+	    height: 30px;
+	    margin-top: 20px;
+	    margin-bottom: 50px;
+	    left: calc(50% - 200px);
+	}
+	
+	.login_input:focus {
+		outline: none;
+	}
+	
+	.login_btn {
+		width: 200px;
+		left: calc(50% - 100px);
+		position: relative;
+		background-color: #00ff70;
+		border: 1px solid #d8d8d8;
+		height: 75px;
+	}
+	
+	.register_btn {
+		width: 200px;
+		left: calc(50% - 200px);
+		position: relative;
+		background-color: #00ff70;
+		border: 1px solid #d8d8d8;
+		height: 75px;
+	}
+	
+	
+	
+	.register_btn:disabled {
+		background-color: #d8d8d8;
+	}
+	
+	.register_btn:disabled:hover {
+		cursor: default;
+	}
+	
+	.register_btn:hover {
+		cursor: pointer;
+	}
+	
+	.login_btn:disabled {
+		background-color: #d8d8d8;
+	}
+	
+	.login_btn:hover {
+		cursor: pointer;
+	}
+	
+	.login_btn:disabled:hover {
+		cursor: default;
+	}
+	
+	.login_a {
+		color: blue;
+	    text-decoration: revert;
+	}
+}
