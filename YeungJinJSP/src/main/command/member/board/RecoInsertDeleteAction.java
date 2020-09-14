@@ -10,7 +10,7 @@ import main.bean.RecommendDBBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
 
-public class BookmarkRecoInsertAction implements CommandAction {
+public class RecoInsertDeleteAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
@@ -22,7 +22,6 @@ public class BookmarkRecoInsertAction implements CommandAction {
 		SHA256 sha = SHA256.getInstance();
 		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
-		BookmarkDBBean bookmarkProcess = BookmarkDBBean.getInstance();
 		RecommendDBBean recomendProcess = RecommendDBBean.getInstance();
 		
 		int board_id = Integer.valueOf(request.getParameter("board_id"));
@@ -30,28 +29,11 @@ public class BookmarkRecoInsertAction implements CommandAction {
 		
 		boolean check_reco = Boolean.valueOf(request.getParameter("check_reco"));
 		boolean check_nonReco = Boolean.valueOf(request.getParameter("check_nonReco"));
-		boolean check_bookmark = Boolean.valueOf(request.getParameter("check_bookmark"));
-		
 		boolean check_db_reco = Boolean.valueOf(request.getParameter("check_db_reco"));
-		boolean check_db_bookmark = Boolean.valueOf(request.getParameter("check_db_bookmark"));
 		
 		int reco = Integer.valueOf(request.getParameter("reco"));
 		int nonReco = Integer.valueOf(request.getParameter("nonReco"));
-		
-		if(check_db_bookmark && !check_bookmark) {
-			// 북마크 디비에 값이 있는데 북마크 취소한 경우
-			// delete 하기
-			int bookmark_db_check = bookmarkProcess.deleteBookmark(mem_id, board_id);
-			request.setAttribute("bookmark_db_check", new Integer(bookmark_db_check));
-		}
-		
-		if(!check_db_bookmark && check_bookmark) {
-			// 북마크 디비에 값이 없는데 북마크 체크한 경우
-			// insert 하기
-			int bookmark_db_check = bookmarkProcess.insertBookmark(mem_id, board_id);
-			request.setAttribute("bookmark_db_check", new Integer(bookmark_db_check));
-		}
-		
+	
 		if(check_db_reco) {
 			// 추천 디비에 값이 있을 경우
 			if(check_reco) {
@@ -92,6 +74,6 @@ public class BookmarkRecoInsertAction implements CommandAction {
 			}
 		}
 			
-		return "/member/board/bookmarkRecoInsert.jsp";
+		return "/member/board/recoInsertDelete.jsp";
 	}
 }
