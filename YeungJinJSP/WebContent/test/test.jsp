@@ -9,27 +9,20 @@
 <script type="text/javascript" src="../resource/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#a').click(function() {
-			alert($('#d option:selected').val());
-		});
-		
-		$('a').click(function() {
-			var check = confirm("페이지 나겠습니까?");
-			
-			if(check == false)
-				return false;
-			
-		});
+		$('#div2').click(function() {
+			$('#div2').parent('#div1').after("<p>ddd</p>");
+		})
 	});
+	
 </script>
 </head>
 <body>
-	<select id="d">
-		<option value="100">1</option>
-		<option value="200">2</option>
-		<option value="300">3</option>
-	</select>
-	<button id="a" type="button">d</button>
-	<a href="../index.do">index</a>
+	<div id="div1">
+		<div id="div2">
+			<div id="div2" style="width: 100px; height: 100px; background-color: red" >
+				
+			</div>
+		</div>
+	</div>
 </body>
 </html>

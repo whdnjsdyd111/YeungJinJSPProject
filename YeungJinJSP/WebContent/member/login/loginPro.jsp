@@ -7,12 +7,12 @@
 	<%
 		request.setCharacterEncoding("utf-8");
 		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_email_key"));
+		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 	
-		String email = request.getParameter("email");
-		String emailEnc = aes.aesEncode(email);
+		String id = String.valueOf(request.getAttribute("mem_id"));
+		String idEnc = aes.aesEncode(id);
 		
-		session.setAttribute("YJFBID_SES", emailEnc);
+		session.setAttribute("YJFBID_SES", idEnc);
 	%>
 </c:if>
 <p id='ck'>${ check }

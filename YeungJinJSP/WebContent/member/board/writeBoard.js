@@ -37,7 +37,7 @@ $(function() {
 					
 					if(check == "1") {
 						alert("게시글 작성 완료하였습니다.");
-						window.location.href = "index.do";
+						window.location.href = "mainBoard.do";
 					} else {
 						window.location.href = "DBFail.do";
 					}

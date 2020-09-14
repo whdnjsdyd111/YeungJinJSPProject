@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="member/login/register.js"></script>
+
 <form id="reg_form" method="post" action="registerPro.do" class="login_form" autocomplete="off">
 	<h1 class="login_h1">회원가입</h1><br>
 	<label class="login_label" >이메일</label><br>

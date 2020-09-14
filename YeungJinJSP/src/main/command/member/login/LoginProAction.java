@@ -13,13 +13,12 @@ public class LoginProAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
-		
+
 		MemberDBBean memProcess = MemberDBBean.getInstance();
 		int check = memProcess.userCheck(email, pw);
-		
-		if(check == 1)
-			request.setAttribute("email", email);
-		
+		int mem_id = memProcess.getMem_id(email);
+
+		request.setAttribute("mem_id", new Integer(mem_id));
 		request.setAttribute("check", new Integer(check));
 		return "/member/login/loginPro.jsp";
 	}

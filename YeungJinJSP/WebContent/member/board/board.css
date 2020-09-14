@@ -85,12 +85,12 @@
 	}
 	
 	.next_page > button {
-		background: #fff;
 		height: 50px;
 		width: 150px;
 		display: inline-block;
 		border-radius: 10px;
 		margin-left: calc(50% - 75px);
+		border: 0px;
 	}
 	
 	

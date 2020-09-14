@@ -25,7 +25,7 @@ $(function() {
 				
 				if(check == "1") {
 					alert("메일 전송이 성공하였습니다.")
-					window.location.href = "index.do";
+					window.location.href = "mainBoard.do";
 				} else {
 					alert("메일 전송이 실패하였습니다.");
 					window.location.href = "loginForm.do";

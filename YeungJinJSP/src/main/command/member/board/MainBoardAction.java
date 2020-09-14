@@ -35,11 +35,19 @@ public class MainBoardAction implements CommandAction {
 				boardList = boardProcess.getJoinBdMemKindOrderByReco(Integer.valueOf(page));
 			else if(sort.equals("recent"))
 				boardList = boardProcess.getJoinBdMemKindOrderByTime(Integer.valueOf(page));
+			else if(sort.equals("TODAY"))
+				boardList = boardProcess.getJoinBdMemKindOrderByRecoToday(Integer.valueOf(page));
+			else if(sort.equals("nonReco"))
+				boardList = boardProcess.getJoinBdMemKindOrderByNoReco(Integer.valueOf(page));
 		} else {
 			if(sort.equals("pop"))
 				boardList = boardProcess.getJoinBdMemKindOrderByReco(Integer.valueOf(page), Integer.valueOf(kind));
 			else if(sort.equals("recent"))
 				boardList = boardProcess.getJoinBdMemKindOrderByTime(Integer.valueOf(page), Integer.valueOf(kind));
+			else if(sort.equals("TODAY"))
+				boardList = boardProcess.getJoinBdMemKindOrderByRecoToday(Integer.valueOf(page), Integer.valueOf(kind));
+			else if(sort.equals("nonReco"))
+				boardList = boardProcess.getJoinBdMemKindOrderByNoReco(Integer.valueOf(page), Integer.valueOf(kind));
 		}
 		
 		request.setAttribute("boardList", boardList);

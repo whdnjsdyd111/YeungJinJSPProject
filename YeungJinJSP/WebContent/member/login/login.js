@@ -42,7 +42,7 @@ $(function() {
 				
 				if(check == "1") {	// 아이디, 비번 맞을 시
 					alert("로그인이 완료되었습니다.");
-					window.location.href = "index.do";
+					window.location.href = "mainBoard.do";
 				} else if(check == "2") {	// 이메일 인증이 아직 안된 아이디
 					$('#load_dialog').load('member/login/dialog.jsp');
 				} else {	// 틀렸을 시

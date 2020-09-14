@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${ kind == null || sort == null }">
 	<script>
-		window.location.href = "index.do?kind=all&sort=pop";
+		window.location.href = "mainBoard.do?kind=all&sort=pop";
 	</script>
 </c:if>
 <script type="text/javascript" src="member/board/mainBoard.js"></script>
@@ -18,10 +18,10 @@
 		</c:if>
 	</div>
 	<div class="board_menu2">
-		<a href="index.do?kind=${ kind }&sort=pop">인기글</a>
-		<a href="index.do?kind=${ kind }&sort=recent">최신글</a>
-		<a>TODAY</a>
-		<a>최악글</a>
+		<a href="mainBoard.do?kind=${ kind }&sort=pop">인기글</a>
+		<a href="mainBoard.do?kind=${ kind }&sort=recent">최신순</a>
+		<a href="mainBoard.do?kind=${ kind }&sort=TODAY">TODAY</a>
+		<a href="mainBoard.do?kind=${ kind }&sort=nonReco">최악글</a>
 		<select>
 			<option>작성자</option>
 			<option>내용</option>
@@ -36,12 +36,18 @@
 <section class="board_whole">
 	<c:forEach var="board" items="${ boardList }" >
 		<article class="board_obj">
-		<div class="board_rec">
-			<div>추천 수</div>
-			<div>${ board.getBoard_reco() }</div>
+		<div class="board_rec">			
+			<c:if test="${ sort == 'nonReco' }">
+				<div>비추 수</div>
+				<div>${ board.getBoard_nonReco() }</div>
+			</c:if>
+			<c:if test="${ sort != 'nonReco' }">
+				<div>추천 수</div>
+				<div>${ board.getBoard_reco() }</div>
+			</c:if>
 		</div>
 		<div class="board_info">
-			<div id="board_title">${ board.getBoard_title() }</div>
+			<div id="board_title"><a href="boardContent.do?bdNum=${ board.getBoard_id() }">${ board.getBoard_title() }</a></div>
 			<div class="board_publisher">${ board.getMem_nickname() }</div><div class="board_level">${ board.getMem_level() }</div>
 			<div class="board_date">${ board.getBoard_date() }</div>
 			<div class="board_kind">${ board.getKind_name() }</div>

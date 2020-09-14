@@ -13,12 +13,14 @@
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/memberLogin.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/writeBoard.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardContent.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/comment.css">
 
 <script type="text/javascript" src="member/index.js"></script>
 </head>
 <body>
 	<header id="indexHeader">
-		<a href="index.do">
+		<a href="mainBoard.do">
 			<img id="index_logo" src="resource/images/index/index_logo.png">
 		</a>
 		
@@ -37,7 +39,7 @@
 		
 		<section id="content">
 			<c:if test="${ cont == null }">
-				<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/index.do">
+				<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/mainBoard.do">
 			</c:if>
 			<c:if test="${ cont != null }">
 				<jsp:include page="${ cont }" />
@@ -66,7 +68,7 @@
 			<div id="company">
 				대구광역시 북구 복현로 35 본관 320호 <br/>
 				전화 053) 940 - 5114 (대표자 : 조원용)<br>
-				Copyright WD-A Jo Won Yong All rights reserved
+				&copy; Copyright WD-A Jo Won Yong All rights reserved
 			</div>
 			<div id="sns">
 				<a href=""><img src="resource/images/index/twitter.png" /></a>

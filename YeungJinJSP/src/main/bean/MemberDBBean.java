@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -70,38 +69,6 @@ public class MemberDBBean {
 			String sql = "SELECT mem_nickname FROM member WHERE mem_nickname = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_nickname);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next())
-				check = 1;
-			else
-				check = 0;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(rs != null)
-				try { rs.close(); } catch(SQLException e) {}
-			if(pstmt != null )
-				try { pstmt.close(); } catch(SQLException e) {}
-			if(conn != null)
-				try { conn.close(); } catch(SQLException e) {}
-		}
-		
-		return check;
-	}
-	
-	public int checkMem_id(int mem_id) {	// mem_id 존재 여부
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int check = 0;
-		
-		try {
-			conn = getConnection();
-			String sql = "SELECT mem_id FROM member WHERE mem_id = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, mem_id);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next())
@@ -292,7 +259,7 @@ public class MemberDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		MemberDataBean mem = new MemberDataBean();
+		MemberDataBean mem = null;
 		
 		try {
 			conn = getConnection();
@@ -304,6 +271,7 @@ public class MemberDBBean {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
+				mem = new MemberDataBean();
 				mem.setMem_id(rs.getInt(1));
 				mem.setMem_email(rs.getString(2));
 				mem.setMem_passwd(rs.getString(3));
@@ -331,7 +299,7 @@ public class MemberDBBean {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		MemberDataBean mem = new MemberDataBean();
+		MemberDataBean mem = null;
 		
 		try {
 			conn = getConnection();
@@ -343,6 +311,7 @@ public class MemberDBBean {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
+				mem = new MemberDataBean();
 				mem.setMem_id(rs.getInt(1));
 				mem.setMem_email(rs.getString(2));
 				mem.setMem_passwd(rs.getString(3));

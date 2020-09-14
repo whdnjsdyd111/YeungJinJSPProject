@@ -4,30 +4,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.bean.AES256Util;
-import main.bean.BoardDBBean;
-import main.bean.MemberDBBean;
+import main.bean.NestCommentDBBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
 
-public class WriteBoardProAction implements CommandAction {
+public class NestCommentInsertAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-
+		
 		request.setCharacterEncoding("utf-8");
-		String title = request.getParameter("title");
+		
+		int com_id = Integer.valueOf(request.getParameter("com_id"));
 		String content = request.getParameter("content");
-		int kind = Integer.valueOf(request.getParameter("kind"));
-		String idEnc = String.valueOf(request.getSession().getAttribute("YJFBID_SES"));
 		
 		SHA256 sha = SHA256.getInstance();
 		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
+		NestCommentDBBean nestProcess = NestCommentDBBean.getInstance();
 		
-		String idDec = aes.aesDecode(idEnc);
+		int mem_id = Integer.valueOf(aes.aesDecode((String) request.getSession().getAttribute("YJFBID_SES")));
 		
-		BoardDBBean boardProcess = BoardDBBean.getInstance();
-		int check = boardProcess.insertBoard(Integer.valueOf(idDec), kind, title, content);
+		int check = nestProcess.insertNestComment(com_id, mem_id, content);
 		
 		request.setAttribute("check", new Integer(check));
-		return "/member/board/writeBoardPro.jsp";
+		return "member/board/nestCommentInsert.jsp";
 	}
 }

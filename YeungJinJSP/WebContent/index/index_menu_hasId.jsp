@@ -8,13 +8,13 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	SHA256 sha = SHA256.getInstance();
-	AES256Util aes = new AES256Util(sha.getSha256("random_mem_email_key"));
+	AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 
-	String emailEnc = String.valueOf(session.getAttribute("YJFBID_SES"));
-	String email = aes.aesDecode(emailEnc);
+	String idEnc = String.valueOf(session.getAttribute("YJFBID_SES"));
+	String id = aes.aesDecode(idEnc);
 	MemberDBBean memProcess = MemberDBBean.getInstance();
 	
-	MemberDataBean mem = memProcess.getMember(email);
+	MemberDataBean mem = memProcess.getMember(Integer.valueOf(id));
 	request.setAttribute("mem", mem);
 %>
 <c:set var="mem" value="${ mem }" scope="request"/>

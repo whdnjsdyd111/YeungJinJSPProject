@@ -7,10 +7,12 @@ public class JoinBoardMemberKindDataBean {
 	private String board_title;
 	private Timestamp board_date;
 	private int board_reco;
+	private int board_nonReco;
 	private int board_readcount;
 	private String mem_nickname;
 	private int mem_level;
 	private String kind_name;
+	
 	
 	public int getBoard_id() {
 		return board_id;
@@ -35,6 +37,12 @@ public class JoinBoardMemberKindDataBean {
 	}
 	public void setBoard_reco(int board_reco) {
 		this.board_reco = board_reco;
+	}
+	public int getBoard_nonReco() {
+		return board_nonReco;
+	}
+	public void setBoard_nonReco(int board_nonReco) {
+		this.board_nonReco = board_nonReco;
 	}
 	public int getBoard_readcount() {
 		return board_readcount;
