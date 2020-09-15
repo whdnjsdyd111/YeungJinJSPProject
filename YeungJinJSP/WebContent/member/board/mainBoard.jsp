@@ -49,8 +49,8 @@
 		<div class="board_info">
 			<div id="board_title"><a href="boardContent.do?bdNum=${ board.getBoard_id() }">${ board.getBoard_title() }</a></div>
 			<div class="board_publisher">${ board.getMem_nickname() }</div><div class="board_level">${ board.getMem_level() }</div>
-			<div class="board_date">${ board.getBoard_date() }</div>
 			<div class="board_kind">${ board.getKind_name() }</div>
+			<div class="board_date">${ board.getBoard_date() }</div>
 		</div>
 		<div class="board_read">
 			<div>조회수</div>

@@ -27,10 +27,11 @@
 	
 	</div>
 	<div>
-		<input type="text" placeholder="https://사진 또는 동영상 링크 입력" class="write_input">	
+		<input id="insert_img" type="text" placeholder="https://사진 또는 동영상 링크 입력" class="write_input">	
 	</div>
+	<img alt="" src="">
 	<div>
-		<textarea id="board_content" rows="50" cols="45" class="write_input"></textarea>
+		<div id="board_content" class="write_input textarea" contentEditable="true"></div>
 	</div>
 	<div>
 		<button id="back">취소</button>

@@ -10,4 +10,11 @@
 	.write_input {
 		width: 100%;
 	}
+	
+	.textarea {
+		overflow-x:auto; 
+		min-height: 350px; 
+		border: solid 1px; 
+		line-height: 20px; 
+	}
 }

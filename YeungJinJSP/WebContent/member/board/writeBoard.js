@@ -21,7 +21,7 @@ $(function() {
 		if(check_title && check_content) {
 			var query = {
 				title: $('#board_title').val(),
-				content: $('#board_content').val(),
+				content: $('#board_content').html(),
 				kind: $('#board_kind option:selected').val()
 			};
 			
@@ -45,6 +45,13 @@ $(function() {
 			})
 		}
 	});
+	
+	$('#insert_img').keydown(function(key) {
+		if(key.keyCode == 13) {
+			var img = "<img src='" + $('#insert_img').val() + "'>";
+			$('#board_content').append(img);
+		}
+	});
 });
 
 function checkAll() {
@@ -59,9 +66,8 @@ function checkAll() {
 		return false;
 	}
 	
-	if(!$('#board_content').val()) {
-		alert("게시글 내용을 작성해주세요.")
-		$('#board_content').focus();
+	if($('#board_content').length == 0) {
+		alert("게시글 내용을 작성해주세요.");
 		check_content = false;
 		return false;
 	}
