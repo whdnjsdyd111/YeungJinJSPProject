@@ -1,5 +1,8 @@
 package main.bean;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -623,6 +626,31 @@ public class BoardDBBean {
 			pstmt.setInt(1, reco);
 			pstmt.setInt(2, nonReco);
 			pstmt.setInt(3, board_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int deleteBoard(int board_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "DELETE FROM board WHERE board_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_id);
 			
 			check = pstmt.executeUpdate();
 		} catch (Exception e) {

@@ -25,6 +25,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:if test="${ host != null }">
+		<button id="board_delete">삭제</button>
+		<button id="board_update">수정</button>
+	</c:if>
+	
 	<div>
 		${ board.getBoard_content() }
 	</div>

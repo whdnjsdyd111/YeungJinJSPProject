@@ -7,6 +7,44 @@
 		min-height: 125px;
 	}
 	
+	.comment_body {
+		width: calc(100% - 50px);
+	}
+	
+	.comment_reco {
+		width: 70px;
+	}
+	
+	.reco_count {
+		width: 100%;
+		display: inline-block;
+		position: relative;
+		top: 25%;
+		text-align: center;
+	}
+	
+	.comment_mem_info {
+		height: 30px;
+	}
+	
+	.comment_content {
+		height: 50px;
+	}
+	
+	.recoBtn {
+		position: relative;
+		top: 30%;
+		width: 70px;
+		left: calc(50% - 35px);
+	}
+	
+	.nonRecoBtn {
+		position: relative;
+	    top: 20%;
+	    width: 70px;
+	    left: calc(50% - 35px);
+	}
+	
 	.reply {
 		display: inline-flex;
 		width: 100%;
@@ -27,8 +65,7 @@
     	width: 30px;
 	    height: 30px;
 	    position: relative;
-	    top: 50px;
-	    left: 50px;
+	    left: 70px;
 	    border-left: 1px solid;
 	    border-bottom: 1px solid;
     }

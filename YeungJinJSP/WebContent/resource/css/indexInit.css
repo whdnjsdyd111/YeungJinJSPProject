@@ -78,7 +78,7 @@
 	
 	#index_div {
 		width: 100%;
-		background: yellow;
+		background: #ebeef1;
 		display: block;
 		font-size: 0px;
 		margin-top: 70px;
@@ -96,7 +96,6 @@
 	
 	#content {
 	    width: 70%;
-	    background-color: green;
 	    display: inline-block;
 	    vertical-align: top;
 	    font-size: medium;

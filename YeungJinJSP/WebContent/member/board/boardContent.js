@@ -229,4 +229,35 @@ $(function() {
 	$('.go_login').click(function() {
 		window.location.href = 'loginForm.do';
 	});
+	
+	$('#board_delete').click(function() {
+		var delete_check = confirm("글을 삭제하시겠습니까?");
+		
+		if(delete_check) {
+			$.ajax({
+				type: "POST",
+				url: "boardDelete.do",
+				data: {
+					board_id: get
+				},
+				success: function(data) {
+					var str = "<p id='ck'>";
+					var loc = data.indexOf(str);
+					var len = str.length;
+					var check = data.substr(loc + len, 1);
+					
+					if(check == "1") {
+						window.location.href = "mainBoard.do?kind=all&sort=pop";
+					} else {
+						alert("글을 삭제하지 못했습니다.");
+						window.location.href = "DBFail.do";
+					}
+				}
+			});
+		}
+	});
+	
+	$('#board_update').click(function() {
+		
+	});
 });

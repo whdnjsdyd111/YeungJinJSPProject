@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,5 +103,62 @@ public class CommentDBBean {
 		}
 		
 		return check;
+	}
+	
+	public int updateComReco(int com_id, int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE comment SET com_reco = "
+					+ "(SELECT * FROM (SELECT com_reco FROM comment WHERE com_id = ?) AS A) + (?) WHERE com_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, com_id);
+			pstmt.setInt(2, num);
+			pstmt.setInt(3, com_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int getComReco(int com_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT com_reco FROM comment WHERE com_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, com_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				num = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return num;
 	}
 }
