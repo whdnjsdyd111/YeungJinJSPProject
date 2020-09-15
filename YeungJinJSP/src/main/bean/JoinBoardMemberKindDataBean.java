@@ -12,6 +12,7 @@ public class JoinBoardMemberKindDataBean {
 	private String mem_nickname;
 	private int mem_level;
 	private String kind_name;
+	private int kind_id;
 	
 	
 	public int getBoard_id() {
@@ -67,6 +68,12 @@ public class JoinBoardMemberKindDataBean {
 	}
 	public void setKind_name(String kind_name) {
 		this.kind_name = kind_name;
+	}
+	public int getKind_id() {
+		return kind_id;
+	}
+	public void setKind_id(int kind_id) {
+		this.kind_id = kind_id;
 	}
 	
 }

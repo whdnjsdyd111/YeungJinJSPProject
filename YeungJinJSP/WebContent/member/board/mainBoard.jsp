@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${ kind == null || sort == null }">
+<c:if test="${ kind == null || (sort == null && search == null)}">
 	<script>
 		window.location.href = "mainBoard.do?kind=all&sort=pop";
 	</script>
@@ -9,7 +9,12 @@
 <script type="text/javascript" src="member/board/mainBoard.js"></script>
 <div class="board_menu">
 	<div class="board_menu1" >	<!-- 인기글 등의 메뉴, 검색, 글쓰기 기능 -->
-		<h3>모든 게시판</h3>
+		<c:if test="${ kind_name == null }">
+			<h2>모든 게시판</h2>
+		</c:if>
+		<c:if test="${ kind_name != null }">
+			<h2>${ kind_name } 게시판</h2>
+		</c:if>
 		<c:if test="${ empty sessionScope.YJFBID_SES }">
 			<a href="loginForm.do">글쓰기</a>
 		</c:if>
@@ -22,12 +27,12 @@
 		<a href="mainBoard.do?kind=${ kind }&sort=recent">최신순</a>
 		<a href="mainBoard.do?kind=${ kind }&sort=TODAY">TODAY</a>
 		<a href="mainBoard.do?kind=${ kind }&sort=nonReco">최악글</a>
-		<select>
-			<option>작성자</option>
-			<option>내용</option>
-			<option>작성자 + 내용</option>
+		<select id="search_select">
+			<option value="writer">작성자</option>
+			<option value="title">제목</option>
+			<option value="content">내용</option>
 		</select>
-		<input type="text" placeholder="검색">
+		<input id="search_content" type="text" placeholder="검색">
 	</div>
 </div>
 <div class="board_space">
@@ -49,7 +54,7 @@
 		<div class="board_info">
 			<div id="board_title"><a href="boardContent.do?bdNum=${ board.getBoard_id() }">${ board.getBoard_title() }</a></div>
 			<div class="board_publisher">${ board.getMem_nickname() }</div><div class="board_level">${ board.getMem_level() }</div>
-			<div class="board_kind">${ board.getKind_name() }</div>
+			<div class="board_kind"><a href="mainBoard.do?kind=${ board.getKind_id() }&sort=pop">${ board.getKind_name() }</a></div>
 			<div class="board_date">${ board.getBoard_date() }</div>
 		</div>
 		<div class="board_read">

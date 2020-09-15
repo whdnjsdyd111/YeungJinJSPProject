@@ -67,7 +67,7 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
 					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id "
 					+ "ORDER BY b.board_reco DESC limit ?, ?";
 			
@@ -95,6 +95,7 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(6));
 					board.setMem_level(rs.getInt(7));
 					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
 					
 					boardList.add(board);
 				} while(rs.next());
@@ -123,8 +124,8 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
-					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind= ? "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind_id = ? "
 					+ "ORDER BY b.board_reco DESC limit ?, ?;";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -153,6 +154,7 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(6));
 					board.setMem_level(rs.getInt(7));
 					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
 					
 					boardList.add(board);
 				} while(rs.next());
@@ -180,7 +182,7 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
 					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id "
 					+ "ORDER BY b.board_date DESC limit ?, ?";
 			
@@ -208,6 +210,7 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(6));
 					board.setMem_level(rs.getInt(7));
 					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
 					
 					boardList.add(board);
 				} while(rs.next());
@@ -235,8 +238,8 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
-					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind= ? "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind_id = ? "
 					+ "ORDER BY b.board_date DESC limit ?, ?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -265,6 +268,7 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(6));
 					board.setMem_level(rs.getInt(7));
 					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
 					
 					boardList.add(board);
 				} while(rs.next());
@@ -292,7 +296,7 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_nonReco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
 					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id "
 					+ "ORDER BY b.board_nonReco DESC limit ?, ?";
 			
@@ -321,6 +325,7 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(7));
 					board.setMem_level(rs.getInt(8));
 					board.setKind_name(rs.getString(9));
+					board.setKind_id(rs.getInt(10));
 					
 					boardList.add(board);
 				} while(rs.next());
@@ -348,17 +353,19 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_nonReco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
-					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind_id = ? "
 					+ "ORDER BY b.board_nonReco DESC limit ?, ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			if(page == 1)
-				pstmt.setInt(1, 0);
-			else
-				pstmt.setInt(1, (page - 1) * 30);
+			pstmt.setInt(1, kind_id);
 			
-			pstmt.setInt(2, 30);
+			if(page == 1)
+				pstmt.setInt(2, 0);
+			else
+				pstmt.setInt(2, (page - 1) * 30);
+			
+			pstmt.setInt(3, 30);
 			
 			rs = pstmt.executeQuery();
 			
@@ -377,6 +384,7 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(7));
 					board.setMem_level(rs.getInt(8));
 					board.setKind_name(rs.getString(9));
+					board.setKind_id(rs.getInt(10));
 					
 					boardList.add(board);
 				} while(rs.next());
@@ -404,7 +412,7 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
 					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND board_date > CURRENT_TIMESTAMP - INTERVAL 24 HOUR "
 					+ "ORDER BY b.board_reco DESC limit ?, ?";
 			
@@ -432,6 +440,7 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(6));
 					board.setMem_level(rs.getInt(7));
 					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
 					
 					boardList.add(board);
 				} while(rs.next());
@@ -459,8 +468,8 @@ public class BoardDBBean {
 		try {
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
-					+ "m.mem_nickname, m.mem_level, k.kind_name from board b, member m, kind k "
-					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind= ? "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind_id = ? "
 					+ "AND board_date > CURRENT_TIMESTAMP - INTERVAL 24 HOUR "
 					+ "ORDER BY b.board_reco DESC limit ?, ?";
 			
@@ -490,6 +499,358 @@ public class BoardDBBean {
 					board.setMem_nickname(rs.getString(6));
 					board.setMem_level(rs.getInt(7));
 					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindWriter(int page, String wirter) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND m.mem_nickname LIKE ? "
+					+ "ORDER BY b.board_reco DESC limit ?, ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + wirter + "%");
+			
+			if(page == 1)
+				pstmt.setInt(2, 0);
+			else
+				pstmt.setInt(2, (page - 1) * 30);
+			
+			pstmt.setInt(3, 30);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
+				
+				do {
+					JoinBoardMemberKindDataBean board = new JoinBoardMemberKindDataBean();
+					
+					board.setBoard_id(rs.getInt(1));
+					board.setBoard_title(rs.getString(2));
+					board.setBoard_date(rs.getTimestamp(3));
+					board.setBoard_reco(rs.getInt(4));
+					board.setBoard_readcount(rs.getInt(5));
+					board.setMem_nickname(rs.getString(6));
+					board.setMem_level(rs.getInt(7));
+					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindWriter(int page, int kind_id, String writer) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind_id = ? AND m.mem_nickname LIKE ? "
+					+ "ORDER BY b.board_reco DESC limit ?, ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, kind_id);
+			pstmt.setString(2, "%" + writer + "%");
+			
+			if(page == 1)
+				pstmt.setInt(3, 0);
+			else
+				pstmt.setInt(3, (page - 1) * 30);
+			
+			pstmt.setInt(4, 30);
+			
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
+				
+				do {
+					JoinBoardMemberKindDataBean board = new JoinBoardMemberKindDataBean();
+					
+					board.setBoard_id(rs.getInt(1));
+					board.setBoard_title(rs.getString(2));
+					board.setBoard_date(rs.getTimestamp(3));
+					board.setBoard_reco(rs.getInt(4));
+					board.setBoard_readcount(rs.getInt(5));
+					board.setMem_nickname(rs.getString(6));
+					board.setMem_level(rs.getInt(7));
+					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindContent(int page, String content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND b.board_content LIKE ? "
+					+ "ORDER BY b.board_reco DESC limit ?, ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + content + "%");
+			
+			if(page == 1)
+				pstmt.setInt(2, 0);
+			else
+				pstmt.setInt(2, (page - 1) * 30);
+			
+			pstmt.setInt(3, 30);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
+				
+				do {
+					JoinBoardMemberKindDataBean board = new JoinBoardMemberKindDataBean();
+					
+					board.setBoard_id(rs.getInt(1));
+					board.setBoard_title(rs.getString(2));
+					board.setBoard_date(rs.getTimestamp(3));
+					board.setBoard_reco(rs.getInt(4));
+					board.setBoard_readcount(rs.getInt(5));
+					board.setMem_nickname(rs.getString(6));
+					board.setMem_level(rs.getInt(7));
+					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindContent(int page, int kind_id, String content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND b.board_content LIKE ? "
+					+ "ORDER BY b.board_reco DESC limit ?, ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, kind_id);
+			pstmt.setString(2, "%" + content + "%");
+			
+			if(page == 1)
+				pstmt.setInt(3, 0);
+			else
+				pstmt.setInt(3, (page - 1) * 30);
+			
+			pstmt.setInt(4, 30);
+			
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
+				
+				do {
+					JoinBoardMemberKindDataBean board = new JoinBoardMemberKindDataBean();
+					
+					board.setBoard_id(rs.getInt(1));
+					board.setBoard_title(rs.getString(2));
+					board.setBoard_date(rs.getTimestamp(3));
+					board.setBoard_reco(rs.getInt(4));
+					board.setBoard_readcount(rs.getInt(5));
+					board.setMem_nickname(rs.getString(6));
+					board.setMem_level(rs.getInt(7));
+					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindTitle(int page, String title) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND b.board_title LIKE ? "
+					+ "ORDER BY b.board_reco DESC limit ?, ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + title + "%");
+			
+			if(page == 1)
+				pstmt.setInt(2, 0);
+			else
+				pstmt.setInt(2, (page - 1) * 30);
+			
+			pstmt.setInt(3, 30);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
+				
+				do {
+					JoinBoardMemberKindDataBean board = new JoinBoardMemberKindDataBean();
+					
+					board.setBoard_id(rs.getInt(1));
+					board.setBoard_title(rs.getString(2));
+					board.setBoard_date(rs.getTimestamp(3));
+					board.setBoard_reco(rs.getInt(4));
+					board.setBoard_readcount(rs.getInt(5));
+					board.setMem_nickname(rs.getString(6));
+					board.setMem_level(rs.getInt(7));
+					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindTitle(int page, int kind_id, String title) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND b.board_title LIKE ? "
+					+ "ORDER BY b.board_reco DESC limit ?, ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, kind_id);
+			pstmt.setString(2, "%" + title + "%");
+			
+			if(page == 1)
+				pstmt.setInt(3, 0);
+			else
+				pstmt.setInt(3, (page - 1) * 30);
+			
+			pstmt.setInt(4, 30);
+			
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
+				
+				do {
+					JoinBoardMemberKindDataBean board = new JoinBoardMemberKindDataBean();
+					
+					board.setBoard_id(rs.getInt(1));
+					board.setBoard_title(rs.getString(2));
+					board.setBoard_date(rs.getTimestamp(3));
+					board.setBoard_reco(rs.getInt(4));
+					board.setBoard_readcount(rs.getInt(5));
+					board.setMem_nickname(rs.getString(6));
+					board.setMem_level(rs.getInt(7));
+					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
 					
 					boardList.add(board);
 				} while(rs.next());
