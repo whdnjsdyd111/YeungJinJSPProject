@@ -128,6 +128,8 @@ public class Controller extends HttpServlet {
 			return;
 		}
 		
+		
+		
 		request.setAttribute("cont", view);
 		
 		dispatcher = request.getRequestDispatcher("/index.jsp");

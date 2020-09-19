@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${ kind == null || (sort == null && search == null)}">
+<c:if test="${ kind == null && (sort == null && search == null)}">
 	<script>
 		window.location.href = "mainBoard.do?kind=all&sort=pop";
 	</script>
@@ -10,7 +10,12 @@
 <div class="board_menu">
 	<div class="board_menu1" >	<!-- 인기글 등의 메뉴, 검색, 글쓰기 기능 -->
 		<c:if test="${ kind_name == null }">
-			<h2>모든 게시판</h2>
+			<c:if test="${ kind == 'bookmark' }">
+				<h2>북마크</h2>
+			</c:if>
+			<c:if test="${ kind != 'bookmark' }">
+				<h2>모든 게시판</h2>
+			</c:if>
 		</c:if>
 		<c:if test="${ kind_name != null }">
 			<h2>${ kind_name } 게시판</h2>
@@ -23,10 +28,12 @@
 		</c:if>
 	</div>
 	<div class="board_menu2">
-		<a href="mainBoard.do?kind=${ kind }&sort=pop">인기글</a>
-		<a href="mainBoard.do?kind=${ kind }&sort=recent">최신순</a>
-		<a href="mainBoard.do?kind=${ kind }&sort=TODAY">TODAY</a>
-		<a href="mainBoard.do?kind=${ kind }&sort=nonReco">최악글</a>
+		<c:if test="${ kind != 'bookmark' }">
+			<a href="mainBoard.do?kind=${ kind }&sort=pop">인기글</a>
+			<a href="mainBoard.do?kind=${ kind }&sort=recent">최신순</a>
+			<a href="mainBoard.do?kind=${ kind }&sort=TODAY">TODAY</a>
+			<a href="mainBoard.do?kind=${ kind }&sort=nonReco">최악글</a>		
+		</c:if>
 		<select id="search_select">
 			<option value="writer">작성자</option>
 			<option value="title">제목</option>

@@ -529,7 +529,7 @@ public class BoardDBBean {
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
 					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
 					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND m.mem_nickname LIKE ? "
-					+ "ORDER BY b.board_reco DESC limit ?, ?";
+					+ "ORDER BY b.board_date DESC limit ?, ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + wirter + "%");
@@ -587,7 +587,7 @@ public class BoardDBBean {
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
 					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k "
 					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND k.kind_id = ? AND m.mem_nickname LIKE ? "
-					+ "ORDER BY b.board_reco DESC limit ?, ?";
+					+ "ORDER BY b.board_date DESC limit ?, ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, kind_id);
@@ -836,6 +836,67 @@ public class BoardDBBean {
 			
 			rs = pstmt.executeQuery();
 
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
+				
+				do {
+					JoinBoardMemberKindDataBean board = new JoinBoardMemberKindDataBean();
+					
+					board.setBoard_id(rs.getInt(1));
+					board.setBoard_title(rs.getString(2));
+					board.setBoard_date(rs.getTimestamp(3));
+					board.setBoard_reco(rs.getInt(4));
+					board.setBoard_readcount(rs.getInt(5));
+					board.setMem_nickname(rs.getString(6));
+					board.setMem_level(rs.getInt(7));
+					board.setKind_name(rs.getString(8));
+					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindBookmark(int page, String mem_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		try {
+			SHA256 sha = SHA256.getInstance();
+			AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
+			
+			conn = getConnection();
+			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
+					+ "m.mem_nickname, m.mem_level, k.kind_name, k.kind_id FROM board b, member m, kind k, bookmark bm "
+					+ "WHERE b.board_userid = m.mem_id AND b.board_kind = k.kind_id AND bm.board_id = b.board_id AND bm.mem_id = ? "
+					+ "ORDER BY b.board_date DESC limit ?, ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.valueOf(aes.aesDecode(mem_id)));
+			
+			if(page == 1)
+				pstmt.setInt(2, 0);
+			else
+				pstmt.setInt(2, (page - 1) * 30);
+			
+			pstmt.setInt(3, 30);
+			
+			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				boardList = new ArrayList<JoinBoardMemberKindDataBean>();
 				

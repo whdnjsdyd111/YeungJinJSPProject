@@ -4,10 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>YJ Funny Bone</title>
+<link rel="shortcut icon" href="/YeungJinFunnyBone/resource/images/index/yjfb_logo_icon.ico">
 <script type="text/javascript" src="resource/js/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/indexInit.css">
+
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/common.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/dialog.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/memberLogin.css">
@@ -16,66 +19,36 @@
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardContent.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/comment.css">
 
-<script type="text/javascript" src="member/index.js"></script>
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="resource/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="member/index/index.js"></script>
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/index.css">
+
 </head>
 <body>
-	<header id="indexHeader">
-		<a href="mainBoard.do">
-			<img id="index_logo" src="resource/images/index/index_logo.png">
-		</a>
-		
-		<c:if test="${ empty sessionScope.YJFBID_SES }">
-			<jsp:include page="/index/index_menu_NoId.html" />
-		</c:if>
-		<c:if test="${ !empty sessionScope.YJFBID_SES }">
-			<jsp:include page="/index/index_menu_hasId.jsp" />
-		</c:if>
-	</header>
+
+<%-- 헤더 --%>
+<c:if test="${ empty sessionScope.YJFBID_SES }">
+	<jsp:include page="/member/index/header_logout.jsp" />
+</c:if>
+<c:if test="${ !empty sessionScope.YJFBID_SES }">
+	<jsp:include page="/member/index/header_login.jsp" />
+</c:if>
+
+<%-- 콘텐트 --%>
+
+<c:if test="${ empty sessionScope.YJFBID_SES }">
+	<jsp:include page="/member/index/content_logout.jsp" />
+</c:if>
+
+<c:if test="${ !empty sessionScope.YJFBID_SES }">
+	<jsp:include page="/member/index/content_login.jsp" />
+</c:if>
 	
-	<div id="index_div">
-		<nav id="nav">
-			
-		</nav>
-		
-		<section id="content">
-			<c:if test="${ cont == null }">
-				<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/mainBoard.do">
-			</c:if>
-			<c:if test="${ cont != null }">
-				<jsp:include page="${ cont }" />
-			</c:if>
-		</section>
-		
-		<section id="add">
-			<a href="#"><img src="resource/images/index/add.png" /></a>
-		</section>
-	</div>
+<%-- 푸터 --%>
+<jsp:include page="member/index/footer.jsp" />
 	
-	<footer>
-		<div id="policy">
-			<ul id="pol_ul">
-				<li><a href="introduction.do">홈페이지 소개</a></li>
-				<span></span>
-				<li><a href="tos.do">이용약관</a></li>
-				<span></span>
-				<li><a href="policy.do">정보처리방침</a></li>
-				<span></span>
-				<li><a href="">문의/피드백</a></li>
-			</ul>
-		</div>
-		
-		<div id="info">
-			<div id="company">
-				대구광역시 북구 복현로 35 본관 320호 <br/>
-				전화 053) 940 - 5114 (대표자 : 조원용)<br>
-				&copy; Copyright WD-A Jo Won Yong All rights reserved
-			</div>
-			<div id="sns">
-				<a href=""><img src="resource/images/index/twitter.png" /></a>
-				<a href=""><img src="resource/images/index/facebook.png" /></a>
-				<a href=""><img src="resource/images/index/instagram.png" /></a>
-			</div>
-		</div>
-	</footer>
 </body>
 </html>

@@ -21,17 +21,27 @@ public class MainBoardAction implements CommandAction {
 		String target = request.getParameter("target");
 		String search = request.getParameter("search");
 		
-		
-		if(sort == null && (target == null || search == null))
-			return "/member/board/mainBoard.jsp";
-		
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
 		KindDBBean kindProcess = KindDBBean.getInstance();
+			
+		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		if(kind == null)
+			return "/member/board/mainBoard.jsp";
 		
 		if(page == null)
 			page = "1";
-			
-		List<JoinBoardMemberKindDataBean> boardList = null;
+		
+		if(kind.equals("bookmark")) {
+			boardList = boardProcess.getJoinBdMemKindFindBookmark(Integer.valueOf(page), (String) request.getSession().getAttribute("YJFBID_SES"));
+			request.setAttribute("boardList", boardList);
+			request.setAttribute("page", page);
+			request.setAttribute("kind", kind);
+			return "/member/board/mainBoard.jsp";
+		}
+		
+		if(sort == null && (target == null || search == null))
+			return "/member/board/mainBoard.jsp";
 		
 		if(kind.equals("all")) {
 			if(sort != null) {

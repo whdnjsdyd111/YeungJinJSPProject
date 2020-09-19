@@ -13,7 +13,7 @@ $(function() {
 		if(key.keyCode == 13) {
 			var loc = location.href.indexOf("kind=");
 			window.location.href = location.href.substring(0, loc + 9) 
-				+ "&target=" + $('#search_select').val() + "&search=" + $('#search_content').val();
+				+ "target=" + $('#search_select').val() + "&search=" + $('#search_content').val();
 		}
 	});
 });
