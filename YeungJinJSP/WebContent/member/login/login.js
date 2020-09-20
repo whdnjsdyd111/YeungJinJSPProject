@@ -86,9 +86,8 @@ function login() {
 				alert("로그인이 완료되었습니다.");
 				window.location.href = "mainBoard.do?kind=all&sort=pop";
 			} else if(check == "2") {	// 이메일 인증이 아직 안된 아이디
-				$('#emailModal').modal(function() {
-					$('#dialog_email').text($('#email').val());
-				});
+				$('#dialog_email').text($('#email').val());
+				$('#emailModal').modal();
 			} else {	// 틀렸을 시
 				$('#check_mail_pass').text("이메일 또는 비밀번호가 틀렸습니다.");
 			}
