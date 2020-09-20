@@ -1,14 +1,13 @@
-package main.command.common;
+package main.command.member.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.command.CommandAction;
 
-public class TosAction implements CommandAction {
+public class IntroductionAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		// TODO Auto-generated method stub
-		return "/common/tos.html";
+		return "/member/index/introduction.html";
 	}
 }

@@ -30,6 +30,6 @@ public class BookmarkInsertDeleteAction implements CommandAction {
 		}
 		
 		request.setAttribute("check", new Integer(check));
-		return "member/board/bookmarkInsertDelete.jsp";
+		return "/member/board/bookmarkInsertDelete.jsp";
 	}
 }

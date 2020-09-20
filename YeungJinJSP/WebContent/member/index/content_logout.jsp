@@ -10,31 +10,31 @@
 			<nav id="sidebar" class="nav_wrap">
 			    <div class="sidebar">
 			        <ul>
-			            <li><a href="#"><i class="fa fa-home"></i>홈으로</a></li>
-			            <li><a href="#"><i class="fa fa-sign-in"></i>로그인</a></li>
-			            <li><a href="#"><i class="fa fa-key"></i>비밀번호 찾기</a></li>
-			            <li><a href="#"><i class="fa fa-user-secret"></i>회원가입</a></li>
+			            <li><a href="mainBoard.do?kind=all&sort=pop"><i class="fa fa-home"></i>홈으로</a></li>
+			            <li><a href="loginForm.do"><i class="fa fa-sign-in"></i>로그인</a></li>
+			            <li><a href="findPasswdForm.do"><i class="fa fa-key"></i>비밀번호 찾기</a></li>
+			            <li><a href="registerForm.do"><i class="fa fa-user-secret"></i>회원가입</a></li>
 			        </ul>
 			        <p class="px-3 ml-5"><i class="fa fa-newspaper-o mr-3"></i>정보</p>
 			        <ul>
-			            <li><a href="#">공지사항</a></li>
-			            <li><a href="#">소식</a></li>
+			            <li><a href="mainBoard.do?kind=600&sort=pop">공지사항</a></li>
+			            <li><a href="mainBoard.do?kind=700&sort=pop">소식</a></li>
 			        </ul>
 			        <p class="px-3 ml-5"><i class="fa fa-list mr-3"></i>커뮤니티</p>
 			        <ul>
-			            <li><a href="#">자유</a></li>
-			            <li><a href="#">유머</a></li>
-			            <li><a href="#">공포</a></li>
-			            <li><a href="#">만화</a></li>
-			            <li><a href="#">코로나 뉴스</a></li>
+			            <li><a href="mainBoard.do?kind=100&sort=pop">자유</a></li>
+			            <li><a href="mainBoard.do?kind=200&sort=pop">유머</a></li>
+			            <li><a href="mainBoard.do?kind=300&sort=pop">공포</a></li>
+			            <li><a href="mainBoard.do?kind=400&sort=pop">만화</a></li>
+			            <li><a href="mainBoard.do?kind=500&sort=pop">코로나 뉴스</a></li>
 			        </ul>
 			    </div>
 			</nav>
 		</div>
 		
-		<div class="col-xl-9 col-lg-9 row px-0 mt-0 mx-0">
+		<div id="content" class="col-xl-9 col-lg-9 row px-0 mt-0 mx-0">
 	
-			<div id="content" class="col-xl-10 col-lg-12 bg-success">
+			<div id="content_main" class="col-xl-10 col-lg-12 bg-success">
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">

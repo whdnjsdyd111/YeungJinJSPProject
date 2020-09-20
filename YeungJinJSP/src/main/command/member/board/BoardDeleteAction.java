@@ -17,6 +17,6 @@ public class BoardDeleteAction implements CommandAction {
 		int check = boardProcess.deleteBoard(board_id);
 		
 		request.setAttribute("check", new Integer(check));
-		return "member/board/boardDelete.jsp";
+		return "/member/board/boardDelete.jsp";
 	}
 }

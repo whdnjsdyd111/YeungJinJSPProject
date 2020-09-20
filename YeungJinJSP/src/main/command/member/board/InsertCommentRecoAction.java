@@ -77,6 +77,6 @@ public class InsertCommentRecoAction implements CommandAction {
 		request.setAttribute("reco_count", new Integer(comProcess.getComReco(com_id)));
 		request.setAttribute("check1", new Integer(check1));
 		request.setAttribute("check2", new Integer(check2));
-		return "member/board/insertCommentReco.jsp";
+		return "/member/board/insertCommentReco.jsp";
 	}
 }

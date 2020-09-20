@@ -26,6 +26,6 @@ public class NestCommentInsertAction implements CommandAction {
 		int check = nestProcess.insertNestComment(com_id, mem_id, content);
 		
 		request.setAttribute("check", new Integer(check));
-		return "member/board/nestCommentInsert.jsp";
+		return "/member/board/nestCommentInsert.jsp";
 	}
 }

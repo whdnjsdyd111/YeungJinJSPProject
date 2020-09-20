@@ -1,14 +1,13 @@
-package main.command.common;
+package main.command.error;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.command.CommandAction;
 
-public class PolicyAction implements CommandAction {
+public class EmailFailAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		// TODO Auto-generated method stub
-		return "/common/policy.html";
+		return "/error/emailFail.jsp";
 	}
 }
