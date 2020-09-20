@@ -1,5 +1,5 @@
 var check_email = false;
-var check_passwd = false;
+var check_pw = false;
 
 $(function() {
 	// 이메일 체크
@@ -16,9 +16,9 @@ $(function() {
 	// 비밀번호 체크
 	$('#pw').on("propertychange change keyup paste input", function() {
 		if($('#pw').val()) {
-			check_passwd = true;
+			check_pw = true;
 		} else {
-			check_passwd = false;
+			check_pw = false;
 		}
 		checkAll();
 		$('#check_mail_pass').text("");
@@ -27,7 +27,8 @@ $(function() {
 	$('#loginBtn').click(function() {
 		var query = {
 			email: $('#email').val(),
-			pw: $('#pw').val()
+			pw: $('#pw').val(),
+			checkbox: $("input:checkbox[id='login_cookie']").is(":checkbox")
 		};
 		
 		$.ajax({
@@ -42,7 +43,7 @@ $(function() {
 				
 				if(check == "1") {	// 아이디, 비번 맞을 시
 					alert("로그인이 완료되었습니다.");
-					window.location.href = "mainBoard.do";
+					window.location.href = "mainBoard.do?kind=all&sort=pop";
 				} else if(check == "2") {	// 이메일 인증이 아직 안된 아이디
 					$('#load_dialog').load('member/login/dialog.jsp');
 				} else {	// 틀렸을 시
@@ -54,7 +55,7 @@ $(function() {
 });
 
 function checkAll() {
-	if(check_email && check_passwd) {
+	if(check_email && check_pw) {
 		$('#loginBtn').removeAttr('disabled');
 	} else {
 		$('#loginBtn').attr('disabled', 'disabled');

@@ -21,13 +21,13 @@
 							</div>
 			        <div class="text-center mb-1">남은 경험치 10</div>
 			        <div class="row text-center">
-						<div class="col px-0 ml-2">
+						<div class="col px-0 ml-3">
 							<a href="mainBoard.do?kind=all&target=writer&search=${ mem.getMem_nickname() }" 
 								class="btn btn-secondary" role="button" aria-pressed="true">
 								<i class="fa fa-sticky-note"></i>내가 쓴 글
 							</a>
 						</div>
-						<div class="col px-0">
+						<div class="col px-0 mr-1">
 							<a href="mainBoard.do?kind=bookmark" 
 								class="btn btn-secondary" role="button" aria-pressed="true">
 								<i class="fa fa-bookmark"></i>북마크

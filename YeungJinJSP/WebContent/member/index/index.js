@@ -4,7 +4,7 @@ function preloading(imageArray) {
 		let img = new Image(); 
 		img.src = imageArray[i]; 
 	} 
-} 
+};
 
 preloading(['resource/images/index/다운로드.jfif', 'resource/images/index/다운로드.png' ]);
 
@@ -13,9 +13,10 @@ $(function() {
 		$('#add').attr('src', 'resource/images/index/다운로드.png');
 	else
 		$('#add').attr('src', 'resource/images/index/다운로드.jfif');
+		
 	
 	$(window).resize(function() {
-		if($('#content').width() == $('#content_add').width())
+		if($('#content_main').width() == $('#content_add').width())
 			$('#add').attr('src', 'resource/images/index/다운로드.png');
 		else
 			$('#add').attr('src', 'resource/images/index/다운로드.jfif');

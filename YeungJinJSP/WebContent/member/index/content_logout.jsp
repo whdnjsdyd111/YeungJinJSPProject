@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container-fluid px-0" style="margin-top: 3.5rem !important">
+<div class="container-fluid" style="margin-top: 3.5rem !important">
 
-	<div class="row navbar navbar-expand-lg" >
+	<div class="row navbar navbar-expand-lg px-0" >
 			
 		<div class="col-xl-3 col-lg-3 collapse navbar-collapse">
 			<nav id="sidebar" class="nav_wrap">
@@ -34,7 +34,7 @@
 		
 		<div id="content" class="col-xl-9 col-lg-9 row px-0 mt-0 mx-0">
 	
-			<div id="content_main" class="col-xl-10 col-lg-12 bg-success">
+			<div id="content_main" class="col-xl-10 col-lg-12">
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">

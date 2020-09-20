@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -13,7 +13,6 @@
 
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/common.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/dialog.css">
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/memberLogin.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/writeBoard.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardContent.css">
@@ -25,6 +24,7 @@
 
 <script type="text/javascript" src="member/index/index.js"></script>
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/index.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/memberLogin.css">
 
 </head>
 <body>

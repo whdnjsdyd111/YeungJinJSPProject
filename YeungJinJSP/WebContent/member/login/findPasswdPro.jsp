@@ -6,7 +6,7 @@
 	<script>
 		alert("메일 전송이 성공되었습니다.");
 	</script>
-	<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/mainBoard.do">	
+	<meta http-equiv="Refresh" content="0; url=/YeungJinFunnyBone/mainBoard.do?kind=all&sort=pop">
 </c:if>
 <c:if test="${ checkMail != 1 }">
 	<script>
