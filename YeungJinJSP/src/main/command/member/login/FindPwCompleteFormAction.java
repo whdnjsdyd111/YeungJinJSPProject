@@ -26,8 +26,6 @@ public class FindPwCompleteFormAction implements CommandAction {
 		
 		int time = (int) ((current.getTime() - mailTime.getTime()) / 1000 / 60);
 
-		System.out.println(time);
-
 		if(time < 10) {
 			checkMail = 1;
 		} else {

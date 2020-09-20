@@ -14,23 +14,23 @@
 	</div>
 	
 	<div class="container d-flex flex-column">
-		<div class="form-group">
+		<div class="form-group mt-2 mb-0">
 			<label for="email"><i class="fa fa-envelope-o mr-2"></i>이메일</label>
 			<input type="text" class="form-control" id="reg_email" name="email">
-			<small id="check_email" class="form-text text-muted check_small my-2"></small>
 		</div>
+		<small id="check_email" class="form-text text-muted check_small mb-2"></small>
 		
-		<div class="form-group">
+		<div class="form-group mt-2 mb-0">
 			<label for="passward"><i class="fa fa-lock mr-2"></i>패스워드</label>
 			<input type="password" class="form-control" id="reg_passwd" name="passwd">
-			<small id="check_passwd" class="form-text text-muted check_small my-2"></small>
 		</div>
+		<small id="check_passwd" class="form-text text-muted check_small mb-2"></small>
 	
-		<div class="form-group">
+		<div class="form-group mt-2 mb-0">
 			<label for="nickname"><i class="fa fa-user mr-2"></i>닉네임</label>
 			<input type="text" class="form-control" id="reg_nick" name="nick">
-			<small id="check_nick" class="form-text text-muted check_small my-2"></small>
 		</div>
+		<small id="check_nick" class="form-text text-muted check_small mb-2"></small>
 	</div>
 	<div class="row">
 		<button type="button" id="back" class="btn btn-outline-dark col mx-3 btn-lg">돌아가기</button>

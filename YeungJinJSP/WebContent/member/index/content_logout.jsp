@@ -34,7 +34,7 @@
 		
 		<div id="content" class="col-xl-9 col-lg-9 row px-0 mt-0 mx-0">
 	
-			<div id="content_main" class="col-xl-10 col-lg-12">
+			<div id="content_main" class="col-xl-10 col-lg-12 bg-success">
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">
@@ -48,7 +48,7 @@
 				</section>
 			</div>
 		
-			<div id="content_add" class="col-xl-2 col-lg-12 bg-danger">
+			<div id="content_add" class="col-xl-2 col-lg-12">
 				<section>
 					<img id="add" class="img-fluid" src="" />
 				</section>

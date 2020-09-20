@@ -70,7 +70,7 @@
 				</section>
 			</div>
 		
-			<div id="content_add" class="col-xl-2 col-lg-12 bg-danger">
+			<div id="content_add" class="col-xl-2 col-lg-12">
 				<section>
 					<img id="add" class="img-fluid" src="" />
 				</section>

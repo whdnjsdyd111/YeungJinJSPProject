@@ -14,11 +14,12 @@
 				<input type="text" class="form-control" id="email" name="email">
 			</div>
 
-			<div class="form-group my-3">
+			<div class="form-group mt-3">
 				<label for="passward"><i class="fa fa-lock mr-2"></i>패스워드</label>
 				<input type="password" class="form-control" id="pw" name="pw"> 
-				<small id="check_mail_pass" class="form-text text-muted check_small my-2"></small>
 			</div>
+			<small id="check_mail_pass" class="form-text text-muted check_small mt-1 mb-3"></small>
+			
 		</div>
 		<div class="container d-flex flex-column my-3">
 			<label>비밀번호를 잊으셨습니까?<a href="findPasswdForm.do"
