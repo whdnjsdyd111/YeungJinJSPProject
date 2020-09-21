@@ -37,16 +37,16 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"><span class="text-white">${ mem.getMem_nickname() }</span></a>
+						aria-expanded="false"><span class="text-white">${ mem.mem_nickname }</span></a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<div class="text-primary text-center">레벨 <span>${ mem.getMem_level() }</span></div>
+							<div class="text-primary text-center">레벨 <span>${ mem.mem_level }</span></div>
 							<div class="progress m-1">
   								<div class="progress-bar bg-success" role="progressbar" style="width: 25%" 
-  									aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${ mem.getMem_ex() }</div>
+  									aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${ mem.mem_ex }</div>
 							</div>
 							<div class="text-muted text-center">남은 경험치 10</div>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item text-center" href="mainBoard.do?kind=all&target=writer&search=${ mem.getMem_nickname() }">
+							<a class="dropdown-item text-center" href="mainBoard.do?kind=all&target=writer&search=${ mem.mem_nickname }">
 								<i class="fa fa-sticky-note mr-2"></i>내가 쓴 글
 							</a>
 							<a class="dropdown-item text-center" href="mainBoard.do?kind=bookmark">

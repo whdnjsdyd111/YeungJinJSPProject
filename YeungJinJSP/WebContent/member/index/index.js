@@ -25,7 +25,7 @@ $(function() {
 	
 
 	$(window).scroll(function() {
-		if(window.scrollY > $('html').height() - $('#sidebar').height() - $('footer').height() - $('header').children().height() - 16 ) {	// 16은 1rem 값
+		if(window.scrollY > $('html').height() - $('#sidebar').height() - $('footer').height() - $('header').children().outerHeight(true) ) {	
 			$('#sidebar').css({
 				position: "absolute",
 				top: "calc(" + ($('#content').height() / 2 - $('#sidebar').height()) + "px + 3.5rem)"
@@ -33,7 +33,7 @@ $(function() {
 		} else {
 			$('#sidebar').css({
 				position: "fixed",
-				top: $('header').children().height() + "px"
+				top: $('header').children().outerHeight(true) + "px"
 			});
 		}
 	});

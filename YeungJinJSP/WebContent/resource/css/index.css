@@ -16,6 +16,10 @@
 	margin-left: auto;
 }
 
+header {
+	z-index: 101;
+}
+
 /* 푸터 */
 .footer {
 	background-color: #e0e9ff;

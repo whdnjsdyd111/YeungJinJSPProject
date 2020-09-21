@@ -40,7 +40,7 @@
 				<li class="nav-item mr-3"><a class="nav-link"
 					href="findPasswdForm.do"><span><i class="fa fa-key mr-2"></i>비밀번호 찾기</span></a></li>
 				<li class="nav-item mr-3"><a class="nav-link"
-					href="registerForm.do"><span><i class="fa fa-user-secret mr-2"></i>회원가입</span></a></li>
+					href="registerForm.do"><span><i class="fa fa-user-plus mr-2"></i>회원가입</span></a></li>
 			</ul>
 		</div>
 	</div>

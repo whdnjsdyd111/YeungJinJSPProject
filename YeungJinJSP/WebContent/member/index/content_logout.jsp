@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container-fluid" style="margin-top: 3.5rem !important">
+<div class="container-fluid" style="margin-top: 3.65rem !important">
 
 	<div class="row navbar navbar-expand-lg px-0" >
 			
@@ -13,7 +13,7 @@
 			            <li><a href="mainBoard.do?kind=all&sort=pop"><i class="fa fa-home"></i>홈으로</a></li>
 			            <li><a href="loginForm.do"><i class="fa fa-sign-in"></i>로그인</a></li>
 			            <li><a href="findPasswdForm.do"><i class="fa fa-key"></i>비밀번호 찾기</a></li>
-			            <li><a href="registerForm.do"><i class="fa fa-user-secret"></i>회원가입</a></li>
+			            <li><a href="registerForm.do"><i class="fa fa-user-plus"></i>회원가입</a></li>
 			        </ul>
 			        <p class="px-3 ml-5"><i class="fa fa-newspaper-o mr-3"></i>정보</p>
 			        <ul>
@@ -34,7 +34,7 @@
 		
 		<div id="content" class="col-xl-9 col-lg-9 row px-0 mt-0 mx-0">
 	
-			<div id="content_main" class="col-xl-10 col-lg-12 bg-success">
+			<div id="content_main" class="col-xl-10 col-lg-12 bg-success px-0">
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">
@@ -48,7 +48,7 @@
 				</section>
 			</div>
 		
-			<div id="content_add" class="col-xl-2 col-lg-12">
+			<div id="content_add" class="col-xl-2 col-lg-12 px-0">
 				<section>
 					<img id="add" class="img-fluid" src="" />
 				</section>

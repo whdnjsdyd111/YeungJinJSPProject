@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container-fluid" style="margin-top: 3.5rem !important">
+<div class="container-fluid" style="margin-top: 3.65rem !important">
 
 	<div class="row navbar navbar-expand-lg px-0" >
 			
@@ -13,16 +13,16 @@
 			        <ul>
 			            <li><a href="mainBoard.do?kind=all&sort=pop"><i class="fa fa-home"></i>홈으로</a></li>
 			        </ul>
-			        <p class="px-3 text-center mb-1">${ mem.getMem_nickname() }</p>
-			        <div class="text-center">레벨 <span>${ mem.getMem_level() }</span></div>
+			        <p class="px-3 text-center mb-1">${ mem.mem_nickname }</p>
+			        <div class="text-center">레벨 <span>${ mem.mem_level }</span></div>
 			        <div class="progress ml-2 mr-2">
   								<div class="progress-bar bg-success" role="progressbar" style="width: 25%" 
-  									aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${ mem.getMem_ex() }</div>
+  									aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${ mem.mem_ex }</div>
 							</div>
 			        <div class="text-center mb-1">남은 경험치 10</div>
 			        <div class="row text-center">
 						<div class="col px-0 ml-3">
-							<a href="mainBoard.do?kind=all&target=writer&search=${ mem.getMem_nickname() }" 
+							<a href="mainBoard.do?kind=all&target=writer&search=${ mem.mem_nickname }" 
 								class="btn btn-secondary" role="button" aria-pressed="true">
 								<i class="fa fa-sticky-note"></i>내가 쓴 글
 							</a>
@@ -56,7 +56,7 @@
 		
 		<div id="content" class="col-xl-9 col-lg-9 row px-0 mt-0 mx-0">
 	
-			<div id="content_main" class="col-xl-10 col-lg-12 bg-success">
+			<div id="content_main" class="col-xl-10 col-lg-12 bg-success px-0">
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">
@@ -70,7 +70,7 @@
 				</section>
 			</div>
 		
-			<div id="content_add" class="col-xl-2 col-lg-12">
+			<div id="content_add" class="col-xl-2 col-lg-12 px-0">
 				<section>
 					<img id="add" class="img-fluid" src="" />
 				</section>

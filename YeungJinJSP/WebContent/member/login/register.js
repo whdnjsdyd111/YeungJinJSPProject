@@ -85,8 +85,8 @@ $(function() {
 		
 		var spe = nick.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 		
-		if(nick.length < 3 || nick.length > 20) {
-			$('#check_nick').text("3자리 ~ 20자리 이내로 입력해주세요.")
+		if(nick.length < 3 || nick.length > 10) {
+			$('#check_nick').text("3자리 ~ 10자리 이내로 입력해주세요.")
 			check_nick = false;
 		} else if(spe > 0 || nick.search(/\s/) != -1) {
 			$('#check_nick').text("공백 또는 특수문자는 사용하실 수 없습니다.");
