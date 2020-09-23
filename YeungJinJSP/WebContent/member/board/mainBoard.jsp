@@ -1,3 +1,5 @@
+<%@page import="main.bean.JoinBoardMemberKindDataBean"%>
+<%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -79,40 +81,12 @@
 			<sql:param value="${ board.board_id }" />
 		</sql:query>
 		
-		<article class="row px-0 mx-0">
+		<article class="row px-0 mx-0 border border-secondary border-top-0 board_article">
 		
-			<div class="container col-2 flex-column px-0 border border-secondary">			
-				<c:if test="${ sort == 'nonReco' }">
-					<div>비추 수</div>
-					<div>${ board.getBoard_nonReco() }</div>
-				</c:if>
-				<c:if test="${ sort != 'nonReco' }">
-					<div>추천 수</div>
-					<div>${ board.getBoard_reco() }</div>
-				</c:if>
-			</div>
-			
-			<div class="container col-8 flex-row px-0 border border-secondary">
-				<a class="col-12" href="boardContent.do?bdNum=${ board.getBoard_id() }">${ board.getBoard_title() }</a>
-				<div>${ board.getMem_nickname() }</div>
-				<div>${ board.getMem_level() }</div>
-				<div><a href="mainBoard.do?kind=${ board.getKind_id() }&sort=pop">${ board.getKind_name() }</a></div>
-				<div>${ board.getBoard_date() }</div>
-			</div>
-			
-			<div class="container col-2 flex-column px-0 border border-secondary">
-				<div>조회수</div>
-				<div>${ board.board_readcount }</div>
-			</div>
-			
-		</article>
-		<%--  --%>
-		<article class="row px-0 mx-0">
-		
-			<div class="container col-9 px-0 border border-secondary py-2">
+			<div class="container col-9 px-0 py-2">
 				<div class="col-8 d-flex flex-column">
 					<div class="col-12">
-						#<span class="mr-2">${ board.board_id }</span>
+						<span class="mr-2">#${ board.board_id }</span>
 						<span class="border rounded bg-info mr-3">
 							<i class="fa fa-comments mx-1"></i>
 							<c:if test="${ board.kind_id == 600 || board.kind_id == 700 }">
@@ -130,23 +104,50 @@
 				<div class="col-4">
 					<ul class="navbar navbar nav mr-auto p-0">
 						<li><i class="fa fa-comment mx-2"></i>${ rs.rowsByIndex[0][0] }</li>
-						<li><i class="fa fa-thumbs-o-up mx-2"></i>${ board.getBoard_reco() }</li>
+						
+						<c:if test="${ sort == 'nonReco' }">
+							<li><i class="fa fa-thumbs-o-down mx-2"></i>${ board.board_nonReco }</li>
+						</c:if>
+						<c:if test="${ sort != 'nonReco' }">
+							<li><i class="fa fa-thumbs-o-up mx-2"></i>${ board.board_reco }</li>
+						</c:if>
+						
 						<li><i class="fa fa-eye mx-2"></i>${ board.board_readcount }</li>
 					</ul>
 				</div>
 			</div>
 			
-			<div class="container col-3 d-flex flex-column px-0 border border-secondary">
+			<div class="container col-3 d-flex flex-column px-0 ">
 				<div class="container">
-					<div class="mx-auto"><span><i class="fa fa-user-circle mr-1"></i>${ board.mem_nickname }</span></div>
-					<div class="mx-auto"><span><i class="fa fa-y-combinator mr-1"></i>${ board.mem_level }</span></div>
+					<div class="mx-auto">
+						<a class="text-dark" style="text-decoration: none;" 
+							href="mainBoard.do?kind=all&target=writer&search=${ board.mem_nickname }">
+							<span><i class="fa fa-user-circle mr-1"></i>${ board.mem_nickname }</span>
+						</a>
+					</div>
+						
+					<div class="mx-auto">
+						<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="레벨 ${ board.mem_level }">
+							<button class="btn m-0" style="pointer-events: none; vertical-align: inherit;" type="button">
+								<i class="fa fa-y-combinator-square mr-1"></i>${ board.mem_level }
+							</button>
+						</span>
+					</div>
 				</div>
-		
-					${ board.board_date }
-					<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
-						<button class="btn btn-primary" style="pointer-events: none;" type="button">Disabled button</button>
-					</span>
 				
+				<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ board.board_date }">
+					<button class="btn" style="pointer-events: none;" type="button">
+						<%
+							long time = new Timestamp(System.currentTimeMillis()).getTime() - 
+								((JoinBoardMemberKindDataBean) pageContext.getAttribute("board")).getBoard_date().getTime();
+						
+							out.print(
+								(time / 1000 < 60) ? time / 1000 + "초 전" : (time / 1000 / 60 < 60) ? time / 1000 / 60 + "분 전"
+										: (time / 1000 / 60 / 60 < 24) ? time / 1000 / 60 / 60 + "시간 전" : time / 1000 / 60 / 60 / 24 + "일 전"
+									);
+						%>
+					</button>
+				</span>
 			</div>
 			
 		</article>
@@ -154,6 +155,20 @@
 	
 </section>
 
-<div class="next_page">
-	<button value="${ page }" id="next_pageBtn">다음 페이지</button>
+<div class="container my-2">
+	<c:if test="${ page == 1 && board.size() == 30 }">
+		<button type="button" class="btn btn-danger page" value="${ page + 1 }">다음<i class="fa fa-chevron-right ml-2"></i></button>
+	</c:if>
+	
+	<c:if test="${ page != 1 }">
+		<c:if test="${ boardList.size() < 30 || boardList == null }">
+			<button type="button" class="btn btn-danger page" value="${ page - 1 }"><i class="fa fa-chevron-left mr-2"></i>이전</button>
+		</c:if>
+		<c:if test="${ boardList.size() == 30 }">
+			<button type="button" class="btn btn-danger page" value="${ page - 1 }"><i class="fa fa-chevron-left mr-2"></i>이전</button>
+			<button type="button" class="btn btn-danger page" value="${ page + 1 }">다음<i class="fa fa-chevron-right ml-2"></i></button>
+		</c:if>
+	</c:if>
+	
+	<input type="hidden" id="currentPage" value="${ page }">
 </div>

@@ -24,6 +24,11 @@ public class WriteBoardProAction implements CommandAction {
 		
 		String idDec = aes.aesDecode(idEnc);
 		
+		if(kind == 600 || kind == 700) {
+			request.setAttribute("check", new Integer(0));
+			return "/member/board/writeBoardPro.jsp";
+		}
+		
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
 		int check = boardProcess.insertBoard(Integer.valueOf(idDec), kind, title, content);
 		

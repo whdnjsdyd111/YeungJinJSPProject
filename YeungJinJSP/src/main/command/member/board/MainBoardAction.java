@@ -93,7 +93,7 @@ public class MainBoardAction implements CommandAction {
 		if(!kind.equals("all")) {
 			request.setAttribute("kind_name", kindProcess.getKind_name(Integer.valueOf(kind)));
 		}
-			
+
 		request.setAttribute("sort", sort);
 		request.setAttribute("search", search);
 		return "/member/board/mainBoard.jsp";

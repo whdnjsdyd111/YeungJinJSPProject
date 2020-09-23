@@ -12,22 +12,22 @@
 <script type="text/javascript" src="resource/js/jquery-3.5.1.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/common.css">
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/dialog.css">
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/writeBoard.css">
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardContent.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/comment.css">
 
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resource/js/bootstrap.bundle.min.js"></script>
 
 <script type="text/javascript" src="member/index/index.js"></script>
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/index.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/login/memberLogin.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/writeBoard.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardContent.css">
 
 </head>
-<body>
+<body class="bg-light">
 
 <%-- 헤더 --%>
 <c:if test="${ empty sessionScope.YJFBID_SES }">

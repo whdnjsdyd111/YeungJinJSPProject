@@ -27,14 +27,15 @@ $(function() {
 	}
 	
 	if($('.bookmark_y').length > 0) {
+		$('#bookmark').prop('checked', true);
 		check_bookmark = true;
 		check_db_bookmark = true;
 	}
 	
 	$('#reco').click(function() {
-		if($('#reco').attr('class') == 'reco_y') {			
-			$('#reco').attr('class', 'reco_n');
-			$('#reco').text(--reco);
+		if($('#reco').attr('class') == 'btn btn-lg btn-light mx-2 reco_y') {			
+			$('#reco').attr('class', 'btn btn-lg btn-light mx-2 reco_n');
+			$('#reco').html('<span><i class="fa fa-level-up mr-2"></i>' + --reco + '</span>');
 			check_reco = false;
 			// 추천되있는데 취소한경우
 			// 데이터베이스에서 지우기
@@ -55,15 +56,15 @@ $(function() {
 			
 			check_db_reco = false;
 		} else {
-			$('#reco').attr('class', 'reco_y');
-			$('#reco').text(++reco);
+			$('#reco').attr('class', 'btn btn-lg btn-light mx-2 reco_y');
+			$('#reco').html('<span><i class="fa fa-level-up mr-2"></i>' + ++reco + '</span>');
 			check_reco = true;
 			
 			
 			
-			if($('#nonReco').attr('class') == 'nonReco_y') {
-				$('#nonReco').attr('class', 'nonReco_n');
-				$('#nonReco').text(--nonReco);
+			if($('#nonReco').attr('class') == 'btn btn-lg btn-light mx-2 nonReco_y') {
+				$('#nonReco').attr('class', 'btn btn-lg btn-light mx-2 nonReco_n');
+				$('#nonReco').html('<span>' + --nonReco + '<i class="fa fa-level-down ml-2"></i></span>');
 				check_nonReco = false;
 				
 				// 비추된 상태에서 추천 누르기
@@ -107,9 +108,9 @@ $(function() {
 	});
 	
 	$('#nonReco').click(function() {
-		if($('#nonReco').attr('class') == 'nonReco_y') {
-			$('#nonReco').attr('class', 'nonReco_n');
-			$('#nonReco').text(--nonReco);
+		if($('#nonReco').attr('class') == 'btn btn-lg btn-light mx-2 nonReco_y') {
+			$('#nonReco').attr('class', 'btn btn-lg btn-light mx-2 nonReco_n');
+			$('#nonReco').html('<span>' + --nonReco + '<i class="fa fa-level-down ml-2"></i></span>');
 			check_nonReco = false;
 			
 			// 비추눌러진 상태에서 취소하기
@@ -132,13 +133,13 @@ $(function() {
 			check_db_reco = false;
 			
 		} else {
-			$('#nonReco').attr('class', 'nonReco_y');
-			$('#nonReco').text(++nonReco);
+			$('#nonReco').attr('class', 'btn btn-lg btn-light mx-2 nonReco_y');
+			$('#nonReco').html('<span>' + ++nonReco + '<i class="fa fa-level-down ml-2"></i></span>');
 			check_nonReco = true;
 			
-			if($('#reco').attr('class') == 'reco_y') {
-				$('#reco').attr('class', 'reco_n');
-				$('#reco').text(--reco);
+			if($('#reco').attr('class') == 'btn btn-lg btn-light mx-2 reco_y') {
+				$('#reco').attr('class', 'btn btn-lg btn-light mx-2 reco_n');
+				$('#reco').html('<span><i class="fa fa-level-up mr-2"></i>' + --reco + '</span>');
 				check_reco = false;
 				
 				$.ajax({
@@ -181,8 +182,8 @@ $(function() {
 	});
 	
 	$('#bookmark').click(function() {
-		if($('#bookmark').attr('class') == 'bookmark_y') {
-			$('#bookmark').attr('class', 'bookmark_n');
+		if($('#bookmark').attr('class') == 'heart_box bookmark_y') {
+			$('#bookmark').attr('class', 'heart_box bookmark_n');
 			
 			$.ajax({
 				type: "POST",
@@ -194,7 +195,7 @@ $(function() {
 			});
 
 		} else {
-			$('#bookmark').attr('class', 'bookmark_y');
+			$('#bookmark').attr('class', 'heart_box bookmark_y');
 			
 			$.ajax({
 				type: "POST",
@@ -205,25 +206,6 @@ $(function() {
 				}
 			});
 		}
-	});
-	
-	window.addEventListener("beforeunload", () => {
-		if($('.go_login').length > 0)
-			return;
-			
-		$.ajax({
-			type: "POST",
-			url: "bookmarkRecoInsert.do",
-			data: {
-				check_reco: check_reco,
-				check_nonReco: check_nonReco,
-				
-				check_db_reco: check_db_reco,
-				board_id: get,
-				reco: reco,
-				nonReco: nonReco
-			}
-		});
 	});
 	
 	$('.go_login').click(function() {
@@ -260,4 +242,6 @@ $(function() {
 	$('#board_update').click(function() {
 		
 	});
+	
+	$('[data-toggle="tooltip"]').tooltip();
 });

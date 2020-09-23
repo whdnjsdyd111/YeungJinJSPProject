@@ -48,7 +48,7 @@ $(function() {
 	
 	$('#insert_img').keydown(function(key) {
 		if(key.keyCode == 13) {
-			var img = "<img src='" + $('#insert_img').val() + "'>";
+			var img = "<img src='" + 'https://' + $('#insert_img').val() + "'>";
 			$('#board_content').append(img);
 		}
 	});
@@ -66,7 +66,7 @@ function checkAll() {
 		return false;
 	}
 	
-	if($('#board_content').length == 0) {
+	if($('#board_content').children().length == 0) {
 		alert("게시글 내용을 작성해주세요.");
 		check_content = false;
 		return false;

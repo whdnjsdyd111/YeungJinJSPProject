@@ -1,11 +1,11 @@
-	$(function() {
+$(function() {
 	$('#commentBtn').click(function() {
 		var href = window.location.href;
 		var str = 'bdNum=';
 		var loc = href.indexOf(str);
 		var len = str.length;
 		var get = href.substr(loc + len, href.length);
-	
+		
 		$.ajax({
 			type: "POST",
 			url: "commentInsert.do",
@@ -109,7 +109,7 @@
 				},
 				success: function(data) {
 					var str1 = "<p id='reco'>";
-					var str2 = "</p>";
+					var str2 = "reco</p>";
 					var loc1 = data.indexOf(str1);
 					var loc2 = data.indexOf(str2);
 					var len = str1.length;
@@ -136,7 +136,7 @@
 				},
 				success: function(data) {
 					var str1 = "<p id='reco'>";
-					var str2 = "</p>";
+					var str2 = "reco</p>";
 					var loc1 = data.indexOf(str1);
 					var loc2 = data.indexOf(str2);
 					var len = str1.length;
@@ -162,7 +162,7 @@
 				},
 				success: function(data) {
 					var str1 = "<p id='reco'>";
-					var str2 = "</p>";
+					var str2 = "reco</p>";
 					var loc1 = data.indexOf(str1);
 					var loc2 = data.indexOf(str2);
 					var len = str1.length;
@@ -199,7 +199,7 @@
 				},
 				success: function(data) {
 					var str1 = "<p id='reco'>";
-					var str2 = "</p>";
+					var str2 = "reco</p>";
 					var loc1 = data.indexOf(str1);
 					var loc2 = data.indexOf(str2);
 					var len = str1.length;
@@ -226,7 +226,7 @@
 				},
 				success: function(data) {
 					var str1 = "<p id='reco'>";
-					var str2 = "</p>";
+					var str2 = "reco</p>";
 					var loc1 = data.indexOf(str1);
 					var loc2 = data.indexOf(str2);
 					var len = str1.length;
@@ -252,7 +252,7 @@
 				},
 				success: function(data) {
 					var str1 = "<p id='reco'>";
-					var str2 = "</p>";
+					var str2 = "reco</p>";
 					var loc1 = data.indexOf(str1);
 					var loc2 = data.indexOf(str2);
 					var len = str1.length;

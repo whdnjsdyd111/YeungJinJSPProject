@@ -7,7 +7,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
 <script type="text/javascript" src="member/board/comment.js"></script>
+
 <%
 	CommentDBBean commentProcess = CommentDBBean.getInstance();
 	CommentRecommandDBBean comRecoProcess = CommentRecommandDBBean.getInstance();
@@ -23,7 +26,14 @@
 	request.setAttribute("commentMap", commentMap);
 	request.setAttribute("comRecoMap", comRecoMap);
 %>
-<h2>댓글</h2>
+
+<sql:query var="rs" dataSource="jdbc/yjfb">
+	SELECT 	COUNT(n.necom_id) + COUNT(distinct c.com_id) AS comments FROM comment c LEFT JOIN nestcomment n 
+	ON c.com_id = n.com_id WHERE c.com_bd_id = ?;
+	<sql:param value="<%= board_id %>" />
+</sql:query>
+
+<h2 class="p-3"><i class="fa fa-comment mr-2"></i>댓글<span class="ml-2 text-success">${ rs.rowsByIndex[0][0] }</span>개</h2>
 
 <c:if test="${ !empty sessionScope.YJFBID_SES }">
 	<div>

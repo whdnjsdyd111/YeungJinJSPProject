@@ -1,20 +1,16 @@
 @charset "UTF-8";
 
-@media (min-width: 1025px) {
-	.write_whole {
-		width: 80%;
-	    margin-left: 10%;
-	    margin-right: 10%;
-	}
-	
-	.write_input {
-		width: 100%;
-	}
-	
-	.textarea {
-		overflow-x:auto; 
-		min-height: 350px; 
-		border: solid 1px; 
-		line-height: 20px; 
-	}
+.write_content_top {
+	height: 450px;
+}
+
+.write_content_middle {
+	max-height: 450px; 
+	height: inherit; 
+	overflow: auto;
+}
+
+#board_content {
+	min-height: 0px;
+	height: inherit;
 }
