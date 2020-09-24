@@ -1,8 +1,5 @@
 package main.bean;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,6 +40,36 @@ public class BoardDBBean {
 			pstmt.setInt(2, kind_id);
 			pstmt.setString(3, title);
 			pstmt.setString(4, content);
+			
+			check = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int updateBoard(int mem_id, int board_id, int kind, String title, String content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE board SET board_kind = ?, board_title = ?, board_content = ? WHERE board_id = ? AND board_userid = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, kind);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			pstmt.setInt(4, board_id);
+			pstmt.setInt(5, mem_id);
 			
 			check = pstmt.executeUpdate();
 			

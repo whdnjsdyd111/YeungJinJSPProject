@@ -240,7 +240,7 @@ $(function() {
 	});
 	
 	$('#board_update').click(function() {
-		
+		window.location.href = "updateBoardForm.do?bdNum=" + get;
 	});
 	
 	$('[data-toggle="tooltip"]').tooltip();

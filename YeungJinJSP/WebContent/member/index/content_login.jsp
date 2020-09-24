@@ -56,7 +56,7 @@
 		
 		<div id="content" class="col-xl-9 col-lg-9 row px-0 mt-0 mx-0">
 	
-			<div id="content_main" class="col-xl-10 col-lg-12 bg-success px-0">
+			<div id="content_main" class="col-xl-10 col-lg-12 px-0">
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">

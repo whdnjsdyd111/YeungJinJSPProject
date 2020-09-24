@@ -1,4 +1,4 @@
-<%@page import="main.bean.BoardDataBean"%>
+	<%@page import="main.bean.BoardDataBean"%>
 <%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -62,7 +62,7 @@
 	</div>
 	
 	<c:if test="${ empty sessionScope.YJFBID_SES }">
-		<div class="container my-2 border border-muted border-bottom-0">
+		<div class="container border border-muted border-bottom-0">
 			<div class="mx-auto">
 				<button class="btn btn-lg btn-light mx-2 go_login">
 					<span><i class="fa fa-level-up mr-2"></i>${ board.board_reco }</span>

@@ -41,8 +41,8 @@
 	</div>
 	
 	<div class="w-100 border border-dark rounded write_content_top">
-		<div class="w-100 write_content_middle mx-3">
-			<div id="board_content" contentEditable="true"></div>
+		<div class="w-100 write_content_middle">
+			<div id="board_content" contentEditable="true" class="px-3"></div>
 		</div>
 	</div>
 	

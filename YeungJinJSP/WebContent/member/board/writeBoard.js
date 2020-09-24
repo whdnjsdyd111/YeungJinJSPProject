@@ -14,7 +14,7 @@ $(function() {
 
 	$('#back').click(function() {
 		window.history.back();
-	})
+	});
 	
 	$('#complete').click(function() {
 		checkAll();
@@ -42,7 +42,7 @@ $(function() {
 						window.location.href = "DBFail.do";
 					}
 				}
-			})
+			});
 		}
 	});
 	
@@ -60,7 +60,7 @@ function checkAll() {
 	check_content = true;
 	
 	if(!$('#board_title').val()) {
-		alert("게시글 제목을 작성해주세요.")
+		alert("게시글 제목을 작성해주세요.");
 		$('#board_title').focus();
 		check_title = false;
 		return false;
