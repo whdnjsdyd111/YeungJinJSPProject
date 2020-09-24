@@ -122,7 +122,7 @@
 					<div class="mx-auto">
 						<a class="text-dark" style="text-decoration: none;" 
 							href="mainBoard.do?kind=all&target=writer&search=${ board.mem_nickname }">
-							<span><i class="fa fa-user-circle mr-1"></i>${ board.mem_nickname }</span>
+							<span><i class="fa fa-user-circle mr-2"></i>${ board.mem_nickname }</span>
 						</a>
 					</div>
 						
@@ -136,7 +136,7 @@
 				</div>
 				
 				<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ board.board_date }">
-					<button class="btn" style="pointer-events: none;" type="button">
+					<button class="btn" style="pointer-events: none; vertical-align: inherit;" type="button">
 						<%
 							long time = new Timestamp(System.currentTimeMillis()).getTime() - 
 								((JoinBoardMemberKindDataBean) pageContext.getAttribute("board")).getBoard_date().getTime();

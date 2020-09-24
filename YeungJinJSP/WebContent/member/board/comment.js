@@ -1,20 +1,26 @@
 $(function() {
 	$('#commentBtn').click(function() {
+		
+		if($('#comment_content').html() == "") {
+			alert("댓글 내용을 입력해주세요.");
+			return false;
+		}
+		
 		var href = window.location.href;
 		var str = 'bdNum=';
 		var loc = href.indexOf(str);
 		var len = str.length;
 		var get = href.substr(loc + len, href.length);
-		
+
 		$.ajax({
 			type: "POST",
 			url: "commentInsert.do",
 			data: { 
 				board_id: get,
-				content: $('#comCont').val() 
+				content: $('#comment_content').html() 
 			},
 			success: function() {
-				$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get);
+				$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get + "&sort=recent");
 			}
 		});
 	});
@@ -23,15 +29,27 @@ $(function() {
 		$('.reply').remove();
 		
 		var com_id = $(this).parents('.comments').children('form').children('input[name=com_id]').val();
-		var reply = "<div class='reply'>" + 
-		"<div class='nestMark'><div class='mark'></div></div>" +
-		"<div class='nestContent'><form method='post'><input type='hidden' name='com_id' value='" + com_id + "'>" +
-		"<textarea row='5' cols='15' id='nestComCont'></textarea>" +
-		"<button type='button' id='nestCommentBtn' onclick=''>작성하기</button></div></form>";
+		var reply = "<div class='reply p-3 d-flex flex-md-row'>" + 
+		"<div class='border border-right-0 border-top-0 border-dark ml-5' style='width: 30px; height: 30px'></div>" +
+		'<div class="w-100"><div class="border border-dark write_comment_top mx-3">' +
+		'<div class="ml-3 write_comment_member">월롱이</div><div class="w-100 write_comment_middle">' +
+		'<div id="nestComCont" class="mx-3" contentEditable="true" style="height: 115px"></div></div></div>' +
+		'<div class="border border-dark border-top-0 mx-3">' +
+		'<div class="w-100 d-flex"><div class="custom-file w-75">' +
+		'<input type="file" class="custom-file-input" id="comment_image">' +
+		'<label class="custom-file-label" for="comment_image"><i class="fa fa-upload mr-2"></i>이미지 삽입</label></div>' +
+		"<input type='hidden' name='com_id' value='" + com_id + "'>" + 
+		'<button id="nestCommentBtn" class="btn btn-info w-25">작성</button></div></div><div>';
 		
 		$(this).parents('.comments').after(reply);
 		
 		$('#nestCommentBtn').click(function() {
+			
+			if($('#nestComCont').html() == "") {
+				alert("댓글 내용을 입력해주세요.");
+				return false;
+			}
+			
 			var href = window.location.href;
 			var str = 'bdNum=';
 			var loc = href.indexOf(str);
@@ -43,7 +61,7 @@ $(function() {
 				url: "nestCommentInsert.do",
 				data: { 
 					com_id: $(this).prevAll('input[name=com_id]').val(),
-					content: $('#nestComCont').val() 
+					content: $('#nestComCont').html() 
 				},
 				success: function() {
 					$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get);
@@ -56,15 +74,27 @@ $(function() {
 		$('.reply').remove();
 		
 		var com_id = $(this).parents('.nestComments').prevAll('.comments').children('form').children('input[name=com_id]').val();
-		var reply = "<div class='reply'>" + 
-		"<div class='nestMark'><div class='mark'></div></div>" +
-		"<div class='nestContent'><form method='post'><input type='hidden' name='com_id' value='" + com_id + "'>" +
-		"<textarea row='5' cols='15' id='nestComCont'></textarea>" +
-		"<button type='button' id='nestCommentBtn' onclick=''>작성하기</button></div></form>";
+		var reply = "<div class='reply p-3 d-flex flex-md-row'>" + 
+		"<div class='border border-right-0 border-top-0 border-dark ml-5' style='width: 30px; height: 30px'></div>" +
+		'<div class="w-100"><div class="border border-dark write_comment_top mx-3">' +
+		'<div class="ml-3 write_comment_member">월롱이</div><div class="w-100 write_comment_middle">' +
+		'<div id="nestComCont" class="mx-3" contentEditable="true" style="height: 115px"></div></div></div>' +
+		'<div class="border border-dark border-top-0 mx-3">' +
+		'<div class="w-100 d-flex"><div class="custom-file w-75">' +
+		'<input type="file" class="custom-file-input" id="comment_image">' +
+		'<label class="custom-file-label" for="comment_image"><i class="fa fa-upload mr-2"></i>이미지 삽입</label></div>' +
+		"<input type='hidden' name='com_id' value='" + com_id + "'>" + 
+		'<button id="nestCommentBtn" class="btn btn-info w-25">작성</button></div></div><div>';
 		
 		$(this).parents('.nestComments').after(reply);
 		
 		$('#nestCommentBtn').click(function() {
+			
+			if($('#nestComCont').html() == "") {
+				alert("댓글 내용을 입력해주세요.");
+				return false;
+			}
+			
 			var href = window.location.href;
 			var str = 'bdNum=';
 			var loc = href.indexOf(str);
@@ -263,4 +293,6 @@ $(function() {
 			});
 		}
 	});
+	
+	$('[data-toggle="tooltip"]').tooltip();
 });

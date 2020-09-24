@@ -78,6 +78,56 @@ public class CommentDBBean {
 		return commentMap;
 	}
 	
+	public Map<JoinMemberCommentDataBean, List<NestCommentDataBean>> getCommentRecentList(int board_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<JoinMemberCommentDataBean, List<NestCommentDataBean>> commentMap = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT c.com_id, m.mem_id, m.mem_nickname, m.mem_level, c.com_bd_id, c.com_content, c.com_reco, c.com_date " + 
+					"FROM member m JOIN comment c ON m.mem_id = c.com_mem_id " + 
+					"WHERE c.com_bd_id = ? ORDER BY c.com_date DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				NestCommentDBBean nestProcess = NestCommentDBBean.getInstance();
+				commentMap = new LinkedHashMap<>();
+				
+				do {
+					JoinMemberCommentDataBean joinMemCom = new JoinMemberCommentDataBean();
+					
+					joinMemCom.setCom_id(rs.getInt(1));
+					joinMemCom.setCom_mem_id(rs.getInt(2));
+					joinMemCom.setCom_mem_nickname(rs.getString(3));
+					joinMemCom.setCom_mem_level(rs.getInt(4));
+					joinMemCom.setCom_db_id(rs.getInt(5));
+					joinMemCom.setCom_content(rs.getString(6));
+					joinMemCom.setCom_reco(rs.getInt(7));
+					joinMemCom.setCom_date(rs.getTimestamp(8));
+					
+					commentMap.put(joinMemCom, nestProcess.getgetNestList(joinMemCom.getCom_id()));
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return commentMap;
+	}
+	
 	public int commentInsert(int mem_id, int board_id, String content) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
