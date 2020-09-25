@@ -5,8 +5,7 @@
 }
 
 .write_content_middle {
-	max-height: 450px; 
-	height: inherit; 
+	height: calc(450px - 2rem); 
 	overflow: auto;
 }
 

@@ -24,8 +24,6 @@ public class MemberDBBean {
 		return ds.getConnection();
 	}
 	
-	// member/login/ 에서 사용할 메소드들
-	
 	public int checkEmail(String mem_email) {	// 이메일 존재 여부 체크
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -114,6 +112,45 @@ public class MemberDBBean {
 					}
 				} else {
 					check = 0;
+				}
+			} else {
+				check = 0;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int userCheck(int mem_id, String mem_passwd) {	// 유저 체크
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SHA256 sha = SHA256.getInstance();
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT mem_passwd FROM member WHERE mem_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(BCrypt.checkpw(sha.getSha256(mem_passwd), rs.getString("mem_passwd"))) {
+					check = 1;
+				} else {
+					check = 2;
 				}
 			} else {
 				check = 0;
@@ -333,5 +370,31 @@ public class MemberDBBean {
 		}
 		
 		return mem;
+	}
+	
+	public int updateNickname(int mem_id, String nickname) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE member SET mem_nickname = ? WHERE mem_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			pstmt.setInt(2, mem_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
 	}
 }

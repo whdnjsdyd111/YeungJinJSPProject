@@ -1,3 +1,5 @@
+<%@page import="main.bean.AES256Util"%>
+<%@page import="main.bean.SHA256"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="main.bean.CommentRecommandDBBean"%>
 <%@page import="java.util.List"%>
@@ -17,14 +19,16 @@
 	CommentRecommandDBBean comRecoProcess = CommentRecommandDBBean.getInstance();
 	int board_id = Integer.valueOf(request.getParameter("bdNum"));
 	String sort = request.getParameter("sort");
-	String mem_idEnc = (String) session.getAttribute("YJFBID_SES");
+	Object mem_id = session.getAttribute("YJFBID_SES");
 
 	Map<JoinMemberCommentDataBean, List<NestCommentDataBean>> commentMap = null;
 	Map<Integer, String> comRecoMap = null;
 
-	if(mem_idEnc != null)
-		comRecoMap = comRecoProcess.getComRecoMap(mem_idEnc, board_id);
-	
+	if(mem_id != null) {
+		comRecoMap = comRecoProcess.getComRecoMap((Integer) mem_id, board_id);
+		request.setAttribute("mem_id", (Integer) mem_id);
+	}
+		
 	if(sort == null)
 		commentMap = commentProcess.getCommentList(board_id);
 	else 
@@ -47,7 +51,7 @@
 		<div class="border border-dark write_comment_top mx-3">
 			<div class="ml-3 write_comment_member">월롱이</div>
 			<div class="w-100 write_comment_middle">
-				<div id="comment_content" class="mx-3" contentEditable="true"></div>
+				<div id="comment_content" class="px-3" contentEditable="true"></div>
 			</div>
 		</div>
 		<div class="border border-dark border-top-0 mx-3">
@@ -62,7 +66,7 @@
 	</div>	
 </c:if>
 
-<div>
+<div id="start_com">
 	<c:forEach var="entry" items="${ commentMap }">
 		<c:set var="joinMemCom" value="${ entry.key }" />
 		<c:set var="comReco" value="${ comRecoMap.get(joinMemCom.getCom_id()) }" />
@@ -150,6 +154,10 @@
 					<c:if test="${ !empty sessionScope.YJFBID_SES }">
 						<button class="write_reply btn btn-dark" >답글쓰기</button>
 						<button class="btn btn-danger">신고</button>
+						<c:if test="${ joinMemCom.com_mem_id == mem_id }">
+							<button class="btn btn-warning delete_com"><i class="fa fa-trash mr-2"></i>삭제</button>
+							<input type="hidden" value="${ joinMemCom.com_id }" />
+						</c:if>
 					</c:if>
 				</div>
 			</div>
@@ -171,14 +179,14 @@
 								<i class="fa fa-y-combinator-square mr-1"></i>${ nestComment.mem_level }
 							</button>
 						</span>
-						<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ nestComment.getReCom_date() }">
+						<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ nestComment.reCom_date }">
 							<button class="btn" style="pointer-events: none; vertical-align: inherit;" type="button">
 								<%
 									long nest_time = new Timestamp(System.currentTimeMillis()).getTime() - 
 										((NestCommentDataBean) pageContext.getAttribute("nestComment")).getReCom_date().getTime();
 								
 									out.print(
-										(nest_time / 1000 < 60) ? time / 1000 + "초 전"
+										(nest_time / 1000 < 60) ? nest_time / 1000 + "초 전"
 												: (nest_time / 1000 / 60 < 60) ? nest_time / 1000 / 60 + "분 전"
 												: (nest_time / 1000 / 60 / 60 < 24) ? nest_time / 1000 / 60 / 60 + "시간 전"
 												: nest_time / 1000 / 60 / 60 / 24 + "일 전"
@@ -198,6 +206,10 @@
 						<c:if test="${ !empty sessionScope.YJFBID_SES }">
 							<button class="write_nest_reply btn btn-dark" >답글쓰기</button>
 							<button class="btn btn-danger">신고</button>
+							<c:if test="${ nestComment.mem_id == mem_id }">
+								<button class="btn btn-warning delete_nest_com"><i class="fa fa-trash mr-2"></i>삭제</button>
+								<input type="hidden" value="${ nestComment.neCom_id }" />
+							</c:if>
 						</c:if>
 					</div>
 				</div>

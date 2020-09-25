@@ -42,7 +42,7 @@
 	
 	<div class="w-100 border border-dark rounded write_content_top">
 		<div class="w-100 write_content_middle">
-			<div id="board_content" contentEditable="true" class="px-3"></div>
+			<div id="board_content" contentEditable="true" class="p-3"></div>
 		</div>
 	</div>
 	

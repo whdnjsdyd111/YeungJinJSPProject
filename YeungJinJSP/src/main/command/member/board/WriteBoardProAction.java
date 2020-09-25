@@ -17,12 +17,8 @@ public class WriteBoardProAction implements CommandAction {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		int kind = Integer.valueOf(request.getParameter("kind"));
-		String idEnc = String.valueOf(request.getSession().getAttribute("YJFBID_SES"));
+		int id = (Integer) request.getSession().getAttribute("YJFBID_SES");
 		
-		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
-		
-		String idDec = aes.aesDecode(idEnc);
 		
 		if(kind == 600 || kind == 700) {
 			request.setAttribute("check", new Integer(0));
@@ -30,7 +26,7 @@ public class WriteBoardProAction implements CommandAction {
 		}
 		
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
-		int check = boardProcess.insertBoard(Integer.valueOf(idDec), kind, title, content);
+		int check = boardProcess.insertBoard(id, kind, title, content);
 		
 		request.setAttribute("check", new Integer(check));
 		return "/member/board/writeBoardPro.jsp";

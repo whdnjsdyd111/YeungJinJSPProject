@@ -6,13 +6,8 @@
 <c:if test="${ check == 1 }">
 	<%
 		request.setCharacterEncoding("utf-8");
-		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
-	
-		String id = String.valueOf(request.getAttribute("mem_id"));
-		String idEnc = aes.aesEncode(id);
 		
-		session.setAttribute("YJFBID_SES", idEnc);
+		session.setAttribute("YJFBID_SES", request.getAttribute("mem_id"));
 	%>
 </c:if>
 <p id='ck'>${ check }

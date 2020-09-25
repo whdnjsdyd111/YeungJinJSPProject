@@ -28,17 +28,13 @@ public class CommentRecommandDBBean {
 		return ds.getConnection();
 	}
 	
-	public Map<Integer, String> getComRecoMap(String mem_idEnc, int board_id) {
+	public Map<Integer, String> getComRecoMap(int mem_id, int board_id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Map<Integer, String> map = null;
 		
 		try {
-			SHA256 sha = SHA256.getInstance();
-			AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
-			int mem_id = Integer.valueOf(aes.aesDecode(mem_idEnc));
-			
 			conn = getConnection();
 			String sql = "SELECT r.com_id, r.nonreco FROM comment c JOIN comment_recommend r "
 					+ "ON r.com_id = c.com_id WHERE r.mem_id = ? AND c.com_bd_id = ?";

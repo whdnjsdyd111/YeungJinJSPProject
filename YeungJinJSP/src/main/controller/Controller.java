@@ -118,6 +118,14 @@ public class Controller extends HttpServlet {
 					command = command.substring(request.getContextPath().length());
 
 			com = (CommandAction) commandMap.get(command);
+			
+			if(com == null) {
+				dispatcher = request.getRequestDispatcher("/error/404code.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+			
+			
 			view = com.requestPro(request, response);
 		} catch (Throwable e) {
 			e.printStackTrace();

@@ -17,12 +17,7 @@ public class UpdateBoardProAction implements CommandAction {
 		String content = request.getParameter("content");
 		int kind = Integer.valueOf(request.getParameter("kind"));
 		int board_id = Integer.valueOf(request.getParameter("board_id"));
-		String idEnc = String.valueOf(request.getSession().getAttribute("YJFBID_SES"));
-		
-		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
-		
-		String idDec = aes.aesDecode(idEnc);
+		int id = (Integer) request.getSession().getAttribute("YJFBID_SES");
 		
 		if(kind == 600 || kind == 700) {
 			request.setAttribute("check", new Integer(0));
@@ -30,7 +25,7 @@ public class UpdateBoardProAction implements CommandAction {
 		}
 		
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
-		int check = boardProcess.updateBoard(Integer.valueOf(idDec), board_id, kind, title, content);
+		int check = boardProcess.updateBoard(id, board_id, kind, title, content);
 		
 		request.setAttribute("check", new Integer(check));
 		return "/member/board/updateBoardPro.jsp";

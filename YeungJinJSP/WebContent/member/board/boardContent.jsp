@@ -14,7 +14,7 @@
 	<div class="row d-flex mx-0 border border-bottom-0 border-muted">
 		<div class="col-lg-7 col-sm-6 px-0">
 			<span class="mr-2 ml-5">#${ board.board_id }</span>
-			<a class="bg-primary border rounded text-dark px-1 mr-2 my-1" style="text-decoration: none"
+			<a class="bg-primary border border-dark rounded text-dark px-1 mr-2 my-1" style="text-decoration: none"
 							href="mainBoard.do?kind=${ board.board_kind }&sort=pop">${ kind }</a>
 			<a class="text-dark" style="text-decoration: none;"
 							href="mainBoard.do?kind=all&target=writer&search=${ nickname }">
@@ -51,12 +51,12 @@
 	<c:if test="${ host != null }">
 		<div class="col-12 px-0 py-2 border border-muted border-bottom-0">
 			<button id="board_update" class="btn btn-outline-warning ml-5">수정</button>
-			<button id="board_delete" class="btn btn-outline-warning ml-3">삭제</button>
+			<button id="board_delete" class="btn btn-outline-warning ml-3"><i class="fa fa-trash-o mr-2"></i>삭제</button>
 		</div>
 	</c:if>
 	
 	<div class="jumbotron border border-muted rounded-0 border-bottom-0 mb-0">
-		<div class="container">
+		<div>
 			${ board.getBoard_content() }
 		</div>
 	</div>
@@ -64,10 +64,10 @@
 	<c:if test="${ empty sessionScope.YJFBID_SES }">
 		<div class="container border border-muted border-bottom-0">
 			<div class="mx-auto">
-				<button class="btn btn-lg btn-light mx-2 go_login">
+				<button class="btn btn-lg btn-outline-secondary mx-2 go_login">
 					<span><i class="fa fa-level-up mr-2"></i>${ board.board_reco }</span>
 				</button>
-				<button class="btn btn-lg btn-light mx-2 go_login">
+				<button class="btn btn-lg btn-outline-secondary mx-2 go_login">
 					<span>${ board.board_nonReco }<i class="fa fa-level-down ml-2"></i></span>
 				</button>
 				
@@ -119,26 +119,26 @@
 			<div class="container">
 				<div class="mx-auto">
 					<c:if test="${ nonReco == null }">
-						<button class="btn btn-lg btn-light mx-2 reco_n" id="reco">
+						<button class="btn btn-lg btn-outline-secondary mx-2 reco_n" id="reco">
 							<span><i class="fa fa-level-up mr-2"></i>${ board.board_reco }</span>
 						</button>
-						<button class="btn btn-lg btn-light mx-2 nonReco_n" id="nonReco">
+						<button class="btn btn-lg btn-outline-secondary mx-2 nonReco_n" id="nonReco">
 							<span>${ board.board_nonReco }<i class="fa fa-level-down ml-2"></i></span>
 						</button>
 					</c:if>
 					<c:if test="${ nonReco == 'N' }">
-						<button class="btn btn-lg btn-light mx-2 reco_y" id="reco">
+						<button class="btn btn-lg btn-outline-secondary mx-2 reco_y" id="reco">
 							<span><i class="fa fa-level-up mr-2"></i>${ board.board_reco }</span>
 						</button>
-						<button class="btn btn-lg btn-light mx-2 nonReco_n" id="nonReco">
+						<button class="btn btn-lg btn-outline-secondary mx-2 nonReco_n" id="nonReco">
 							<span>${ board.board_nonReco }<i class="fa fa-level-down ml-2"></i></span>
 						</button>
 					</c:if>
 					<c:if test="${ nonReco == 'Y' }">
-						<button class="btn btn-lg btn-light mx-2 reco_n" id="reco">
+						<button class="btn btn-lg btn-outline-secondary mx-2 reco_n" id="reco">
 							<span><i class="fa fa-level-up mr-2"></i>${ board.board_reco }</span>
 						</button>
-						<button class="btn btn-lg btn-light mx-2 nonReco_y" id="nonReco">
+						<button class="btn btn-lg btn-outline-secondary mx-2 nonReco_y" id="nonReco">
 							<span>${ board.board_nonReco }<i class="fa fa-level-down ml-2"></i></span>
 						</button>
 					</c:if>

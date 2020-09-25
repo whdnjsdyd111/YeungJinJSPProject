@@ -17,11 +17,9 @@ public class NestCommentInsertAction implements CommandAction {
 		int com_id = Integer.valueOf(request.getParameter("com_id"));
 		String content = request.getParameter("content");
 		
-		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 		NestCommentDBBean nestProcess = NestCommentDBBean.getInstance();
 		
-		int mem_id = Integer.valueOf(aes.aesDecode((String) request.getSession().getAttribute("YJFBID_SES")));
+		int mem_id = (Integer) request.getSession().getAttribute("YJFBID_SES");
 		
 		int check = nestProcess.insertNestComment(com_id, mem_id, content);
 		

@@ -33,8 +33,8 @@ $(function() {
 	}
 	
 	$('#reco').click(function() {
-		if($('#reco').attr('class') == 'btn btn-lg btn-light mx-2 reco_y') {			
-			$('#reco').attr('class', 'btn btn-lg btn-light mx-2 reco_n');
+		if($('#reco').attr('class') == 'btn btn-lg btn-outline-secondary mx-2 reco_y') {			
+			$('#reco').attr('class', 'btn btn-lg btn-outline-secondary mx-2 reco_n');
 			$('#reco').html('<span><i class="fa fa-level-up mr-2"></i>' + --reco + '</span>');
 			check_reco = false;
 			// 추천되있는데 취소한경우
@@ -56,14 +56,14 @@ $(function() {
 			
 			check_db_reco = false;
 		} else {
-			$('#reco').attr('class', 'btn btn-lg btn-light mx-2 reco_y');
+			$('#reco').attr('class', 'btn btn-lg btn-outline-secondary mx-2 reco_y');
 			$('#reco').html('<span><i class="fa fa-level-up mr-2"></i>' + ++reco + '</span>');
 			check_reco = true;
 			
 			
 			
-			if($('#nonReco').attr('class') == 'btn btn-lg btn-light mx-2 nonReco_y') {
-				$('#nonReco').attr('class', 'btn btn-lg btn-light mx-2 nonReco_n');
+			if($('#nonReco').attr('class') == 'btn btn-lg btn-outline-secondary mx-2 nonReco_y') {
+				$('#nonReco').attr('class', 'btn btn-lg btn-outline-secondary mx-2 nonReco_n');
 				$('#nonReco').html('<span>' + --nonReco + '<i class="fa fa-level-down ml-2"></i></span>');
 				check_nonReco = false;
 				
@@ -108,8 +108,8 @@ $(function() {
 	});
 	
 	$('#nonReco').click(function() {
-		if($('#nonReco').attr('class') == 'btn btn-lg btn-light mx-2 nonReco_y') {
-			$('#nonReco').attr('class', 'btn btn-lg btn-light mx-2 nonReco_n');
+		if($('#nonReco').attr('class') == 'btn btn-lg btn-outline-secondary mx-2 nonReco_y') {
+			$('#nonReco').attr('class', 'btn btn-lg btn-outline-secondary mx-2 nonReco_n');
 			$('#nonReco').html('<span>' + --nonReco + '<i class="fa fa-level-down ml-2"></i></span>');
 			check_nonReco = false;
 			
@@ -133,12 +133,12 @@ $(function() {
 			check_db_reco = false;
 			
 		} else {
-			$('#nonReco').attr('class', 'btn btn-lg btn-light mx-2 nonReco_y');
+			$('#nonReco').attr('class', 'btn btn-lg btn-outline-secondary mx-2 nonReco_y');
 			$('#nonReco').html('<span>' + ++nonReco + '<i class="fa fa-level-down ml-2"></i></span>');
 			check_nonReco = true;
 			
-			if($('#reco').attr('class') == 'btn btn-lg btn-light mx-2 reco_y') {
-				$('#reco').attr('class', 'btn btn-lg btn-light mx-2 reco_n');
+			if($('#reco').attr('class') == 'btn btn-lg btn-outline-secondary mx-2 reco_y') {
+				$('#reco').attr('class', 'btn btn-lg btn-outline-secondary mx-2 reco_n');
 				$('#reco').html('<span><i class="fa fa-level-up mr-2"></i>' + --reco + '</span>');
 				check_reco = false;
 				

@@ -24,7 +24,7 @@ public class BoardContentAction implements CommandAction {
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
 		MemberDBBean memProcess = MemberDBBean.getInstance();
 		KindDBBean kindProcess = KindDBBean.getInstance();
-		String mem_idEnc = (String) request.getSession().getAttribute("YJFBID_SES");
+		Object mem_id_obj = request.getSession().getAttribute("YJFBID_SES");
 		
 		int board_id = Integer.valueOf(boardNum);
 		
@@ -37,10 +37,8 @@ public class BoardContentAction implements CommandAction {
 		String kind_name = kindProcess.getKind_name(board.getBoard_kind());
 		
 		
-		if(mem_idEnc != null) {
-			SHA256 sha = SHA256.getInstance();
-			AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
-			int mem_id = Integer.valueOf(aes.aesDecode(mem_idEnc));
+		if(mem_id_obj != null) {
+			int mem_id = (Integer) mem_id_obj;
 			
 			BookmarkDBBean bookmarkProcess = BookmarkDBBean.getInstance();
 			RecommendDBBean recommendProcess = RecommendDBBean.getInstance();

@@ -33,7 +33,8 @@ public class MainBoardAction implements CommandAction {
 			page = "1";
 		
 		if(kind.equals("bookmark")) {
-			boardList = boardProcess.getJoinBdMemKindFindBookmark(Integer.valueOf(page), (String) request.getSession().getAttribute("YJFBID_SES"));
+			boardList = boardProcess.getJoinBdMemKindFindBookmark(Integer.valueOf(page), 
+					(Integer) request.getSession().getAttribute("YJFBID_SES"));
 			request.setAttribute("boardList", boardList);
 			request.setAttribute("page", page);
 			request.setAttribute("kind", kind);

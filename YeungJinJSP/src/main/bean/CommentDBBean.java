@@ -61,7 +61,7 @@ public class CommentDBBean {
 					joinMemCom.setCom_reco(rs.getInt(7));
 					joinMemCom.setCom_date(rs.getTimestamp(8));
 					
-					commentMap.put(joinMemCom, nestProcess.getgetNestList(joinMemCom.getCom_id()));
+					commentMap.put(joinMemCom, nestProcess.getNestList(joinMemCom.getCom_id()));
 				} while(rs.next());
 			}
 		} catch (Exception e) {
@@ -111,7 +111,7 @@ public class CommentDBBean {
 					joinMemCom.setCom_reco(rs.getInt(7));
 					joinMemCom.setCom_date(rs.getTimestamp(8));
 					
-					commentMap.put(joinMemCom, nestProcess.getgetNestList(joinMemCom.getCom_id()));
+					commentMap.put(joinMemCom, nestProcess.getNestList(joinMemCom.getCom_id()));
 				} while(rs.next());
 			}
 		} catch (Exception e) {
@@ -210,5 +210,30 @@ public class CommentDBBean {
 		}
 		
 		return num;
+	}
+	
+	public int commentDelete(int com_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "DELETE FROM comment WHERE com_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, com_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null)
+				try { pstmt.close(); } catch(SQLException sqle) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException sqle) {}
+		}
+		
+		return check;
 	}
 }

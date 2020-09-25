@@ -26,7 +26,7 @@ public class NestCommentDBBean {
 		return ds.getConnection();
 	}
 	
-	public List<NestCommentDataBean> getgetNestList(int com_id) {
+	public List<NestCommentDataBean> getNestList(int com_id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -87,6 +87,31 @@ public class NestCommentDBBean {
 			pstmt.setInt(1, com_id);
 			pstmt.setInt(2, mem_id);
 			pstmt.setString(3, content);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null)
+				try { pstmt.close(); } catch(SQLException sqle) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException sqle) {}
+		}
+		
+		return check;
+	}
+	
+	public int deleteNestComment(int nest_com_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "DELETE FROM nestcomment WHERE necom_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, nest_com_id);
 			
 			check = pstmt.executeUpdate();
 		} catch (Exception e) {

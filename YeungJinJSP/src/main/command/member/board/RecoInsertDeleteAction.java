@@ -19,13 +19,11 @@ public class RecoInsertDeleteAction implements CommandAction {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
 		RecommendDBBean recomendProcess = RecommendDBBean.getInstance();
 		
 		int board_id = Integer.valueOf(request.getParameter("board_id"));
-		int mem_id = Integer.valueOf(aes.aesDecode((String) request.getSession().getAttribute("YJFBID_SES")));
+		int mem_id = (Integer) request.getSession().getAttribute("YJFBID_SES");
 		
 		boolean check_reco = Boolean.valueOf(request.getParameter("check_reco"));
 		boolean check_nonReco = Boolean.valueOf(request.getParameter("check_nonReco"));

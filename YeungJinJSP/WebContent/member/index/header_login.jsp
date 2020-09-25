@@ -7,14 +7,11 @@
 
 <%
 	request.setCharacterEncoding("utf-8");
-	SHA256 sha = SHA256.getInstance();
-	AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 
-	String idEnc = String.valueOf(session.getAttribute("YJFBID_SES"));
-	String id = aes.aesDecode(idEnc);
+	int id = (Integer) session.getAttribute("YJFBID_SES");
 	MemberDBBean memProcess = MemberDBBean.getInstance();
 	
-	MemberDataBean mem = memProcess.getMember(Integer.valueOf(id));
+	MemberDataBean mem = memProcess.getMember(id);
 	request.setAttribute("mem", mem);
 %>
 
@@ -88,7 +85,7 @@
 				<li class="nav-item mr-3"><a class="nav-link"
 					href="logout.do"><span><i class="fa fa-sign-out mr-2"></i>로그아웃</span></a></li>
 				<li class="nav-item mr-3"><a class="nav-link"
-					href="#"><span><i class="fa fa-address-card mr-2"></i>계정설정</span></a></li>
+					href="checkPasswordForm.do"><span><i class="fa fa-address-card mr-2"></i>계정설정</span></a></li>
 			</ul>
 		</div>
 	</div>

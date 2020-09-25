@@ -87,7 +87,7 @@
 				<div class="col-8 d-flex flex-column">
 					<div class="col-12">
 						<span class="mr-2">#${ board.board_id }</span>
-						<span class="border rounded bg-info mr-3">
+						<span class="border border-dark rounded bg-info mr-3">
 							<i class="fa fa-comments mx-1"></i>
 							<c:if test="${ board.kind_id == 600 || board.kind_id == 700 }">
 								정보
@@ -96,7 +96,7 @@
 								커뮤니티
 							</c:if>
 						</span>
-						<a class="bg-primary border rounded text-dark px-1" style="text-decoration: none"
+						<a class="bg-primary border border-dark rounded text-dark px-1" style="text-decoration: none"
 							href="mainBoard.do?kind=${ board.kind_id }&sort=pop">${ board.kind_name }</a>
 					</div>
 					<a class="text-dark col-12" href="boardContent.do?bdNum=${ board.board_id }">${ board.board_title }</a>

@@ -48,9 +48,21 @@ $(function() {
 	
 	$('#insert_img').keydown(function(key) {
 		if(key.keyCode == 13) {
-			var img = "<img src='" + 'https://' + $('#insert_img').val() + "'>";
+			var img = "<img class='img-fluid' src='" + 'https://' + $('#insert_img').val() + "'><div></br></br></div>";
 			$('#board_content').append(img);
 		}
+	});
+	
+	$('#insert_img').on("propertychange change keyup paste input", function() {
+		var image_link = $('#insert_img').val();
+		image_link = image_link.replace("https://", "");
+		image_link = image_link.replace("http://", "");
+		
+		image_link = image_link.replace(/[(\[\],<>:;"@)\\]/gi, "");
+		image_link = image_link.replace(/[ㄱ-ㅎ가-힣ㅏ-ㅡ]/gi, "")
+		
+		$('#insert_img').val(image_link);
+		
 	});
 });
 
@@ -66,7 +78,7 @@ function checkAll() {
 		return false;
 	}
 	
-	if($('#board_content').children().length == 0) {
+	if(!$('#board_content').html()) {
 		alert("게시글 내용을 작성해주세요.");
 		check_content = false;
 		return false;

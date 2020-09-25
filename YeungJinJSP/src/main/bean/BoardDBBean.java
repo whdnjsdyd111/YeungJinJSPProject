@@ -896,15 +896,13 @@ public class BoardDBBean {
 		return boardList;
 	}
 	
-	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindBookmark(int page, String mem_id) {
+	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindFindBookmark(int page, int mem_id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<JoinBoardMemberKindDataBean> boardList = null;
 		
 		try {
-			SHA256 sha = SHA256.getInstance();
-			AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 			
 			conn = getConnection();
 			String sql = "SELECT b.board_id, b.board_title, b.board_date, b.board_reco, b.board_readcount, "
@@ -913,7 +911,7 @@ public class BoardDBBean {
 					+ "ORDER BY b.board_date DESC limit ?, ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.valueOf(aes.aesDecode(mem_id)));
+			pstmt.setInt(1, mem_id);
 			
 			if(page == 1)
 				pstmt.setInt(2, 0);

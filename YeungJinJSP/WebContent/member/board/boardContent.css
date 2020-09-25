@@ -266,12 +266,17 @@
 }
 
 .write_comment_middle {
-	max-height: 150px; 
-	height: calc(150px - 2rem); 
+	max-height: 130px; 
+	height: calc(150px - 3rem);
 	overflow: auto;
 }
 
 #comment_content {
+	min-height: 0px;
+	height: inherit;
+}
+
+#nestComCont {
 	min-height: 0px;
 	height: inherit;
 }

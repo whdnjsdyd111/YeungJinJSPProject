@@ -25,7 +25,7 @@ $(function() {
 	});
 	
 	$('#pw').keydown(function(key) {
-		if(key.keyCode == 13) {
+		if(key.keyCode == 13 && check_pw && check_email) {
 			login();
 		}
 	});

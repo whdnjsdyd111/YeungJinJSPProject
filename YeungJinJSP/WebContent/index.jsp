@@ -23,6 +23,17 @@
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardContent.css">
 
+<script type="text/javascript">
+
+/*
+if (document.location.protocol == 'http:') {
+
+    document.location.href = document.location.href.replace('http:', 'https:');
+
+}	// http 접속을 https로 바꿔주기
+*/
+</script>
+
 </head>
 <body class="bg-light">
 

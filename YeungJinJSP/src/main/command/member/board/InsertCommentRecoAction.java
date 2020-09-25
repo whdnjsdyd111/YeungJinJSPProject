@@ -16,12 +16,10 @@ public class InsertCommentRecoAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 		int com_id = Integer.valueOf(request.getParameter("com_id"));
 		
-		SHA256 sha = SHA256.getInstance();
-		AES256Util aes = new AES256Util(sha.getSha256("random_mem_id_key"));
 		CommentRecommandDBBean comRecoProcess = CommentRecommandDBBean.getInstance();
 		CommentDBBean comProcess = CommentDBBean.getInstance();
 		
-		int mem_id = Integer.valueOf(aes.aesDecode((String) request.getSession().getAttribute("YJFBID_SES")));
+		int mem_id = (Integer) request.getSession().getAttribute("YJFBID_SES");
 		boolean check_reco = Boolean.valueOf(request.getParameter("check_reco"));
 		boolean check_nonReco = Boolean.valueOf(request.getParameter("check_nonReco"));
 		boolean check_db = Boolean.valueOf(request.getParameter("check_db"));

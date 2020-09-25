@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<script type="text/javascript" src="member/login/checkPassword.js"></script>
+    
 <div class="container">
 	<form autocomplete="off" class="mx-auto my-5">
 		<h1 class="text-center text-dark font-weight-bold my-3">계정 설정</h1>
@@ -11,7 +13,7 @@
 			</div>
 			<div class="form-group my-3">
 				<label for="email"><i class="fa fa-envelope-o mr-2"></i>이메일</label>
-				<label id="email" for="email" class="text-muted">${ email }</label>
+				<input type="text" class="form-control" id="email" name="email" value="${ email }" readonly="readonly">
 			</div>
 
 			<div class="form-group mt-3">
