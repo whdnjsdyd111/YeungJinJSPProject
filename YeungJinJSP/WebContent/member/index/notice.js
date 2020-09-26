@@ -18,8 +18,6 @@ $(function() {
 	});
 	
 	$('.delete_notice').click(function() {
-		alert($(this).nextAll('input[name=board]').val());
-		alert($(this).nextAll('input[name=kind]').val());
 		$.ajax({
 			type: "post",
 			url: "deleteNotice.do",

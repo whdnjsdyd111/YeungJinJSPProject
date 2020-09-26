@@ -95,4 +95,31 @@ public class NoticeDBBean {
 		
 		return check;
 	}
+	
+	public int deleteNotice(int mem_id, int board_id, int kind_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "DELETE FROM notice WHERE mem_id = ? AND board_id = ? AND kind_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_id);
+			pstmt.setInt(2, board_id);
+			pstmt.setInt(3, kind_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return check;
+	}
 }

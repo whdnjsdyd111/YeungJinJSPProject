@@ -1,6 +1,3 @@
-<%@page import="main.bean.NoticeDBBean"%>
-<%@page import="main.bean.NoticeDataBean"%>
-<%@page import="java.util.List"%>
 <%@page import="main.bean.MemberDataBean"%>
 <%@page import="main.bean.MemberDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,13 +8,9 @@
 
 	int id = (Integer) session.getAttribute("YJFBID_SES");
 	MemberDBBean memProcess = MemberDBBean.getInstance();
-	NoticeDBBean noticeProcess = NoticeDBBean.getInstance();
-	
-	
 	MemberDataBean mem = memProcess.getMember(id);
-	List<NoticeDataBean> notices = noticeProcess.getNoticeList(id);
+
 	request.setAttribute("mem", mem);
-	request.setAttribute("notices", notices);
 %>
 
 <header class="container-fluid px-0">

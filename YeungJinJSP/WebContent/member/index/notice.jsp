@@ -1,10 +1,22 @@
+<%@page import="java.util.List"%>
+<%@page import="main.bean.NoticeDBBean"%>
 <%@page import="main.bean.NoticeDataBean"%>
 <%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-    
+
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	int id = (Integer) session.getAttribute("YJFBID_SES");
+	NoticeDBBean noticeProcess = NoticeDBBean.getInstance();
+	List<NoticeDataBean> notices = noticeProcess.getNoticeList(id);
+	
+	request.setAttribute("notices", notices);
+%>
+
 <c:if test="${ notices == null }">
 	<div class="row no-gutters bg-light border border-dark border-left-0 border-right-0">
 		<div class="col p-4 bg-highlight d-flex flex-md-row">
@@ -49,9 +61,11 @@
 			    	<a href="boardContent.do?bdNum=${ notice.board_id }#start_com" class="stretched-link"></a>
 				</div>
 				<div class="col-2 bg-highlight d-flex">
-					<button type="button" class="close m-auto" aria-label="Close">
+					<button type="button" class="close m-auto delete_notice" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+					<input type="hidden" name="board" value="${ notice.board_id }" />
+					<input type="hidden" name="kind" value="${ notice.kind_id }" />
 				</div>
 			</div>
 		</c:if>
