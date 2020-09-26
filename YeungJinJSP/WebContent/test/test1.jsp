@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,6 +23,12 @@
 
 </head>
 <body>
-	<%= (Integer) session.getAttribute("dddd") %>
+	<% request.setAttribute("str", "1234567890123456"); 
+		String str = "asd";
+	%>
+	
+	<c:if test="${ fn:length(str) > 13 }">
+		${ str.substring(0, 13) }..
+	</c:if>
 </body>
 </html>

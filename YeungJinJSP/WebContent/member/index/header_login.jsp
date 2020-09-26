@@ -1,7 +1,8 @@
+<%@page import="main.bean.NoticeDBBean"%>
+<%@page import="main.bean.NoticeDataBean"%>
+<%@page import="java.util.List"%>
 <%@page import="main.bean.MemberDataBean"%>
 <%@page import="main.bean.MemberDBBean"%>
-<%@page import="main.bean.AES256Util"%>
-<%@page import="main.bean.SHA256"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -10,9 +11,13 @@
 
 	int id = (Integer) session.getAttribute("YJFBID_SES");
 	MemberDBBean memProcess = MemberDBBean.getInstance();
+	NoticeDBBean noticeProcess = NoticeDBBean.getInstance();
+	
 	
 	MemberDataBean mem = memProcess.getMember(id);
+	List<NoticeDataBean> notices = noticeProcess.getNoticeList(id);
 	request.setAttribute("mem", mem);
+	request.setAttribute("notices", notices);
 %>
 
 <header class="container-fluid px-0">
@@ -21,15 +26,18 @@
 		<a class="navbar-brand mr-0 mr-md-2" href="mainBoard.do?kind=all&sort=pop" aria-label="YJFB"> <img
 			width="40" height="40" src="resource/images/index/yjfb_logo.png">
 		</a>
-		
+			
 		<div class="navbar-expand">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"><span><i class="fa fa-bell-o fa-2 text-white ml-3 mr-3"></i></span></a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<!-- 알림 -->
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 350px;">
+							<!-- 알림 -->
+							<div id="notice_div">
+								<jsp:include page="/member/index/notice.jsp" />
+							</div>
 						</div></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="navbarDropdown"

@@ -24,13 +24,13 @@
 						<div class="col px-0 ml-3">
 							<a href="mainBoard.do?kind=all&target=writer&search=${ mem.mem_nickname }" 
 								class="btn btn-secondary" role="button" aria-pressed="true">
-								<i class="fa fa-sticky-note"></i>내가 쓴 글
+								<i class="fa fa-sticky-note mr-1"></i>내가 쓴 글
 							</a>
 						</div>
 						<div class="col px-0 mr-1">
 							<a href="mainBoard.do?kind=bookmark" 
 								class="btn btn-secondary" role="button" aria-pressed="true">
-								<i class="fa fa-bookmark"></i>북마크
+								<i class="fa fa-bookmark mr-1"></i>북마크
 							</a>
 						</div>
 					</div>

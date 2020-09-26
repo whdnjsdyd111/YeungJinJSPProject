@@ -2,6 +2,8 @@ var check_email = false;
 var check_pw = false;
 
 $(function() {
+	$('#email').focus();
+	
 	// 이메일 체크
 	$('#email').on("propertychange change keyup paste input", function() {
 		if($('#email').val()) {

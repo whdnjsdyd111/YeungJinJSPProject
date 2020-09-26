@@ -78,6 +78,13 @@ function checkAll() {
 		return false;
 	}
 	
+	if($('#board_title').val().length > 30) {
+		alert("게시글 제목은 30자 이하만 가능합니다.");
+		$('#board_title').focus();
+		check_title = false;
+		return false;
+	}
+	
 	if(!$('#board_content').html()) {
 		alert("게시글 내용을 작성해주세요.");
 		check_content = false;
