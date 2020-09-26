@@ -122,4 +122,119 @@ public class NoticeDBBean {
 		
 		return check;
 	}
+	
+	public int insertCommentNotice(int board_id, int mem_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT board_userid FROM board WHERE board_id = ? AND board_userid = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_id);
+			pstmt.setInt(2, mem_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check = 0;
+			} else {
+				sql = "UPDATE notice SET notice_number = notice_number + 1, notice_date = CURRENT_TIMESTAMP "
+						+ "WHERE mem_id = (SELECT board_userid FROM board WHERE board_id = ?) AND board_id = ? AND kind_id = 100";
+				
+				pstmt.close();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, board_id);
+				pstmt.setInt(2, board_id);
+				
+				check = pstmt.executeUpdate();
+
+				if(check == 0) {
+					sql = "INSERT INTO notice(mem_id, board_id, kind_id, notice_content) VALUES ("
+							+ "(SELECT board_userid FROM board WHERE board_id = ?) "
+							+ ", ?, 100, "
+							+ "(SELECT INSERT(board_title, 14, CHAR_LENGTH(board_title), '..') FROM board WHERE board_id = ?))";
+					
+					pstmt.close();
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, board_id);
+					pstmt.setInt(2, board_id);
+					pstmt.setInt(3, board_id);
+					
+					check = pstmt.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int insertNestCommentNotice(int target_mem_id, int board_id, int mem_id, String content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int check = 0;
+
+		if(content.length() > 5) {
+			content = " " + content.substring(0, 5) + "..";
+		}
+		
+		if(target_mem_id == mem_id)
+			return check;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE notice SET notice_number = notice_number + 1, notice_date = CURRENT_TIMESTAMP, "
+					+ "notice_content = CONCAT('[', (SELECT INSERT((mem_nickname), 4, LENGTH(mem_nickname), '..') "
+					+ "FROM member WHERE mem_id = ?), ']', ?)"
+					+ "WHERE mem_id = ? AND board_id = ? AND kind_id = 200";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_id);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, target_mem_id);
+			pstmt.setInt(4, board_id);
+			
+			check = pstmt.executeUpdate();
+			
+			if(check == 0) {
+				sql = "INSERT INTO notice(mem_id, board_id, kind_id, notice_content) "
+						+ "VALUES(?, ?, 200, "
+						+ "CONCAT('[', (SELECT INSERT((mem_nickname), 4, LENGTH(mem_nickname), '..') FROM member WHERE mem_id = ?), "
+						+ "']', ?))";
+				
+				pstmt.close();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, target_mem_id);
+				pstmt.setInt(2, board_id);
+				pstmt.setInt(3, mem_id);
+				pstmt.setString(4, content);
+				
+				check = pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return check;
+	}
 }

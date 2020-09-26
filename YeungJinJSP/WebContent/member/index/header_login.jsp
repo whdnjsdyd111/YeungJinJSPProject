@@ -31,6 +31,7 @@
 							<div id="notice_div">
 								<jsp:include page="/member/index/notice.jsp" />
 							</div>
+							
 						</div></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="navbarDropdown"

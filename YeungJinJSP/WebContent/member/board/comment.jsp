@@ -43,13 +43,16 @@
 	ON c.com_id = n.com_id WHERE c.com_bd_id = ?;
 	<sql:param value="<%= board_id %>" />
 </sql:query>
-
+<sql:query var="rs_nick" dataSource="jdbc/yjfb">
+	SELECT mem_nickname FROM member WHERE mem_id = ?
+	<sql:param value="<%= (Integer) mem_id %>" />
+</sql:query>
 <h2 class="p-3"><i class="fa fa-comment mr-2"></i>댓글<span class="ml-2 text-success">${ rs.rowsByIndex[0][0] }</span>개</h2>
 
 <c:if test="${ !empty sessionScope.YJFBID_SES }">
 	<div class="my-2">
 		<div class="border border-dark write_comment_top mx-3">
-			<div class="ml-3 write_comment_member">월롱이</div>
+			<div class="ml-3 write_comment_member" id="mem_nickname">${ rs_nick.rowsByIndex[0][0] }</div>
 			<div class="w-100 write_comment_middle">
 				<div id="comment_content" class="px-3" contentEditable="true"></div>
 			</div>
@@ -153,6 +156,10 @@
 					</c:if>
 					<c:if test="${ !empty sessionScope.YJFBID_SES }">
 						<button class="write_reply btn btn-dark" >답글쓰기</button>
+						
+						<c:if test="${ joinMemCom.com_mem_id != mem_id }">
+							<input type="hidden" value="${ joinMemCom.com_mem_id }" />
+						</c:if>
 						<button class="btn btn-danger">신고</button>
 						<c:if test="${ joinMemCom.com_mem_id == mem_id }">
 							<button class="btn btn-warning delete_com"><i class="fa fa-trash mr-2"></i>삭제</button>
@@ -205,6 +212,9 @@
 						</c:if>
 						<c:if test="${ !empty sessionScope.YJFBID_SES }">
 							<button class="write_nest_reply btn btn-dark" >답글쓰기</button>
+							<c:if test="${ nestComment.mem_id != mem_id }">
+								<input type="hidden" value="${ nestComment.mem_id }" />
+							</c:if>
 							<button class="btn btn-danger">신고</button>
 							<c:if test="${ nestComment.mem_id == mem_id }">
 								<button class="btn btn-warning delete_nest_com"><i class="fa fa-trash mr-2"></i>삭제</button>
