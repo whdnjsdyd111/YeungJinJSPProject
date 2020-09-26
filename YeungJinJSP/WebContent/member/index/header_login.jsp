@@ -25,7 +25,7 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"><span><i class="fa fa-bell-o fa-2 text-white ml-3 mr-3"></i></span></a>
+						aria-expanded="false"><span><i id="notice_bell" class="fa fa-bell-o fa-2 text-white ml-3 mr-3"></i></span></a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 350px;">
 							<!-- 알림 -->
 							<div id="notice_div">

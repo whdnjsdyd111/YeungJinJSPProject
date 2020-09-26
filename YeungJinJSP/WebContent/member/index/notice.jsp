@@ -18,6 +18,9 @@
 %>
 
 <c:if test="${ notices == null }">
+	<script>
+		$('#notice_bell').attr('class', 'fa fa-bell-o fa-2 text-white ml-3 mr-3');
+	</script>
 	<div class="row no-gutters bg-light border border-dark border-left-0 border-right-0">
 		<div class="col p-4 bg-highlight d-flex flex-md-row">
 			<h3 class="mr-3">알림이 없습니다.<i class="fa fa-envelope-open-o ml-3"></i></h3>
@@ -25,6 +28,9 @@
 	</div>
 </c:if>
 <c:if test="${ notices != null }">
+	<script>
+		$('#notice_bell').attr('class', 'fa fa-bell fa-2 text-red ml-3 mr-3 faa-ring animated');
+	</script>
 	<script type="text/javascript" src="member/index/notice.js"></script>
 	<c:set var="loop_flag" value="false" />
 	<c:forEach var="i" begin="0" end="2" step="1" varStatus="status">

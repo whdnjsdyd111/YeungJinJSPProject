@@ -22,6 +22,7 @@
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/writeBoard.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/board.css">
 <link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/board/boardContent.css">
+<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/member/index/notice.css">
 
 <script type="text/javascript">
 
