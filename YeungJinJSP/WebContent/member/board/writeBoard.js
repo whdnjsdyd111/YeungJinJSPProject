@@ -1,6 +1,9 @@
 var check_title = false;
 var check_content = false;
 
+var image_files = [];
+var image_ori_files = [];
+
 $(function() {
 	var checkload = true;
 	
@@ -48,7 +51,7 @@ $(function() {
 	
 	$('#insert_img').keydown(function(key) {
 		if(key.keyCode == 13) {
-			var img = "<img class='img-fluid img-thumbnail' src='" + 'https://' + $('#insert_img').val() + "'><div></br></br></div>";
+			var img = "<img class='img-fluid img-thumbnail' src='" + 'https://' + $('#insert_img').val() + "'></br></br>";
 			$('#board_content').append(img);
 		}
 	});
@@ -68,6 +71,33 @@ $(function() {
 	$(".custom-file-input").on("change", function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+	
+	$('.custom-file-input').on("change", handleImageFile);
+	
+	$('.custom-file-input').on("change", function() {
+		image_ori_files.push(this.files[0]);
+	});
+	
+	$('#upload_image').click(function() {
+		
+		var form = new FormData();
+		
+		for(let i = 0; i < image_ori_files.length; i++) {
+			form.append("file", image_ori_files[i]);
+		}
+		
+		$.ajax({
+			type: "post",
+			enctype: 'multipart/form-data',
+			url: "imageUpload.do",	// member/board/imageUpload.jsp
+			data: form,
+            processData: false,
+            contentType: false,
+			success: function(data) {
+				alert(data);
+			}
+		});
 	});
 });
 
@@ -95,4 +125,25 @@ function checkAll() {
 		check_content = false;
 		return false;
 	}
+}
+
+function handleImageFile(e) {
+	var file = e.target.files;
+	var fileArr = Array.prototype.slice.call(file);
+	
+	fileArr.forEach(function (f) {	// 이런 메소드 안쓰고도 readAsDataURL 가능한지 내일 확인 및 태그 붙여놓고, 태그들을 배열로 지정한 후 게시글 작성버튼 누르면 태그의 속성 src을 업로드한 파일 경로로 바꾸기
+		if(!f.type.match("image.*")) {
+			alert("이미지 확장자만 가능합니다.");
+			return;
+		}
+		
+		image_files.push(f);
+		
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			var img_html = "<img src='" + e.target.result + "' /><br><br>";
+			$('#board_content').append(img_html);
+		}
+		reader.readAsDataURL(f);
+	});
 }

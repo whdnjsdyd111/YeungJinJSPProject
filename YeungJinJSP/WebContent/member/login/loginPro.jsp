@@ -4,10 +4,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${ check == 1 }">
-	<%
-		request.setCharacterEncoding("utf-8");
-		
-		session.setAttribute("YJFBID_SES", request.getAttribute("mem_id"));
-	%>
+	<c:set var="YJFBID_SES" value="${ mem_id }" scope="session" />
 </c:if>
 <p id='ck'>${ check }
