@@ -1005,10 +1005,9 @@ public class BoardDBBean {
 				board.setBoard_title(rs.getString(4));
 				board.setBoard_content(rs.getString(5));
 				board.setBoard_date(rs.getTimestamp(6));
-				board.setBoard_images(rs.getString(7));
-				board.setBoard_reco(rs.getInt(8));
-				board.setBoard_nonReco(rs.getInt(9));
-				board.setBoard_readcount(rs.getInt(10));
+				board.setBoard_reco(rs.getInt(7));
+				board.setBoard_nonReco(rs.getInt(8));
+				board.setBoard_readcount(rs.getInt(9));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

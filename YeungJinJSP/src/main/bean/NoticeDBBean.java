@@ -188,8 +188,10 @@ public class NoticeDBBean {
 		int check = 0;
 
 		if(content.length() > 5) {
-			content = " " + content.substring(0, 5) + "..";
+			content = content.substring(0, 5) + "..";
 		}
+		
+		content = " " + content;
 		
 		if(target_mem_id == mem_id)
 			return check;
@@ -197,8 +199,9 @@ public class NoticeDBBean {
 		try {
 			conn = getConnection();
 			String sql = "UPDATE notice SET notice_number = notice_number + 1, notice_date = CURRENT_TIMESTAMP, "
-					+ "notice_content = CONCAT('[', (SELECT INSERT((mem_nickname), 4, LENGTH(mem_nickname), '..') "
-					+ "FROM member WHERE mem_id = ?), ']', ?)"
+					+ "notice_content = (SELECT CONCAT('[', (SELECT CASE WHEN CHAR_LENGTH(mem_nickname) > 3 "
+					+ "THEN CONCAT(SUBSTRING(mem_nickname, 1, 3), '..') ELSE mem_nickname END "
+					+ "FROM member WHERE mem_id = ?), ']', ?) AS A) "
 					+ "WHERE mem_id = ? AND board_id = ? AND kind_id = 200";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -212,8 +215,10 @@ public class NoticeDBBean {
 			if(check == 0) {
 				sql = "INSERT INTO notice(mem_id, board_id, kind_id, notice_content) "
 						+ "VALUES(?, ?, 200, "
-						+ "CONCAT('[', (SELECT INSERT((mem_nickname), 4, LENGTH(mem_nickname), '..') FROM member WHERE mem_id = ?), "
-						+ "']', ?))";
+						+ "(SELECT CONCAT('[', (SELECT CASE WHEN CHAR_LENGTH(mem_nickname) > 3 "
+						+ "THEN CONCAT(SUBSTRING(mem_nickname, 1, 3), '..') ELSE mem_nickname END "
+						+ "FROM member WHERE mem_id = ?), ']', ?) AS A)"
+						+ ")";
 				
 				pstmt.close();
 				pstmt = conn.prepareStatement(sql);

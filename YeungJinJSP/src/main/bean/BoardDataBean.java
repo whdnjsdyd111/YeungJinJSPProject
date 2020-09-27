@@ -9,7 +9,6 @@ public class BoardDataBean {
 	private String board_title;
 	private String board_content;
 	private Timestamp board_date;
-	private String board_images;
 	private int board_reco;
 	private int board_nonReco;
 	private int board_readcount;
@@ -49,12 +48,6 @@ public class BoardDataBean {
 	}
 	public void setBoard_date(Timestamp board_date) {
 		this.board_date = board_date;
-	}
-	public String getBoard_images() {
-		return board_images;
-	}
-	public void setBoard_images(String board_images) {
-		this.board_images = board_images;
 	}
 	public int getBoard_reco() {
 		return board_reco;

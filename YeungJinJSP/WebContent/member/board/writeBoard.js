@@ -48,7 +48,7 @@ $(function() {
 	
 	$('#insert_img').keydown(function(key) {
 		if(key.keyCode == 13) {
-			var img = "<img class='img-fluid' src='" + 'https://' + $('#insert_img').val() + "'><div></br></br></div>";
+			var img = "<img class='img-fluid img-thumbnail' src='" + 'https://' + $('#insert_img').val() + "'><div></br></br></div>";
 			$('#board_content').append(img);
 		}
 	});
@@ -63,6 +63,11 @@ $(function() {
 		
 		$('#insert_img').val(image_link);
 		
+	});
+	
+	$(".custom-file-input").on("change", function() {
+		var fileName = $(this).val().split("\\").pop();
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
 });
 
