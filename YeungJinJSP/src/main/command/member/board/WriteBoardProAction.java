@@ -28,6 +28,13 @@ public class WriteBoardProAction implements CommandAction {
 		BoardDBBean boardProcess = BoardDBBean.getInstance();
 		int check = boardProcess.insertBoard(id, kind, title, content);
 		
+		if(check == 1) {
+			int check2 = MemberDBBean.getInstance().addEx(id, 100);
+			
+			if(check2 != 1)
+				return "/error/DBFail.jsp";
+		}
+		
 		request.setAttribute("check", new Integer(check));
 		return "/member/board/writeBoardPro.jsp";
 	}

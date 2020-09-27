@@ -102,9 +102,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(1, 0);
 			else
-				pstmt.setInt(1, (page - 1) * 30);
+				pstmt.setInt(1, (page - 1) * 20);
 			
-			pstmt.setInt(2, 30);
+			pstmt.setInt(2, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -161,9 +161,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -217,9 +217,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(1, 0);
 			else
-				pstmt.setInt(1, (page - 1) * 30);
+				pstmt.setInt(1, (page - 1) * 20);
 			
-			pstmt.setInt(2, 30);
+			pstmt.setInt(2, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -275,9 +275,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -331,9 +331,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(1, 0);
 			else
-				pstmt.setInt(1, (page - 1) * 30);
+				pstmt.setInt(1, (page - 1) * 20);
 			
-			pstmt.setInt(2, 30);
+			pstmt.setInt(2, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -390,9 +390,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -447,9 +447,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(1, 0);
 			else
-				pstmt.setInt(1, (page - 1) * 30);
+				pstmt.setInt(1, (page - 1) * 20);
 			
-			pstmt.setInt(2, 30);
+			pstmt.setInt(2, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -506,9 +506,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 
@@ -564,9 +564,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -623,9 +623,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(3, 0);
 			else
-				pstmt.setInt(3, (page - 1) * 30);
+				pstmt.setInt(3, (page - 1) * 20);
 			
-			pstmt.setInt(4, 30);
+			pstmt.setInt(4, 20);
 			
 			rs = pstmt.executeQuery();
 
@@ -681,9 +681,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -740,9 +740,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(3, 0);
 			else
-				pstmt.setInt(3, (page - 1) * 30);
+				pstmt.setInt(3, (page - 1) * 20);
 			
-			pstmt.setInt(4, 30);
+			pstmt.setInt(4, 20);
 			
 			rs = pstmt.executeQuery();
 
@@ -798,9 +798,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 			
@@ -857,9 +857,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(3, 0);
 			else
-				pstmt.setInt(3, (page - 1) * 30);
+				pstmt.setInt(3, (page - 1) * 20);
 			
-			pstmt.setInt(4, 30);
+			pstmt.setInt(4, 20);
 			
 			rs = pstmt.executeQuery();
 
@@ -916,9 +916,9 @@ public class BoardDBBean {
 			if(page == 1)
 				pstmt.setInt(2, 0);
 			else
-				pstmt.setInt(2, (page - 1) * 30);
+				pstmt.setInt(2, (page - 1) * 20);
 			
-			pstmt.setInt(3, 30);
+			pstmt.setInt(3, 20);
 			
 			rs = pstmt.executeQuery();
 			

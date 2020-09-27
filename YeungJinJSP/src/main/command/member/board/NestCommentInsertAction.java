@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.bean.AES256Util;
+import main.bean.MemberDBBean;
 import main.bean.NestCommentDBBean;
 import main.bean.NoticeDBBean;
 import main.bean.SHA256;
@@ -36,6 +37,11 @@ public class NestCommentInsertAction implements CommandAction {
 			} catch (NumberFormatException e) {
 				
 			}
+			
+			int check2 = MemberDBBean.getInstance().addEx(mem_id, 40);
+			
+			if(check2 != 1)
+				return "/error/DBFail.jsp";
 		}
 		
 		request.setAttribute("check", new Integer(check));

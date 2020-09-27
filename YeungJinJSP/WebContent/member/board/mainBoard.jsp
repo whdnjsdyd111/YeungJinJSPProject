@@ -156,17 +156,17 @@
 </section>
 
 <div class="container my-2">
-	<c:if test="${ page == 1 && board.size() == 30 }">
-		<button type="button" class="btn btn-danger page" value="${ page + 1 }">다음<i class="fa fa-chevron-right ml-2"></i></button>
+	<c:if test="${ page == 1 && boardList.size() == 20 }">
+		<button type="button" class="btn btn-danger page ml-auto" value="${ page + 1 }">다음<i class="fa fa-chevron-right ml-2"></i></button>
 	</c:if>
 	
 	<c:if test="${ page != 1 }">
-		<c:if test="${ boardList.size() < 30 || boardList == null }">
+		<c:if test="${ boardList.size() < 20 || boardList == null }">
 			<button type="button" class="btn btn-danger page" value="${ page - 1 }"><i class="fa fa-chevron-left mr-2"></i>이전</button>
 		</c:if>
-		<c:if test="${ boardList.size() == 30 }">
+		<c:if test="${ boardList.size() == 20 }">
 			<button type="button" class="btn btn-danger page" value="${ page - 1 }"><i class="fa fa-chevron-left mr-2"></i>이전</button>
-			<button type="button" class="btn btn-danger page" value="${ page + 1 }">다음<i class="fa fa-chevron-right ml-2"></i></button>
+			<button type="button" class="btn btn-danger page ml-auto" value="${ page + 1 }">다음<i class="fa fa-chevron-right ml-2"></i></button>
 		</c:if>
 	</c:if>
 	

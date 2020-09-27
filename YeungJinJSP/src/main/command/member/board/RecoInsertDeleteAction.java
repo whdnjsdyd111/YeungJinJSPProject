@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.bean.AES256Util;
 import main.bean.BoardDBBean;
 import main.bean.BookmarkDBBean;
+import main.bean.MemberDBBean;
 import main.bean.RecommendDBBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
@@ -31,6 +32,9 @@ public class RecoInsertDeleteAction implements CommandAction {
 		
 		int reco = Integer.valueOf(request.getParameter("reco"));
 		int nonReco = Integer.valueOf(request.getParameter("nonReco"));
+		
+		if(MemberDBBean.getInstance().addRecoEx(mem_id, board_id) == 0)
+			return "/error/DBFail.jsp";
 	
 		if(check_db_reco) {
 			// 추천 디비에 값이 있을 경우

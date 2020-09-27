@@ -397,4 +397,164 @@ public class MemberDBBean {
 		
 		return check;
 	}
+	
+	public int addEx(int mem_id, int ex) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE member SET mem_level = "
+					+ "(SELECT * FROM (SELECT IF(mem_ex + ? >= mem_level * 150, mem_level + 1, mem_level) FROM member WHERE mem_id = ?) AS A), "
+					+ "mem_ex = "
+					+ "(SELECT * FROM (SELECT IF(mem_ex + ? >= mem_level * 150, mem_ex + ? - mem_level * 150, mem_ex + ?)"
+					+ " FROM member WHERE mem_id = ?) AS A) "
+					+ "WHERE mem_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ex);
+			pstmt.setInt(2, mem_id);
+			pstmt.setInt(3, ex);
+			pstmt.setInt(4, ex);
+			pstmt.setInt(5, ex);
+			pstmt.setInt(6, mem_id);
+			pstmt.setInt(7, mem_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int addRecoEx(int mem_id, int board_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT * FROM ex_prevent WHERE mem_id = ? AND board_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_id);
+			pstmt.setInt(2, board_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check = 2;
+				return check;
+			} else {
+				sql = "INSERT INTO ex_prevent(mem_id, board_id) VALUES(?, ?)";
+				
+				pstmt.close();
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, mem_id);
+				pstmt.setInt(2, board_id);
+				
+				check = pstmt.executeUpdate();
+				
+				if(check == 1) {
+					sql = "UPDATE member SET mem_level = "
+							+ "(SELECT * FROM (SELECT IF(mem_ex + 10 >= mem_level * 150, mem_level + 1, mem_level) FROM member WHERE mem_id = ?) AS A), "
+							+ "mem_ex = "
+							+ "(SELECT * FROM (SELECT IF(mem_ex + 10 >= mem_level * 150, mem_ex + 10 - mem_level * 150, mem_ex + 10)"
+							+ " FROM member WHERE mem_id = ?) AS A) "
+							+ "WHERE mem_id = ?";
+					
+					pstmt.close();
+					pstmt = conn.prepareStatement(sql);
+					
+					pstmt.setInt(1, mem_id);
+					pstmt.setInt(2, mem_id);
+					pstmt.setInt(3, mem_id);
+					
+					check = pstmt.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int addComRecoEx(int mem_id, int com_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT * FROM ex_prevent WHERE mem_id = ? AND com_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_id);
+			pstmt.setInt(2, com_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check = 2;
+				return check;
+			} else {
+				sql = "INSERT INTO ex_prevent(mem_id, com_id) VALUES(?, ?)";
+				
+				pstmt.close();
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, mem_id);
+				pstmt.setInt(2, com_id);
+				
+				check = pstmt.executeUpdate();
+				
+				if(check == 1) {
+					sql = "UPDATE member SET mem_level = "
+							+ "(SELECT * FROM (SELECT IF(mem_ex + 2 >= mem_level * 150, mem_level + 1, mem_level) FROM member WHERE mem_id = ?) AS A), "
+							+ "mem_ex = "
+							+ "(SELECT * FROM (SELECT IF(mem_ex + 2 >= mem_level * 150, mem_ex + 2 - mem_level * 150, mem_ex + 2)"
+							+ " FROM member WHERE mem_id = ?) AS A) "
+							+ "WHERE mem_id = ?";
+					
+					pstmt.close();
+					pstmt = conn.prepareStatement(sql);
+					
+					pstmt.setInt(1, mem_id);
+					pstmt.setInt(2, mem_id);
+					pstmt.setInt(3, mem_id);
+					
+					check = pstmt.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
+	}
 }

@@ -54,10 +54,7 @@
 		<div class="border border-dark write_comment_top mx-3">
 			<div class="ml-3 write_comment_member" id="mem_nickname">${ rs_nick.rowsByIndex[0][0] }</div>
 			<div class="w-100 write_comment_middle">
-				<div id="comment_content" class="px-3" contentEditable="true">d</div>
-				<script type="text/javascript">
-					$('div[contentEditable=true]').html();
-				</script>
+				<div id="comment_content" class="px-3" contentEditable="true"></div>
 			</div>
 		</div>
 		<div class="border border-dark border-top-0 mx-3">

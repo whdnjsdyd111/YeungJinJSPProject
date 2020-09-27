@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.bean.AES256Util;
 import main.bean.CommentDBBean;
 import main.bean.CommentRecommandDBBean;
+import main.bean.MemberDBBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
 
@@ -24,6 +25,9 @@ public class InsertCommentRecoAction implements CommandAction {
 		boolean check_nonReco = Boolean.valueOf(request.getParameter("check_nonReco"));
 		boolean check_db = Boolean.valueOf(request.getParameter("check_db"));
 		String btn = request.getParameter("btn");
+		
+		if(MemberDBBean.getInstance().addComRecoEx(mem_id, com_id) == 0)
+			return "/error/DBFail.jsp";
 		
 		int check1 = 0;
 		int check2 = 0;

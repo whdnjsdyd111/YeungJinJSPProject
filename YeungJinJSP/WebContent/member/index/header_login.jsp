@@ -40,10 +40,10 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<div class="text-primary text-center">레벨 <span>${ mem.mem_level }</span></div>
 							<div class="progress m-1">
-  								<div class="progress-bar bg-success" role="progressbar" style="width: 25%" 
-  									aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${ mem.mem_ex }</div>
+  								<div class="progress-bar bg-success" role="progressbar" style="width: ${ mem.mem_ex / (mem.mem_level * 150) * 100 }%" 
+  									aria-valuenow="${ mem.mem_ex / (mem.mem_level * 150) * 100 }" aria-valuemin="0" aria-valuemax="100">${ mem.mem_ex }</div>
 							</div>
-							<div class="text-muted text-center">남은 경험치 10</div>
+							<div class="text-muted text-center">남은 경험치 ${ mem.mem_level * 150 - mem.mem_ex }</div>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item text-center" href="mainBoard.do?kind=all&target=writer&search=${ mem.mem_nickname }">
 								<i class="fa fa-sticky-note mr-2"></i>내가 쓴 글
