@@ -229,7 +229,7 @@ $(function() {
 					var check = data.substr(loc + len, 1);
 					
 					if(check == "1") {
-						window.location.href = "mainBoard.do?kind=all&sort=pop";
+						window.location.href = "mainBoard.do?kind=all&sort=recent";
 					} else {
 						alert("글을 삭제하지 못했습니다.");
 						window.location.href = "DBFail.do";

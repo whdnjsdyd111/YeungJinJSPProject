@@ -10,23 +10,23 @@
 			<nav id="sidebar" class="nav_wrap">
 			    <div class="sidebar">
 			        <ul>
-			            <li><a href="mainBoard.do?kind=all&sort=pop"><i class="fa fa-home"></i>홈으로</a></li>
+			            <li><a href="mainBoard.do?kind=all&sort=recent"><i class="fa fa-home"></i>홈으로</a></li>
 			            <li><a href="loginForm.do"><i class="fa fa-sign-in"></i>로그인</a></li>
 			            <li><a href="findPasswdForm.do"><i class="fa fa-key"></i>비밀번호 찾기</a></li>
 			            <li><a href="registerForm.do"><i class="fa fa-user-plus"></i>회원가입</a></li>
 			        </ul>
 			        <p class="px-3 ml-5"><i class="fa fa-newspaper-o mr-3"></i>정보</p>
 			        <ul>
-			            <li><a href="mainBoard.do?kind=600&sort=pop">공지사항</a></li>
-			            <li><a href="mainBoard.do?kind=700&sort=pop">소식</a></li>
+			            <li><a href="mainBoard.do?kind=600&sort=recent">공지사항</a></li>
+			            <li><a href="mainBoard.do?kind=700&sort=recent">소식</a></li>
 			        </ul>
 			        <p class="px-3 ml-5"><i class="fa fa-list mr-3"></i>커뮤니티</p>
 			        <ul>
-			            <li><a href="mainBoard.do?kind=100&sort=pop">자유</a></li>
-			            <li><a href="mainBoard.do?kind=200&sort=pop">유머</a></li>
-			            <li><a href="mainBoard.do?kind=300&sort=pop">공포</a></li>
-			            <li><a href="mainBoard.do?kind=400&sort=pop">만화</a></li>
-			            <li><a href="mainBoard.do?kind=500&sort=pop">코로나 뉴스</a></li>
+			            <li><a href="mainBoard.do?kind=100&sort=recent">자유</a></li>
+			            <li><a href="mainBoard.do?kind=200&sort=recent">유머</a></li>
+			            <li><a href="mainBoard.do?kind=300&sort=recent">공포</a></li>
+			            <li><a href="mainBoard.do?kind=400&sort=recent">만화</a></li>
+			            <li><a href="mainBoard.do?kind=500&sort=recent">코로나 뉴스</a></li>
 			        </ul>
 			    </div>
 			</nav>
@@ -38,7 +38,7 @@
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">
-							window.location.href = "mainBoard.do?kind=all&sort=pop";
+							window.location.href = "mainBoard.do?kind=all&sort=recent";
 						</script>
 					</c:if>
 					

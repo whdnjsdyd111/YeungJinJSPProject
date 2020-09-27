@@ -7,7 +7,7 @@
 
 <c:if test="${ kind == null && (sort == null && search == null)}">
 	<script>
-		window.location.href = "mainBoard.do?kind=all&sort=pop";
+		window.location.href = "mainBoard.do?kind=all&sort=recent";
 	</script>
 </c:if>
 
@@ -47,10 +47,10 @@
 		
 		<ul class="navbar-nav nav mr-auto">
 			<c:if test="${ kind != 'bookmark' }">
-				<li class="nav-item"><a class="nav-link px-3" href="mainBoard.do?kind=${ kind }&sort=pop">
-				<i class="fa fa-heart mr-2"></i><span>인기글</span></a><li>
 				<li class="nav-item"><a class="nav-link px-3" href="mainBoard.do?kind=${ kind }&sort=recent">
 				<i class="fa fa-arrow-down mr-2"></i><span>최신순</span></a><li>
+				<li class="nav-item"><a class="nav-link px-3" href="mainBoard.do?kind=${ kind }&sort=pop">
+				<i class="fa fa-heart mr-2"></i><span>인기글</span></a><li>
 				<li class="nav-item"><a class="nav-link px-3" href="mainBoard.do?kind=${ kind }&sort=TODAY">
 				<i class="fa fa-clock-o mr-2"></i><span>TODAY</span></a><li>
 				<li class="nav-item"><a class="nav-link px-3" href="mainBoard.do?kind=${ kind }&sort=nonReco">
@@ -97,7 +97,7 @@
 							</c:if>
 						</span>
 						<a class="bg-primary border border-dark rounded text-dark px-1" style="text-decoration: none"
-							href="mainBoard.do?kind=${ board.kind_id }&sort=pop">${ board.kind_name }</a>
+							href="mainBoard.do?kind=${ board.kind_id }&sort=recent">${ board.kind_name }</a>
 					</div>
 					<a class="text-dark col-12" href="boardContent.do?bdNum=${ board.board_id }">${ board.board_title }</a>
 				</div>

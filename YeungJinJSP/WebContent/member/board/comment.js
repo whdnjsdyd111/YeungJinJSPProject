@@ -27,14 +27,23 @@ $(function() {
 	
 	$('.write_reply').click(function() {
 		$('.reply').remove();
+		
 		var target_mem_id = $(this).next().val();
+		var target_mem_nickname = $(this).nextAll('input[name=nickname]').val();
+		
+		var span_nickname = '<span class="mr-2 bg-success text-white rounded" contenteditable="false">' + target_mem_nickname + '</span><br>';
+		
+		if(target_mem_nickname === undefined)
+			span_nickname = "";
 		
 		var com_id = $(this).parents('.comments').children('form').children('input[name=com_id]').val();
 		var reply = "<div class='reply p-3 d-flex flex-md-row'>" + 
 		"<div class='border border-right-0 border-top-0 border-dark ml-5' style='width: 30px; height: 30px'></div>" +
 		'<div class="w-100"><div class="border border-dark write_comment_top mx-3">' +
 		'<div class="ml-3 write_comment_member">' + $('#mem_nickname').text() + '</div><div class="w-100 write_comment_middle">' +
-		'<div id="nestComCont" class="px-3" contentEditable="true"></div></div></div>' +
+		'<div id="nestComCont" class="px-3" contentEditable="true">' +
+		span_nickname +
+		'</div></div></div>' +
 		'<div class="border border-dark border-top-0 mx-3">' +
 		'<div class="w-100 d-flex"><div class="custom-file w-75">' +
 		'<input type="file" class="custom-file-input" id="comment_image">' +
@@ -58,6 +67,8 @@ $(function() {
 			var get = href.substr(loc + len, href.length);
 			get = get.replace("#start_com", "");
 			
+			var notice_content = $('#nestComCont').html().replace(span_nickname.replace('<br>', ""), "").replace(/(<([^>]+)>)/ig,"");
+			
 			$.ajax({
 				type: "post",
 				url: "nestCommentInsert.do",
@@ -65,7 +76,8 @@ $(function() {
 					board_id: get,
 					target_mem_id: target_mem_id,
 					com_id: $(this).prevAll('input[name=com_id]').val(),
-					content: $('#nestComCont').html() 
+					content: $('#nestComCont').html(),
+					notice_content: notice_content
 				},
 				success: function() {
 					$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get);
@@ -76,14 +88,23 @@ $(function() {
 	
 	$('.write_nest_reply').click(function() {
 		$('.reply').remove();
+		
 		var target_mem_id = $(this).next().val();
+		var target_mem_nickname = $(this).nextAll('input[name=nickname]').val();
+		
+		var span_nickname = '<span class="mr-2 bg-success text-white rounded" contenteditable="false">' + target_mem_nickname + '</span><br>';
+		
+		if(target_mem_nickname === undefined)
+			span_nickname = "";
 		
 		var com_id = $(this).parents('.nestComments').prevAll('.comments').children('form').children('input[name=com_id]').val();
 		var reply = "<div class='reply p-3 d-flex flex-md-row'>" + 
 		"<div class='border border-right-0 border-top-0 border-dark ml-5' style='width: 30px; height: 30px'></div>" +
 		'<div class="w-100"><div class="border border-dark write_comment_top mx-3">' +
 		'<div class="ml-3 write_comment_member">' + $('#mem_nickname').text() + '</div><div class="w-100 write_comment_middle">' +
-		'<div id="nestComCont" class="px-3" contentEditable="true"></div></div></div>' +
+		'<div id="nestComCont" class="px-3" contentEditable="true">' +
+		span_nickname +
+		'</div></div></div>' +
 		'<div class="border border-dark border-top-0 mx-3">' +
 		'<div class="w-100 d-flex"><div class="custom-file w-75">' +
 		'<input type="file" class="custom-file-input" id="comment_image">' +
@@ -107,7 +128,7 @@ $(function() {
 			var get = href.substr(loc + len, href.length);
 			get = get.replace("#start_com", "");
 			
-			var notice_content = $('#nestComCont').html().replace(/(<([^>]+)>)/ig,"");
+			var notice_content = $('#nestComCont').html().replace(span_nickname.replace('<br>', ""), "").replace(/(<([^>]+)>)/ig,"");
 			
 			$.ajax({
 				type: "post",

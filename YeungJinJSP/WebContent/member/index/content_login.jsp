@@ -11,12 +11,12 @@
 			    <div class="sidebar">
 			    	
 			        <ul>
-			            <li><a href="mainBoard.do?kind=all&sort=pop"><i class="fa fa-home"></i>홈으로</a></li>
+			            <li><a href="mainBoard.do?kind=all&sort=recent"><i class="fa fa-home"></i>홈으로</a></li>
 			        </ul>
 			        <p class="px-3 text-center text-white mb-1">${ mem.mem_nickname }</p>
 			        <div class="text-center text-warning">레벨 <span>${ mem.mem_level }</span></div>
 			        <div class="progress ml-2 mr-2">
-  								<div class="progress-bar bg-success" role="progressbar" style="width: ${ mem.mem_ex / (mem.mem_level * 150) * 100 }%" 
+  								<div class="progress-bar bg-success text-dark" role="progressbar" style="width: ${ mem.mem_ex / (mem.mem_level * 150) * 100 }%" 
   									aria-valuenow="${ mem.mem_ex / (mem.mem_level * 150) * 100 }" aria-valuemin="0" aria-valuemax="100">
   									${ mem.mem_ex }</div>
 							</div>
@@ -40,16 +40,16 @@
 			        </ul>
 			        <p class="px-3 ml-5"><i class="fa fa-newspaper-o mr-3"></i>정보</p>
 			        <ul>
-			            <li><a href="mainBoard.do?kind=600&sort=pop">공지사항</a></li>
-			            <li><a href="mainBoard.do?kind=700&sort=pop">소식</a></li>
+			            <li><a href="mainBoard.do?kind=600&sort=recent">공지사항</a></li>
+			            <li><a href="mainBoard.do?kind=700&sort=recent">소식</a></li>
 			        </ul>
 			        <p class="px-3 ml-5"><i class="fa fa-list mr-3"></i>커뮤니티</p>
 			        <ul>
-			            <li><a href="mainBoard.do?kind=100&sort=pop">자유</a></li>
-			            <li><a href="mainBoard.do?kind=200&sort=pop">유머</a></li>
-			            <li><a href="mainBoard.do?kind=300&sort=pop">공포</a></li>
-			            <li><a href="mainBoard.do?kind=400&sort=pop">만화</a></li>
-			            <li><a href="mainBoard.do?kind=500&sort=pop">코로나 뉴스</a></li>
+			            <li><a href="mainBoard.do?kind=100&sort=recent">자유</a></li>
+			            <li><a href="mainBoard.do?kind=200&sort=recent">유머</a></li>
+			            <li><a href="mainBoard.do?kind=300&sort=recent">공포</a></li>
+			            <li><a href="mainBoard.do?kind=400&sort=recent">만화</a></li>
+			            <li><a href="mainBoard.do?kind=500&sort=recent">코로나 뉴스</a></li>
 			        </ul>
 			    </div>
 			</nav>
@@ -61,7 +61,7 @@
 				<section>
 					<c:if test="${ cont == null }">
 						<script type="text/javascript">
-							window.location.href = "mainBoard.do?kind=all&sort=pop";
+							window.location.href = "mainBoard.do?kind=all&sort=recent";
 						</script>
 					</c:if>
 					

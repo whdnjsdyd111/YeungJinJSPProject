@@ -156,9 +156,9 @@
 					</c:if>
 					<c:if test="${ !empty sessionScope.YJFBID_SES }">
 						<button class="write_reply btn btn-dark" >답글쓰기</button>
-						
 						<c:if test="${ joinMemCom.com_mem_id != mem_id }">
 							<input type="hidden" value="${ joinMemCom.com_mem_id }" />
+							<input type="hidden" value="${ joinMemCom.com_mem_nickname }" name="nickname"/>
 						</c:if>
 						<button class="btn btn-danger">신고</button>
 						<c:if test="${ joinMemCom.com_mem_id == mem_id }">
@@ -203,7 +203,7 @@
 						</span>
 					</div>
 					<div class="container my-2">
-						<div>${ nestComment.getReCom_content() }</div>
+						<div>${ nestComment.reCom_content }</div>
 					</div>
 					<div class="mt-2">
 						<c:if test="${ empty sessionScope.YJFBID_SES }">
@@ -214,6 +214,7 @@
 							<button class="write_nest_reply btn btn-dark" >답글쓰기</button>
 							<c:if test="${ nestComment.mem_id != mem_id }">
 								<input type="hidden" value="${ nestComment.mem_id }" />
+								<input type="hidden" value="${ nestComment.mem_nickname }" name="nickname" />
 							</c:if>
 							<button class="btn btn-danger">신고</button>
 							<c:if test="${ nestComment.mem_id == mem_id }">

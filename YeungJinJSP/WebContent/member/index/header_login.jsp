@@ -16,7 +16,7 @@
 <header class="container-fluid px-0">
 	<div class="navbar navbar-expand-lg navbar-dark bg-dark flex-md-row bd-navbar fixed-top justify-content-start">
 	
-		<a class="navbar-brand mr-0 mr-md-2" href="mainBoard.do?kind=all&sort=pop" aria-label="YJFB"> <img
+		<a class="navbar-brand mr-0 mr-md-2" href="mainBoard.do?kind=all&sort=recent" aria-label="YJFB"> <img
 			width="40" height="40" src="resource/images/index/yjfb_logo.png">
 		</a>
 			
@@ -40,7 +40,7 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<div class="text-primary text-center">레벨 <span>${ mem.mem_level }</span></div>
 							<div class="progress m-1">
-  								<div class="progress-bar bg-success" role="progressbar" style="width: ${ mem.mem_ex / (mem.mem_level * 150) * 100 }%" 
+  								<div class="progress-bar bg-success text-dark" role="progressbar" style="width: ${ mem.mem_ex / (mem.mem_level * 150) * 100 }%" 
   									aria-valuenow="${ mem.mem_ex / (mem.mem_level * 150) * 100 }" aria-valuemin="0" aria-valuemax="100">${ mem.mem_ex }</div>
 							</div>
 							<div class="text-muted text-center">남은 경험치 ${ mem.mem_level * 150 - mem.mem_ex }</div>
@@ -78,11 +78,11 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"><span><i class="fa fa-list mr-2"></i>커뮤니티</span></a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="mainBoard.do?kind=100&sort=pop">자유</a> 
-							<a class="dropdown-item" href="mainBoard.do?kind=200&sort=pop">유머</a>
-							<a class="dropdown-item" href="mainBoard.do?kind=300&sort=pop">공포</a>
-							<a class="dropdown-item" href="mainBoard.do?kind=400&sort=pop">만화</a>
-							<a class="dropdown-item" href="mainBoard.do?kind=500&sort=pop">코로나 뉴스</a>
+							<a class="dropdown-item" href="mainBoard.do?kind=100&sort=recent">자유</a> 
+							<a class="dropdown-item" href="mainBoard.do?kind=200&sort=recent">유머</a>
+							<a class="dropdown-item" href="mainBoard.do?kind=300&sort=recent">공포</a>
+							<a class="dropdown-item" href="mainBoard.do?kind=400&sort=recent">만화</a>
+							<a class="dropdown-item" href="mainBoard.do?kind=500&sort=recent">코로나 뉴스</a>
 						</div></li>
 				<li class="nav-item mr-3"><a class="nav-link"
 					href="logout.do"><span><i class="fa fa-sign-out mr-2"></i>로그아웃</span></a></li>
