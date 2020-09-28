@@ -80,7 +80,7 @@
 			ON c.com_id = n.com_id WHERE c.com_bd_id = ?;
 			<sql:param value="${ board.board_id }" />
 		</sql:query>
-		
+
 		<article class="row px-0 mx-0 border border-secondary border-top-0 board_article">
 		
 			<div class="container col-9 px-0 py-2">
