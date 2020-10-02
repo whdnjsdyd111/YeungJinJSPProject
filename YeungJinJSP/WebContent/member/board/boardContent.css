@@ -257,28 +257,29 @@
     }
 }
 
-.write_comment_top {
-	height: 150px;
-}
-
 .write_comment_member {
 	height: 2rem;
 }
 
 .write_comment_middle {
-	max-height: 130px; 
-	height: calc(150px - 3rem);
-	overflow: auto;
+	min-height: calc(150px - 3rem);
 }
 
 #comment_content {
-	min-height: 0px;
-	height: inherit;
+	min-height: calc(150px - 3rem);
+}
+
+.writen_comment {
+	overflow: auto;
+	max-height: 450px;
+}
+
+.comment_upload {
+	max-height: 400px;
 }
 
 #nestComCont {
-	min-height: 0px;
-	height: inherit;
+	min-height: calc(150px - 3rem);
 }
 
 div[contenteditable=true] {

@@ -58,6 +58,6 @@ if (document.location.protocol == 'http:') {
 	
 <%-- 푸터 --%>
 <jsp:include page="member/index/footer.jsp" />
-	
+
 </body>
 </html>

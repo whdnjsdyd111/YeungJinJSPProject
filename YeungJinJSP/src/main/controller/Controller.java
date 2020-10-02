@@ -137,6 +137,11 @@ public class Controller extends HttpServlet {
 			return;
 		}
 		
+		if(view.contains("/admin/")) {
+			dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+			return;
+		}
 		
 		
 		request.setAttribute("cont", view);

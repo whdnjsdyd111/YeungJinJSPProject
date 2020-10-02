@@ -1,3 +1,13 @@
+var total_file = 0;
+var image_files = [];
+
+var nest_total_file = 0;
+var nest_image_files = [];
+
+var target_mem_id;
+var target_mem_nickname;
+var target_com_id;
+
 $(function() {
 	$('#commentBtn').click(function() {
 		
@@ -6,30 +16,16 @@ $(function() {
 			return false;
 		}
 		
-		var href = window.location.href;
-		var str = 'bdNum=';
-		var loc = href.indexOf(str);
-		var len = str.length;
-		var get = href.substr(loc + len, href.length);
-
-		$.ajax({
-			type: "POST",
-			url: "commentInsert.do",
-			data: { 
-				board_id: get,
-				content: $('#comment_content').html() 
-			},
-			success: function() {
-				$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get + "&sort=recent");
-			}
-		});
+		upload();
 	});
 	
 	$('.write_reply').click(function() {
 		$('.reply').remove();
+		nest_total_file = 0;
+		nest_image_files = [];
 		
-		var target_mem_id = $(this).next().val();
-		var target_mem_nickname = $(this).nextAll('input[name=nickname]').val();
+		target_mem_id = $(this).next().val();
+		target_mem_nickname = $(this).nextAll('input[name=nickname]').val();
 		
 		var span_nickname = '<span class="mr-2 bg-success text-white rounded" contenteditable="false">' + target_mem_nickname + '</span><br>';
 		
@@ -46,51 +42,109 @@ $(function() {
 		'</div></div></div>' +
 		'<div class="border border-dark border-top-0 mx-3">' +
 		'<div class="w-100 d-flex"><div class="custom-file w-75">' +
-		'<input type="file" class="custom-file-input" id="comment_image">' +
-		'<label class="custom-file-label" for="comment_image"><i class="fa fa-upload mr-2"></i>이미지 삽입</label></div>' +
+		'<input type="file" class="custom-file-input" id="nest_comment_image">' +
+		'<label class="custom-file-label" for="nest_comment_image"><i class="fa fa-upload mr-2"></i>이미지 삽입</label></div>' +
 		"<input type='hidden' name='com_id' value='" + com_id + "'>" + 
 		'<button id="nestCommentBtn" class="btn btn-info w-25">작성</button></div></div><div>';
 		
+
+		
 		$(this).parents('.comments').after(reply);
 		
+		$(".custom-file-input").on("change", function() {
+			var fileName = $(this).val().split("\\").pop();
+			$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+		
+		$('#nest_comment_image').on("change", nest_handleImageFile);
+		
 		$('#nestCommentBtn').click(function() {
+			
+			target_com_id = $(this).prevAll('input[name=com_id]').val();
 			
 			if(!$('#nestComCont').html()) {
 				alert("댓글 내용을 입력해주세요.");
 				return false;
 			}
 			
-			var href = window.location.href;
-			var str = 'bdNum=';
-			var loc = href.indexOf(str);
-			var len = str.length;
-			var get = href.substr(loc + len, href.length);
-			get = get.replace("#start_com", "");
+			var index = 0;
+			for(let i = 0; i < nest_image_files.length; i++) {
+				if(!$('#nest_img' + i).attr('src')) {
+					nest_image_files.splice(index--, 1);
+				}
+				index++;
+			}
 			
-			var notice_content = $('#nestComCont').html().replace(span_nickname.replace('<br>', ""), "").replace(/(<([^>]+)>)/ig,"");
+			var form = new FormData();
+			
+			for(let i = 0; i < nest_image_files.length; i++) {
+				form.append("file" + i, nest_image_files[i]);
+			}
 			
 			$.ajax({
 				type: "post",
-				url: "nestCommentInsert.do",
-				data: { 
-					board_id: get,
-					target_mem_id: target_mem_id,
-					com_id: $(this).prevAll('input[name=com_id]').val(),
-					content: $('#nestComCont').html(),
-					notice_content: notice_content
-				},
-				success: function() {
-					$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get);
+				enctype: 'multipart/form-data',
+				url: "imageUploadComment.do",
+				data: form,
+				processData: false,
+				contentType: false,
+				success: function(data) {
+					var str1 = "<p id='images'>";
+					var str2 = "image_p_tag</p>";
+					var loc1 = data.indexOf(str1);
+					var loc2 = data.indexOf(str2);
+					var len = str1.length;
+					var check = data.substr(loc1 + len, loc2 - (loc1 + len));
+					
+					var check_files = check.split(',');
+					
+					var index1 = check_files.length - 1;
+					
+					for(let i = 0; i < nest_total_file; i++) {
+						if($('#nest_img' + i).attr('src')) {
+							$('#nest_img' + i).attr('src', check_files[index1 = index1 - 1].trim());
+							$('#nest_img' + i).removeAttr('id');
+						}
+					}
+					
+					var href = window.location.href;
+					var str = 'bdNum=';
+					var loc = href.indexOf(str);
+					var len = str.length;
+					var get = href.substr(loc + len, href.length);
+					get = get.replace("#start_com", "");
+					
+					var notice_content = $('#nestComCont').html().replace(span_nickname.replace('<br>', ""), "").replace(/(<([^>]+)>)/ig,"");
+					
+					$.ajax({
+						type: "post",
+						url: "nestCommentInsert.do",
+						data: { 
+							board_id: get,
+							target_mem_id: target_mem_id,
+							com_id: target_com_id,
+							content: $('#nestComCont').html(),
+							notice_content: notice_content
+						},
+						success: function() {
+							$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get);
+						}
+					});
+					
 				}
 			});
+			
 		});
 	});
 	
 	$('.write_nest_reply').click(function() {
 		$('.reply').remove();
 		
-		var target_mem_id = $(this).next().val();
-		var target_mem_nickname = $(this).nextAll('input[name=nickname]').val();
+		nest_total_file = 0;
+		nest_image_files = [];
+		
+		target_mem_id = $(this).next().val();
+		target_mem_nickname = $(this).nextAll('input[name=nickname]').val();
 		
 		var span_nickname = '<span class="mr-2 bg-success text-white rounded" contenteditable="false">' + target_mem_nickname + '</span><br>';
 		
@@ -107,41 +161,92 @@ $(function() {
 		'</div></div></div>' +
 		'<div class="border border-dark border-top-0 mx-3">' +
 		'<div class="w-100 d-flex"><div class="custom-file w-75">' +
-		'<input type="file" class="custom-file-input" id="comment_image">' +
-		'<label class="custom-file-label" for="comment_image"><i class="fa fa-upload mr-2"></i>이미지 삽입</label></div>' +
+		'<input type="file" class="custom-file-input" id="nest_comment_image">' +
+		'<label class="custom-file-label" for="nest_comment_image"><i class="fa fa-upload mr-2"></i>이미지 삽입</label></div>' +
 		"<input type='hidden' name='com_id' value='" + com_id + "'>" + 
 		'<button id="nestCommentBtn" class="btn btn-info w-25">작성</button></div></div><div>';
 		
 		$(this).parents('.nestComments').after(reply);
 		
+		$(".custom-file-input").on("change", function() {
+			var fileName = $(this).val().split("\\").pop();
+			$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+		
+		$('#nest_comment_image').on("change", nest_handleImageFile);
+		
 		$('#nestCommentBtn').click(function() {
+			
+			target_com_id = $(this).prevAll('input[name=com_id]').val();
 			
 			if(!$('#nestComCont').html()) {
 				alert("댓글 내용을 입력해주세요.");
 				return false;
 			}
 			
-			var href = window.location.href;
-			var str = 'bdNum=';
-			var loc = href.indexOf(str);
-			var len = str.length;
-			var get = href.substr(loc + len, href.length);
-			get = get.replace("#start_com", "");
+			var index = 0;
+			for(let i = 0; i < nest_image_files.length; i++) {
+				if(!$('#nest_img' + i).attr('src')) {
+					nest_image_files.splice(index--, 1);
+				}
+				index++;
+			}
 			
-			var notice_content = $('#nestComCont').html().replace(span_nickname.replace('<br>', ""), "").replace(/(<([^>]+)>)/ig,"");
+			var form = new FormData();
+			
+			for(let i = 0; i < nest_image_files.length; i++) {
+				form.append("file" + i, nest_image_files[i]);
+			}
 			
 			$.ajax({
 				type: "post",
-				url: "nestCommentInsert.do",
-				data: { 
-					board_id: get,
-					target_mem_id: target_mem_id,
-					com_id: $(this).prevAll('input[name=com_id]').val(),
-					content: $('#nestComCont').html(),
-					notice_content: notice_content
-				},
-				success: function() {
-					$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get);
+				enctype: 'multipart/form-data',
+				url: "imageUploadComment.do",
+				data: form,
+				processData: false,
+				contentType: false,
+				success: function(data) {
+					var str1 = "<p id='images'>";
+					var str2 = "image_p_tag</p>";
+					var loc1 = data.indexOf(str1);
+					var loc2 = data.indexOf(str2);
+					var len = str1.length;
+					var check = data.substr(loc1 + len, loc2 - (loc1 + len));
+					
+					var check_files = check.split(',');
+					
+					var index1 = check_files.length - 1;
+					
+					for(let i = 0; i < nest_total_file; i++) {
+						if($('#nest_img' + i).attr('src')) {
+							$('#nest_img' + i).attr('src', check_files[index1 = index1 - 1].trim());
+							$('#nest_img' + i).removeAttr('id');
+						}
+					}
+					
+					var href = window.location.href;
+					var str = 'bdNum=';
+					var loc = href.indexOf(str);
+					var len = str.length;
+					var get = href.substr(loc + len, href.length);
+					get = get.replace("#start_com", "");
+					
+					var notice_content = $('#nestComCont').html().replace(span_nickname.replace('<br>', ""), "").replace(/(<([^>]+)>)/ig,"");
+					
+					$.ajax({
+						type: "post",
+						url: "nestCommentInsert.do",
+						data: { 
+							board_id: get,
+							target_mem_id: target_mem_id,
+							com_id: target_com_id,
+							content: $('#nestComCont').html(),
+							notice_content: notice_content
+						},
+						success: function() {
+							$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get);
+						}
+					});
 				}
 			});
 		});
@@ -381,4 +486,115 @@ $(function() {
 			});
 		}
 	});
+	
+	$(".custom-file-input").on("change", function() {
+		var fileName = $(this).val().split("\\").pop();
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+	
+	$('#comment_image').on("change", handleImageFile);
 });
+
+function upload() {
+	
+	var index = 0;
+	for(let i = 0; i < image_files.length; i++) {
+		if(!$('#img' + i).attr('src')) {
+			image_files.splice(index--, 1);
+		}
+		index++;
+	}
+	
+	var form = new FormData();
+	
+	for(let i = 0; i < image_files.length; i++) {
+		form.append("file" + i, image_files[i]);
+	}
+	
+	$.ajax({
+		type: "post",
+		enctype: 'multipart/form-data',
+		url: "imageUploadComment.do",
+		data: form,
+		processData: false,
+		contentType: false,
+		success: function(data) {
+			var str1 = "<p id='images'>";
+			var str2 = "image_p_tag</p>";
+			var loc1 = data.indexOf(str1);
+			var loc2 = data.indexOf(str2);
+			var len = str1.length;
+			var check = data.substr(loc1 + len, loc2 - (loc1 + len));
+			
+			var check_files = check.split(',');
+			
+			var index1 = check_files.length - 1;
+			
+			for(let i = 0; i < total_file; i++) {
+				if($('#img' + i).attr('src')) {
+					index1 = index1 - 1;
+					document.getElementById('img' + i).setAttribute('src', check_files[index1].trim());
+					document.getElementById('img' + i).removeAttribute('id');
+					$('#img' + i).attr('src', check_files[index1].trim());
+					$('#img' + i).removeAttr('id');
+				}
+			}
+			
+			comment_comple();
+		}
+	});
+}
+
+function comment_comple() {
+	var href = window.location.href;
+	var str = 'bdNum=';
+	var loc = href.indexOf(str);
+	var len = str.length;
+	var get = href.substr(loc + len, href.length);
+
+	$.ajax({
+		type: "POST",
+		url: "commentInsert.do",
+		data: { 
+			board_id: get,
+			content: $('#comment_content').html() 
+		},
+		success: function() {
+			$('#comments_div').load("/YeungJinFunnyBone/member/board/comment.jsp?bdNum=" + get + "&sort=recent");
+		}
+	});
+}
+
+function handleImageFile() {
+	if(!$('#comment_image').val())
+		return false;
+	
+	total_file++;
+	image_files.push($('#comment_image')[0].files[0]);
+
+	var reader = new FileReader();
+	
+	reader.onload = function(e) {
+		var img_html = "<div><br></div><img class='img-fluid img-thumbnail comment_upload' id='img" + (image_files.length - 1) + "' src='" + e.target.result + "' /><div><br></div>";
+		$('#comment_content').append(img_html);
+	}
+
+	reader.readAsDataURL(image_files[image_files.length - 1]);
+}
+
+function nest_handleImageFile() {
+	if(!$('#nest_comment_image').val())
+		return false;
+	
+	nest_total_file++;
+	nest_image_files.push($('#nest_comment_image')[0].files[0]);
+
+	var reader = new FileReader();
+	
+	reader.onload = function(e) {
+		var img_html = "<div><br></div><img class='img-fluid img-thumbnail comment_upload' id='nest_img" + (nest_image_files.length - 1) + "' src='" + e.target.result + "' /><div><br></div>";
+		$('#nestComCont').append(img_html);
+	}
+	
+	reader.readAsDataURL(nest_image_files[nest_image_files.length - 1]);
+}

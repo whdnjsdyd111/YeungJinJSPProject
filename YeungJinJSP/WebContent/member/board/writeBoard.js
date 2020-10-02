@@ -28,7 +28,7 @@ $(function() {
 	
 	$('#insert_img').keydown(function(key) {
 		if(key.keyCode == 13) {
-			var img = "<img class='img-fluid img-thumbnail' src='" + 'https://' + $('#insert_img').val() + "'></br></br>";
+			var img = "<div><br></div><img class='img-fluid img-thumbnail' src='" + 'https://' + $('#insert_img').val() + "'><div><br></div>";
 			$('#board_content').append(img);
 		}
 	});
@@ -80,13 +80,16 @@ function checkAll() {
 }
 
 function handleImageFile() {
+	if(!$('#file_image').val())
+		return false;
+	
 	total_file++;
-	image_files.push(document.getElementById('file_image').files[0]);
+	image_files.push($('#file_image')[0].files[0]);
 
 	var reader = new FileReader();
 	
 	reader.onload = function(e) {
-		var img_html = "<img id='img" + (image_files.length - 1) + "' src='" + e.target.result + "' /><br><br>";
+		var img_html = "<div><br></div><img class='img-fluid img-thumbnail' id='img" + (image_files.length - 1) + "' src='" + e.target.result + "' /><div><br></div>";
 		$('#board_content').append(img_html);
 	}
 	
@@ -129,7 +132,7 @@ function upload() {
 	$.ajax({
 		type: "post",
 		enctype: 'multipart/form-data',
-		url: "imageUpload.do",	// member/board/imageUpload.jsp
+		url: "imageUploadBoard.do",	// member/board/imageUpload.jsp
 		data: form,
         processData: false,
         contentType: false,
@@ -147,8 +150,7 @@ function upload() {
 			
 			for(let i = 0; i < total_file; i++) {
 				if($('#img' + i).attr('src')) {
-					$('#img' + i).attr('src', check_files[index1--].trim().replace(/\\/gi, '/') // 2 1 0
-					.replace('C:/Users/PC/git/YeungJinJSPProject/YeungJinJSP/WebContent/', 'http://localhost:8001/YeungJinFunnyBone/'));
+					$('#img' + i).attr('src', check_files[index1--].trim().replace(/\\/gi, '/'));
 				}
 			}
 			

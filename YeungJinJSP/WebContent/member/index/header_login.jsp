@@ -34,9 +34,9 @@
 							
 						</div></li>
 				<li class="nav-item dropdown">
-					<a class="nav-link" href="#" id="navbarDropdown"
+					<a class="nav-link btn btn-outline-danger" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"><span class="text-white">${ mem.mem_nickname }</span></a>
+						aria-expanded="false"><span class="text-warning">${ mem.mem_nickname }</span></a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<div class="text-primary text-center">레벨 <span>${ mem.mem_level }</span></div>
 							<div class="progress m-1">

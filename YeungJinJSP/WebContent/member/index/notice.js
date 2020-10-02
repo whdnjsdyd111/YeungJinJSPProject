@@ -1,5 +1,7 @@
 $(function() {
 	$('#delete_notices').click(function() {
+		$('#delete_notices').remove();
+		
 		$.ajax({
 			url: "deleteAllNotice.do",
 			success: function(data) {
@@ -18,6 +20,8 @@ $(function() {
 	});
 	
 	$('.delete_notice').click(function() {
+		$(this).remove();
+		
 		$.ajax({
 			type: "post",
 			url: "deleteNotice.do",

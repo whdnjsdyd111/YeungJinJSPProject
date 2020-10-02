@@ -121,7 +121,7 @@
 			</c:if>
 
 			</form>
-			<div class="mr-auto d-flex flex-column" >
+			<div class="col mr-auto d-flex flex-column" >
 				<div class="">
 					<a class="text-dark" style="text-decoration: none;" 
 							href="mainBoard.do?kind=all&target=writer&search=${ joinMemCom.com_mem_nickname }">
@@ -146,7 +146,7 @@
 						</button>
 					</span>
 				</div>
-				<div class="container my-2">
+				<div class="container my-2 writen_comment">
 					<div>${ joinMemCom.com_content }</div>
 				</div>
 				<div class="mt-2">
@@ -175,7 +175,7 @@
 				<div class="border border-right-0 border-top-0 border-dark ml-5" style="width: 30px; height: 30px">
 					
 				</div>
-				<div class="mr-auto ml-3 d-flex flex-column">
+				<div class="col mr-auto ml-3 d-flex flex-column">
 					<div class="">
 						<a class="text-dark" style="text-decoration: none;" 
 								href="mainBoard.do?kind=all&target=writer&search=${ nestComment.mem_nickname }">
@@ -202,7 +202,7 @@
 							</button>
 						</span>
 					</div>
-					<div class="container my-2">
+					<div class="container my-2 writen_comment">
 						<div>${ nestComment.reCom_content }</div>
 					</div>
 					<div class="mt-2">

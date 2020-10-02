@@ -13,12 +13,12 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import main.command.CommandAction;
 
-public class ImageUploadBoardAction implements CommandAction {
+public class ImageUploadCommentAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
 		String realFolder = "";	// 웹 애플리케이션 상의 절대 경로 저장
-		String saveFolder = "/uploadBoard";	// 파일 업로드 폴더 지정
+		String saveFolder = "/uploadComment";	// 파일 업로드 폴더 지정
 		String encType = "utf-8";	// 인코딩 타입
 		int maxSize = 10 * 1024 * 1024;	// 업로드될 파일 크기 최대 10Mb
 		
@@ -80,7 +80,7 @@ public class ImageUploadBoardAction implements CommandAction {
 			
 				StringBuffer url = request.getRequestURL();
 				url.delete(url.indexOf(request.getServletPath()), url.length());
-				url.append("/uploadBoard/" + fileName);
+				url.append("/uploadComment/" + fileName);
 				
 				results.add(url.toString());
 			}
