@@ -64,7 +64,7 @@ function login() {
 
 			if(check != "0") {	// 아이디, 비번 맞을 시
 				alert("관리자님 환영합니다.");
-				window.location.href = "#";
+				window.location.href = "dashboard.do";
 			} else {	// 틀렸을 시
 				$('#check_mail_pass').text("이메일 또는 비밀번호가 틀렸습니다.");
 			}
