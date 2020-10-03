@@ -34,7 +34,7 @@
 		<nav class="navbar navbar-expand-lg navbar-dark flex-md-row bd-navbar header">
 
 			<a class="navbar-brand" href="dashboard.do"> <img width="40"
-				height="40" src="../resource/images/index/yjfb_logo.png">
+				height="40" class="mr-2" src="../resource/images/index/yjfb_logo.png">
 				YJFB
 			</a>
 			
@@ -67,6 +67,7 @@
 					<a href="#">
 						<i class="fa fa-comments mr-2"></i>컨텐츠 관리
 					</a>
+					
 				</li>
 				<li>
 					<a href="#">
@@ -87,7 +88,7 @@
 		</div>
 		
 		<div class="dashboard-content" style="min-height: 1200px">
-			ddd
+			<jsp:include page="mainDashBoard.jsp" />
 		</div>
 	</div>
 </body>

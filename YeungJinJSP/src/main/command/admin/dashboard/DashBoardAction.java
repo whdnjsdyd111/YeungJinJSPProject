@@ -9,8 +9,6 @@ public class DashBoardAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-		
-		
 		return "/admin/dashboard/dashboard.jsp";
 	}
 }

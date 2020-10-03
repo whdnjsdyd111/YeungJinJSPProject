@@ -5,7 +5,7 @@
 }
 
 .header {
-	background-color: #39C6F0;
+	background-color: #4A148C;
 }
 @media (min-width: 992px) {
 	.sidebar {
@@ -39,6 +39,6 @@
 }
 
 .dashboard-content {
-	padding: 15px 30px;
+	padding: 30px 15px;
 	background-color: #fff;
 }
