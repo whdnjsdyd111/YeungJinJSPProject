@@ -69,7 +69,7 @@ public class FindPwProAction implements CommandAction {
 			buffer.append("<h1>비밀번호 재설정</h1><br>");
 			buffer.append("<p>" + member.getMem_nickname() +"님의 이메일 주소가 " + email +"이(가) 맞다면 증명하여 비밀번호를 재설정하기 위해 아래 링크로 이동해주세요.<br>");
 			buffer.append("<p>10분 이내로 완료하십시오.</p><br>");
-			buffer.append("<a href='http://14.45.5.70:8000/YeungJinFunnyBone/findPasswdCompleteForm.do?token=" + 
+			buffer.append("<a href='http://localhost:8001/YeungJinFunnyBone/findPasswdCompleteForm.do?token=" + 
 					enc + "&timeToken=" + timeEnc + "'>비밀번호 재설정</a>");
 			msg.setFrom(SMTPAuthenticator.from);
 			

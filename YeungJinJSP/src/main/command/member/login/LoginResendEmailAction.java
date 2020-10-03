@@ -59,7 +59,7 @@ public class LoginResendEmailAction implements CommandAction {
 			buffer.append("<h1>이메일 인증</h1><br>");
 			buffer.append("<p>" + nick +"님의 이메일 주소가 " + email +"이(가) 맞다면 증명하여 회웝가입을 완료하여 주십시오.<br>");
 			buffer.append("<p>1시간 이내로 완료하십시오.</p><br>");
-			buffer.append("<a href='http://14.45.5.70:8000/YeungJinFunnyBone/registerComplete.do?token=" + 
+			buffer.append("<a href='http://localhost:8001/YeungJinFunnyBone/registerComplete.do?token=" + 
 					enc + "'>회원가입 완료</a>");
 			msg.setFrom(SMTPAuthenticator.from);
 			
