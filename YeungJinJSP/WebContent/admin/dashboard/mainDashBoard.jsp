@@ -14,9 +14,9 @@
 	SELECT COUNT(*) FROM comment WHERE DATE_FORMAT(com_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
 </sql:query>
 
-<%-- <sql:query var="t_rep_rs">
-	
-</sql:query> --%>
+<sql:query var="t_rep_rs" dataSource="jdbc/yjfb">
+	SELECT COUNT(*) FROM report;	
+</sql:query>
 
 <div class="row">
 	<div class="col-12">
@@ -84,7 +84,7 @@
 				</div>
 				<div class="col-7">
 					<div class="card-body" style="padding-top: 35px;">
-						<h4 class="card-title">1,000</h4>
+						<h4 class="card-title">${ t_rep_rs.rowsByIndex[0][0] }</h4>
 						<p class="card-text">신고</p>
 					</div>
 				</div>

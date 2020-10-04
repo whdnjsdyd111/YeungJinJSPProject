@@ -8,6 +8,9 @@ var target_mem_id;
 var target_mem_nickname;
 var target_com_id;
 
+var contents_id;
+var contents_kind;
+
 $(function() {
 	$('#commentBtn').click(function() {
 		
@@ -493,6 +496,50 @@ $(function() {
 	});
 	
 	$('#comment_image').on("change", handleImageFile);
+	
+	$('#report_content').val("");
+	
+	$(".report").click(function() {
+		$('#reportModal').modal();
+		contents_id = $(this).next().val();
+		contents_kind = $(this).next().next().val();
+	});
+	
+	$('#modal_close').click(function() {
+		$('#radioGroup input:radio:checked').prop('checked', false);
+		$('#report_content').val("");
+	});
+	
+	$('#modal_report').click(function() {
+		if(!$('#radioGroup input:radio:checked').val()) {
+			alert("신고 사유를 선택하십시오.");
+			return false;
+		}
+
+		$.ajax({
+			type: "post",
+			url: "report.do",
+			data: {
+				rep_content: $('#report_content').val(),
+				rep_kind: $('#radioGroup input:radio:checked').val(),
+				contents_id: contents_id,
+				contents_kind: contents_kind
+			},
+			success: function(data) {
+				var str = "<p id='ck'>";
+				var loc = data.indexOf(str);
+				var len = str.length;
+				var check = data.substr(loc + len, 1);
+				
+				if(check == "1") {
+					$('#reportModal').modal("hide");
+					alert("신고 감사합니다.");
+				} else {
+					alert("다시 신고해주십시오.")
+				}
+			}
+		});
+	});
 });
 
 function upload() {

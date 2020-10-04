@@ -285,3 +285,10 @@
 div[contenteditable=true] {
 	outline: none;
 }
+
+#report_content {
+	width: 100%;
+	height: 120px;
+	resize: none;
+	overflow: hidden;
+}

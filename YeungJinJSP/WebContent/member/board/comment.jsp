@@ -160,7 +160,9 @@
 							<input type="hidden" value="${ joinMemCom.com_mem_id }" />
 							<input type="hidden" value="${ joinMemCom.com_mem_nickname }" name="nickname"/>
 						</c:if>
-						<button class="btn btn-danger">신고</button>
+						<button class="btn btn-danger report">신고</button>
+						<input type="hidden" value="${ joinMemCom.com_id }" />
+						<input type="hidden" value="C" />
 						<c:if test="${ joinMemCom.com_mem_id == mem_id }">
 							<button class="btn btn-warning delete_com"><i class="fa fa-trash mr-2"></i>삭제</button>
 							<input type="hidden" value="${ joinMemCom.com_id }" />
@@ -216,7 +218,9 @@
 								<input type="hidden" value="${ nestComment.mem_id }" />
 								<input type="hidden" value="${ nestComment.mem_nickname }" name="nickname" />
 							</c:if>
-							<button class="btn btn-danger">신고</button>
+							<button class="btn btn-danger report">신고</button>
+							<input type="hidden" value="${ nestComment.neCom_id }" />
+							<input type="hidden" value="N" />
 							<c:if test="${ nestComment.mem_id == mem_id }">
 								<button class="btn btn-warning delete_nest_com"><i class="fa fa-trash mr-2"></i>삭제</button>
 								<input type="hidden" value="${ nestComment.neCom_id }" />
