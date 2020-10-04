@@ -1,6 +1,7 @@
 package main.bean;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,22 +26,22 @@ public class VisitDBBean {
 	
 	public void insertUpdateCount() {
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		
 		try {
 			conn = getConnection();
 			String sql = "INSERT INTO visit(visit_date) VALUES(DATE_FORMAT(now(), '%y-%m-%d')) "
 					+ "ON DUPLICATE KEY UPDATE visit_num = visit_num + 1";
 			
-			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(conn != null)
 				try { conn.close(); } catch(SQLException e) {}
-			if(stmt != null)
-				try { stmt.close(); } catch(SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch(SQLException e) {}
 		}
 	}
 }
