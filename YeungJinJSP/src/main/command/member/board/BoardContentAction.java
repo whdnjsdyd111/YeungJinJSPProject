@@ -10,6 +10,7 @@ import main.bean.BookmarkDBBean;
 import main.bean.KindDBBean;
 import main.bean.MemberDBBean;
 import main.bean.MemberDataBean;
+import main.bean.PageViewDBBean;
 import main.bean.RecommendDBBean;
 import main.bean.SHA256;
 import main.command.CommandAction;
@@ -54,6 +55,8 @@ public class BoardContentAction implements CommandAction {
 			if(boardProcess.hostCheck(board_id, mem_id))
 				request.setAttribute("host", "Y");
 		}
+		
+		PageViewDBBean.getInstance().insertUpdatePageView();
 		
 		request.setAttribute("nickname", member.getMem_nickname());
 		request.setAttribute("level", member.getMem_level());

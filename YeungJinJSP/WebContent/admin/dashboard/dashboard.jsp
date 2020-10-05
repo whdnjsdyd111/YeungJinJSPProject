@@ -24,6 +24,7 @@
 <script type="text/javascript" src="../resource/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="../resource/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="../resource/js/Chart.min.js"></script>
 
 <script type="text/javascript" src="dashboard/dashboard.js"></script>
 <link rel="stylesheet" type="text/css"

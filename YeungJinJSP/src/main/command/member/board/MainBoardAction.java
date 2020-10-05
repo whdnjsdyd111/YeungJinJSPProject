@@ -54,6 +54,8 @@ public class MainBoardAction implements CommandAction {
 					boardList = boardProcess.getJoinBdMemKindOrderByRecoToday(Integer.valueOf(page));
 				else if(sort.equals("nonReco"))
 					boardList = boardProcess.getJoinBdMemKindOrderByNoReco(Integer.valueOf(page));
+				else
+					return "/member/board/mainBoard.jsp";
 			} else {
 				if(target.equals("writer"))
 					boardList = boardProcess.getJoinBdMemKindFindWriter(Integer.valueOf(page), search);
@@ -77,6 +79,8 @@ public class MainBoardAction implements CommandAction {
 					boardList = boardProcess.getJoinBdMemKindOrderByRecoToday(Integer.valueOf(page), Integer.valueOf(kind));
 				else if(sort.equals("nonReco"))
 					boardList = boardProcess.getJoinBdMemKindOrderByNoReco(Integer.valueOf(page), Integer.valueOf(kind));
+				else
+					return "/member/board/mainBoard.jsp";
 			} else {
 				if(target.equals("writer"))
 					boardList = boardProcess.getJoinBdMemKindFindWriter(Integer.valueOf(page), Integer.valueOf(kind), search);
