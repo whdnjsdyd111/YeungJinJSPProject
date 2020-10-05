@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <sql:query var="t_users_rs" dataSource="jdbc/yjfb">
 	SELECT visit_num FROM visit WHERE DATE_FORMAT(visit_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
@@ -16,6 +17,14 @@
 
 <sql:query var="t_rep_rs" dataSource="jdbc/yjfb">
 	SELECT COUNT(*) FROM report;	
+</sql:query>
+
+<sql:query var="chart_visit_rs" dataSource="jdbc/yjfb">
+	SELECT visit_num FROM visit where visit_date >= date_format(date_sub(now(), interval 6 day), '%y-%m-%d');
+</sql:query>
+
+<sql:query var="chart_page_view_rs" dataSource="jdbc/yjfb">
+	SELECT view_num FROM page_view where view_date >= date_format(date_sub(now(), interval 6 day), '%y-%m-%d');
 </sql:query>
 
 <div class="row">
@@ -92,78 +101,70 @@
 		</div>
 	</div>
 </div>
+<script>
+	var dates = [];
+
+	<c:forEach var="date" items="${ dates }">
+		dates.push('<c:out value="${ date }" />');
+	</c:forEach>
+	
+	var visits = [];
+	
+	<c:forEach begin="0" end="6" step="1" var="i">
+		visits.push('<c:out value="${ chart_visit_rs.rowsByIndex[i][0] }" />');
+	</c:forEach>
+	
+	var page_views = [];
+	
+	<c:forEach begin="0" end="6" step="1" var="i">
+		page_views.push('<c:out value="${ chart_page_view_rs.rowsByIndex[i][0] }" />');
+	</c:forEach>
+</script>
 <div class="row">
 <div class="col-xl-6 col-md-12">
-	<canvas id="canvas1"></canvas>
+	<canvas id="memCanvas"></canvas>
 	<script>
 		var lineChartData = {
-			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			labels: dates,
 			datasets: [{
-				label: 'My First dataset',
+				label: '방문자 수',
 				fill: false,
-				backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-				borderColor: ['rgba(255, 99, 132, 0.2)'],
-				data: [
-					{ x: 10, y: 100 },
-					{ x: 20, y: 20 },
-					{ x: 30, y: 25 },
-					{ x: 40, y: 50 },
-					{ x: 50, y: 40 },
-					{ x: 60, y: 20 },
-					{ x: 70, y: 90 },
-				],
-				yAxisID: 'y-axis-1',
+				backgroundColor: ['rgba(255, 99, 132)'],
+				borderColor: ['rgba(255, 99, 132)'],
+				data: visits
 			}, {
-				label: 'My Second dataset',
-				backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-				borderColor: ['rgba(54, 162, 235, 0.2)'],
+				label: '페이지 뷰',
+				backgroundColor: ['rgba(54, 162, 235)'],
+				borderColor: ['rgba(54, 162, 235)'],
 				fill: false,
-				data: [
-					{ x: 10, y: 70 },
-					{ x: 20, y: 30 },
-					{ x: 30, y: 40 },
-					{ x: 40, y: 70 },
-					{ x: 50, y: 50 },
-					{ x: 60, y: 30 },
-					{ x: 70, y: 60 },
-				],
-				yAxisID: 'y-axis-2'
+				data: page_views
 			}]
 		};
+		
+		var lineChartOpt = {
+			responsive: true,
+			hoverMode: 'index',
+			stacked: false,
+			title: {
+				display: true,
+				text: '방문자 현황'
+			},
+			scales: {
+				yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+			}
+		};
 
-		window.onload = function() {
-			var ctx = document.getElementById('canvas1').getContext('2d');
-				window.myLine = Chart.Line(ctx, {
-					data: lineChartData,
-					options: {
-						responsive: true,
-						hoverMode: 'index',
-						stacked: false,
-						title: {
-							display: true,
-							text: 'Chart.js Line Chart - Multi Axis'
-						},
-						scales: {
-							yAxes: [{
-								type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-								display: true,
-								position: 'left',
-								id: 'y-axis-1',
-							}, {
-								type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-								display: true,
-								position: 'right',
-								id: 'y-axis-2',
-	
-								// grid line settings
-								gridLines: {
-									drawOnChartArea: false, // only want the grid lines for one axis to show up
-								},
-							}],
-						}
-					}
-				});
-			};
+		var mem_ctx = document.getElementById('memCanvas').getContext('2d');
+			window.myLine = Chart.Line(mem_ctx, {
+				type: 'line',
+				data: lineChartData,
+				options: lineChartOpt
+			});
+			
 		</script>
 	</div>
 	<div class="col-xl-6 col-md-12">
