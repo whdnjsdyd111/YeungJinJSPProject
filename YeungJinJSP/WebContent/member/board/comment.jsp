@@ -73,7 +73,7 @@
 	<c:forEach var="entry" items="${ commentMap }">
 		<c:set var="joinMemCom" value="${ entry.key }" />
 		<c:set var="comReco" value="${ comRecoMap.get(joinMemCom.getCom_id()) }" />
-		<div class="container p-3 comments">
+		<div class="container p-3 comments ml-0">
 			<form method="post" class="mx-3 d-flex flex-column">
 			
 			<c:if test="${ empty sessionScope.YJFBID_SES }">
@@ -173,7 +173,7 @@
 		</div>
 		
 		<c:forEach var="nestComment" items="${ entry.value }">
-			<div class="nestComments container p-3 d-flex flex-md-row">
+			<div class="nestComments container p-3 d-flex flex-md-row ml-0">
 				<div class="border border-right-0 border-top-0 border-dark ml-5" style="width: 30px; height: 30px">
 					
 				</div>

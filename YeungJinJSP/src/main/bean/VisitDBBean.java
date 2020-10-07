@@ -30,8 +30,7 @@ public class VisitDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT INTO visit(visit_date) VALUES(DATE_FORMAT(now(), '%y-%m-%d')) "
-					+ "ON DUPLICATE KEY UPDATE visit_num = visit_num + 1";
+			String sql = "UPDATE visit SET visit_num = visit_num + 1 WHERE visit_date = CURDATE()";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.executeUpdate();

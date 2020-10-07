@@ -20,8 +20,6 @@ $(function() {
 	});
 	
 	$('.delete_notice').click(function() {
-		$(this).remove();
-		
 		$.ajax({
 			type: "post",
 			url: "deleteNotice.do",

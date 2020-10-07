@@ -29,8 +29,7 @@ public class PageViewDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT INTO page_view(view_date) VALUES(DATE_FORMAT(now(), '%y-%m-%d')) "
-					+ "ON DUPLICATE KEY UPDATE view_num = view_num + 1";
+			String sql = "UPDATE page_view SET view_num = view_num + 1 WHERE view_date = CURDATE()";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.executeUpdate();

@@ -89,7 +89,7 @@
 			</ul>
 		</div>
 		
-		<div class="dashboard-content" style="min-height: 1200px">
+		<div class="dashboard-content bg-light" style="min-height: 1200px">
 			<jsp:include page="mainDashBoard.jsp" />
 		</div>
 	</div>

@@ -4,15 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <sql:query var="t_users_rs" dataSource="jdbc/yjfb">
-	SELECT visit_num FROM visit WHERE DATE_FORMAT(visit_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
+	SELECT visit_num FROM visit WHERE visit_date = CURDATE();
 </sql:query>
 
 <sql:query var="t_bd_rs" dataSource="jdbc/yjfb">
-	SELECT COUNT(*) FROM board WHERE DATE_FORMAT(board_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
+	SELECT COUNT(*) FROM board WHERE DATE(board_date) = CURDATE();
 </sql:query>
 
 <sql:query var="t_cm_rs" dataSource="jdbc/yjfb">
-	SELECT COUNT(*) FROM comment WHERE DATE_FORMAT(com_date, '%y-%m-%d') = DATE_FORMAT(now(), '%y-%m-%d');
+	SELECT COUNT(*) FROM comment WHERE DATE(com_date) = CURDATE();
 </sql:query>
 
 <sql:query var="t_rep_rs" dataSource="jdbc/yjfb">
@@ -20,11 +20,23 @@
 </sql:query>
 
 <sql:query var="chart_visit_rs" dataSource="jdbc/yjfb">
-	SELECT visit_num FROM visit where visit_date >= date_format(date_sub(now(), interval 6 day), '%y-%m-%d');
+	SELECT visit_num FROM visit WHERE visit_date >= DATE_SUB(CURDATE(), interval 7 day);
 </sql:query>
 
 <sql:query var="chart_page_view_rs" dataSource="jdbc/yjfb">
-	SELECT view_num FROM page_view where view_date >= date_format(date_sub(now(), interval 6 day), '%y-%m-%d');
+	SELECT view_num FROM page_view WHERE view_date >= DATE_SUB(CURDATE(), interval 7 day);
+</sql:query>
+
+<sql:query var="chart_boards_rs" dataSource="jdbc/yjfb">
+	CALL dates_from_board;
+</sql:query>
+
+<sql:query var="chart_comments_rs" dataSource="jdbc/yjfb">
+	CALL dates_from_comments;
+</sql:query>
+
+<sql:query var="new_mem_rs" dataSource="jdbc/yjfb">
+	SELECT mem_email, mem_nickname FROM member WHERE mem_date > '2020-08-01';
 </sql:query>
 
 <div class="row">
@@ -119,11 +131,23 @@
 	<c:forEach begin="0" end="6" step="1" var="i">
 		page_views.push('<c:out value="${ chart_page_view_rs.rowsByIndex[i][0] }" />');
 	</c:forEach>
+	
+	var boards = [];
+	
+	<c:forEach begin="0" end="6" step="1" var="i">
+		boards.push('<c:out value="${ chart_boards_rs.rowsByIndex[i][0] }" />');
+	</c:forEach>	
+	
+	var comments = [];
+	
+	<c:forEach begin="0" end="6" step="1" var="i">
+		comments.push('<c:out value="${ chart_comments_rs.rowsByIndex[i][0] }" />');
+	</c:forEach>
 </script>
 <div class="row">
-<div class="col-xl-6 col-md-12">
-	<canvas id="memCanvas"></canvas>
-	<script>
+	<div class="col-xl-6 col-md-12 mb-3">
+		<canvas id="memCanvas"></canvas>
+		<script>
 		var lineChartData = {
 			labels: dates,
 			datasets: [{
@@ -159,44 +183,56 @@
 		};
 
 		var mem_ctx = document.getElementById('memCanvas').getContext('2d');
-			window.myLine = Chart.Line(mem_ctx, {
-				type: 'line',
-				data: lineChartData,
-				options: lineChartOpt
-			});
+		window.myLine = Chart.Line(mem_ctx, {
+			type: 'line',
+			data: lineChartData,
+			options: lineChartOpt
+		});
 			
 		</script>
 	</div>
-	<div class="col-xl-6 col-md-12">
-		<canvas id="myChart"></canvas>
+	<div class="col-xl-6 col-md-12 mb-3">
+		<canvas id="contentsCanvas"></canvas>
 		<script>
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(ctx, {
-		    type: 'bar',
-		    data: {
-		        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-		        datasets: [{
-		            label: '# of Votes',
-		            data: [12, 19, 3, 5, 2, 3],
-		            backgroundColor: [
-		                'rgba(255, 99, 132, 0.2)',
-		                'rgba(54, 162, 235, 0.2)',
-		                'rgba(255, 206, 86, 0.2)',
-		                'rgba(75, 192, 192, 0.2)',
-		                'rgba(153, 102, 255, 0.2)',
-		                'rgba(255, 159, 64, 0.2)'
-		            ],
-		            borderColor: [
-		                'rgba(255, 99, 132, 1)',
-		                'rgba(54, 162, 235, 1)',
-		                'rgba(255, 206, 86, 1)',
-		                'rgba(75, 192, 192, 1)',
-		                'rgba(153, 102, 255, 1)',
-		                'rgba(255, 159, 64, 1)'
-		            ],
-		            borderWidth: 1
-		        }]
-		    },
+		var contents_ctx = document.getElementById('contentsCanvas').getContext('2d');
+		
+		var purple_trans = [];
+		var purple = [];
+		
+		var orange_trans = [];
+		var orange = [];
+		
+		for (let i = 0; i < 7; i++) {
+			purple_trans.push('rgba(255, 159, 64, 0.2)');
+			purple.push('rgba(255, 159, 64, 1)');
+			orange_trans.push('rgba(153, 102, 255, 0.2)');
+			orange.push('rgba(153, 102, 255, 1)');
+		}
+		
+		var barChartData = {
+			labels: dates,
+	        datasets: [{
+	            label: '게시판',
+	            data: boards,
+	            backgroundColor: purple_trans,
+	            borderColor: purple,
+	            borderWidth: 1
+	        }, {
+	            label: '댓글',
+	            data: comments,
+	            backgroundColor: orange_trans,
+	            borderColor: orange,
+	            borderWidth: 1
+	        }],
+		}
+		
+		var barChartOpt = {
+			type: 'bar',
+		    data: barChartData,
+			title: {
+				display: true,
+				text: '콘텐츠 현황'
+			},
 		    options: {
 		        scales: {
 		            yAxes: [{
@@ -206,7 +242,96 @@
 		            }]
 		        }
 		    }
+		}
+		
+		window.myBar = new Chart(contents_ctx, {
+			type: 'bar',
+			data: barChartData,
+			options: barChartOpt
 		});
 		</script>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xl-4 col-md-12 mb-3 overflow-auto">
+		<div class="text-center bg-dark" style="height: 250px;">
+			<div class="table-responsive" style="word-break: keep-all;">
+				<table class="table table-striped table-dark table-borderless table-sm">
+					<caption class="text-warning"><i class="fa fa-user-circle fa-2x ml-2"></i> 새 회원</caption>
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">이메일</th>
+							<th scope="col">닉네임</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:set var="mem_num" value="${ 1 }" />
+					<c:forEach var="new_mem" items="${ new_mem_rs.rowsByIndex }">
+						<tr>
+							<th scope="row"><c:out value="${ mem_num }" /></th>
+							<th>${ new_mem[0] }</th>
+							<th>${ new_mem[1] }</th>
+						</tr>
+						<c:set var="mem_num" value="${ mem_num + 1 }" />
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-4 col-md-12 mb-3 overflow-auto">
+		<div class="text-center bg-danger" style="height: 250px;">
+			<div class="table-responsive" style="word-break: keep-all;">
+				<table class="table table-striped table-danger table-borderless table-sm">
+					<caption class="text-warning"><i class="fa fa-user-circle fa-2x ml-2"></i> 새 게시글</caption>
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">이메일</th>
+							<th scope="col">닉네임</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:set var="mem_num" value="${ 1 }" />
+					<c:forEach var="new_mem" items="${ new_mem_rs.rowsByIndex }">
+						<tr>
+							<th scope="row"><c:out value="${ mem_num }" /></th>
+							<th>${ new_mem[0] }</th>
+							<th>${ new_mem[1] }</th>
+						</tr>
+						<c:set var="mem_num" value="${ mem_num + 1 }" />
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-4 col-md-12 mb-3 overflow-auto">
+		<div class="text-center bg-success" style="height: 250px;">
+			<div class="table-responsive" style="word-break: keep-all;">
+				<table class="table table-striped table-success table-borderless table-sm">
+					<caption class="text-warning"><i class="fa fa-user-circle fa-2x ml-2"></i> 새 댓글</caption>
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">이메일</th>
+							<th scope="col">닉네임</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:set var="mem_num" value="${ 1 }" />
+					<c:forEach var="new_mem" items="${ new_mem_rs.rowsByIndex }">
+						<tr>
+							<th scope="row"><c:out value="${ mem_num }" /></th>
+							<th>${ new_mem[0] }</th>
+							<th>${ new_mem[1] }</th>
+						</tr>
+						<c:set var="mem_num" value="${ mem_num + 1 }" />
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
