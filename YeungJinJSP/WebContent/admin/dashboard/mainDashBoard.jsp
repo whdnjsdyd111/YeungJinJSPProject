@@ -50,6 +50,12 @@
 	SELECT c.com_id, m.mem_nickname, c.com_content FROM member m JOIN comment c ON m.mem_id = c.com_mem_id;
 </sql:query>
 
+<sql:query var="admin_rs" dataSource="jdbc/yjfb">
+	SELECT a.admin_name, m.mem_email, DATE(a.admin_reg_date), m.mem_nickname, m.mem_level FROM admin a JOIN member m ON a.admin_id = m.mem_id 
+	WHERE a.admin_id = ?
+	<sql:param value="${ sessionScope.YJFBID_ADMIN_SES }" />
+</sql:query>
+
 <div class="row">
 	<div class="col-12">
 		<h2 class="border-bottom pb-3">Dashboard<small class="ml-3 text-secondary">notice your app data</small></h2>
@@ -295,7 +301,7 @@
 		<div class="text-center bg-danger" style="height: 250px;">
 			<div class="bg-danger">
 				<table class="table table-hover table-danger table-sm mb-0">
-					<caption class="text-warning"><i class="fa fa-user-circle fa-2x ml-2"></i> 새 게시글</caption>
+					<caption class="text-warning"><i class="fa fa-list fa-2x ml-2"></i> 새 게시글</caption>
 					<thead>
 						<tr>
 							<th scope="col">번호</th>
@@ -320,7 +326,7 @@
 		<div class="text-center bg-success" style="height: 250px;">
 			<div class="bg-success">
 				<table class="table table-hover table-success table-sm mb-0">
-					<caption class="text-warning"><i class="fa fa-user-circle fa-2x ml-2"></i> 새 댓글</caption>
+					<caption class="text-warning"><i class="fa fa-comment fa-2x ml-2"></i> 새 댓글</caption>
 					<thead>
 						<tr>
 							<th scope="col">번호</th>
@@ -339,6 +345,45 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<div class="bg-dark d-flex flex-column text-center text-light">
+			<i class="fa fa-id-badge fa-5x mt-2"></i>
+			<span>${ admin_rs.rowsByIndex[0][0] }</span>
+			<span class="mb-2">${ admin_rs.rowsByIndex[0][1] }</span>
+			<hr>
+			<table class="table table-borderless text-white table-sm">
+				<tr>
+					<th scope="col">위임일</th>
+					<td>${ admin_rs.rowsByIndex[0][2] }</td>
+				</tr>
+				<tr>
+					<th scope="row">사용 닉네임</th>
+					<td>${ admin_rs.rowsByIndex[0][3] }</td>
+				</tr>
+				<tr>
+					<th scope="row">활동 레벨</th>
+					<td>${ admin_rs.rowsByIndex[0][4] }</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-6 col-xs-12 border border-dark">
+		<h2 class="font-weight-bold p-3">접속중인 관리자</h2>
+		<div class="row">
+			<i class="fa fa-id-badge fa-5x mt-2 col ml-4"></i>
+			<i class="fa fa-id-badge fa-5x mt-2 col"></i>
+			<i class="fa fa-id-badge fa-5x mt-2 col"></i>
+			<i class="fa fa-id-badge fa-5x mt-2 col"></i>
+		</div>
+		<div class="row font-weight-bolder ml-3 mt-3">
+			<span class="col">조원용</span>
+			<span class="col">조원용</span>
+			<span class="col">조원용</span>
+			<span class="col">조원용</span>
 		</div>
 	</div>
 </div>

@@ -92,5 +92,63 @@
 			<jsp:include page="mainDashBoard.jsp" />
 		</div>
 	</div>
+	<div>
+		<footer class="container-fluid bg-dark">
+			<div class="card mx-5 bg-warning">
+				<div class="row mb-4 ">
+					<div class="col-lg-4 col-md-7 col-sm-11 col-xs-11">
+						<div class="pull-left">
+							<div class="d-flex">
+								<h1 class="mr-2 px-3">
+									<img width="50" height="50" src="../resource/images/index/yjfb_logo.png">
+								</h1>
+								<h1 style="color: #957bda">YJFB</h1>
+							</div>
+							<p class="card-text">
+								대구광역시 북구 복현로 35 본관 320호 <br /> 
+								전화 053) 940 - 5114 (대표자 : 조원용)<br>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+						<h4 class="pt-5 text-center">
+							<i class="fa fa-facebook-official fa-lg"></i> 
+						</h4>
+					</div>
+					<div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+						<h4 class="pt-5 text-center">
+							<i class="fa fa-instagram fa-lg"></i>
+						</h4>
+					</div>
+					<div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+						<h4 class="pt-5 text-center">
+							<i class="fa fa-twitter fa-lg"></i>
+						</h4>
+					</div>
+					<div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+						<h4 class="pt-5 text-center">
+							<i class="fa fa-linkedin-square fa-lg"></i> 
+						</h4>
+					</div>
+				</div>
+		
+				<div class="mb-4"></div>
+				<div class="row" style="font-size: 10px;">
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="pull-left">
+							<p>&copy; Copyright WD-A Jo Won Yong All rights reserved</p>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="pull-right mr-4 d-flex">
+							<div>Terms of Use</div>
+							<div>Privacy Policy</div>
+							<div>Cookie Policy</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>
