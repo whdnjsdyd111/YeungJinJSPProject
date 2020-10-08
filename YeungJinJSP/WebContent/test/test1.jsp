@@ -23,12 +23,12 @@
 
 </head>
 <body>
-	<% request.setAttribute("str", "1234567890123456"); 
+	<% session.setAttribute("str", "1234567890123456"); 
 		String str = "asd";
 	%>
 	
-	<c:if test="${ fn:length(str) > 13 }">
-		${ str.substring(0, 13) }..
-	</c:if>
+	<c:forEach var="i" items="${ sessionScope }">
+		<c:out value="${ i.value }" />
+	</c:forEach>
 </body>
 </html>

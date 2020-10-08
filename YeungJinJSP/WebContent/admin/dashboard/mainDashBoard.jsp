@@ -373,17 +373,8 @@
 	</div>
 	<div class="col-md-4 col-sm-6 col-xs-12 border border-dark">
 		<h2 class="font-weight-bold p-3">접속중인 관리자</h2>
-		<div class="row">
-			<i class="fa fa-id-badge fa-5x mt-2 col ml-4"></i>
-			<i class="fa fa-id-badge fa-5x mt-2 col"></i>
-			<i class="fa fa-id-badge fa-5x mt-2 col"></i>
-			<i class="fa fa-id-badge fa-5x mt-2 col"></i>
-		</div>
-		<div class="row font-weight-bolder ml-3 mt-3">
-			<span class="col">조원용</span>
-			<span class="col">조원용</span>
-			<span class="col">조원용</span>
-			<span class="col">조원용</span>
+		<div id="visitors">
+			<jsp:include page="visitor.jsp" />
 		</div>
 	</div>
 </div>
