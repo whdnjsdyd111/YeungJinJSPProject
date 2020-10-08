@@ -2,17 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<script type="text/javascript" src="dashboard/mainDashBoard.js"></script>
 
 <sql:query var="t_users_rs" dataSource="jdbc/yjfb">
-	SELECT visit_num FROM visit WHERE visit_date = CURDATE();
+	SELECT SUM(visit_num) FROM visit;
 </sql:query>
 
 <sql:query var="t_bd_rs" dataSource="jdbc/yjfb">
-	SELECT COUNT(*) FROM board WHERE DATE(board_date) = CURDATE();
+	SELECT COUNT(*) FROM board;
 </sql:query>
 
 <sql:query var="t_cm_rs" dataSource="jdbc/yjfb">
-	SELECT COUNT(*) FROM comment WHERE DATE(com_date) = CURDATE();
+	SELECT COUNT(*) FROM comment;
 </sql:query>
 
 <sql:query var="t_rep_rs" dataSource="jdbc/yjfb">
@@ -39,6 +42,14 @@
 	SELECT mem_email, mem_nickname FROM member WHERE mem_date > '2020-08-01';
 </sql:query>
 
+<sql:query var="new_bd_rs" dataSource="jdbc/yjfb">
+	SELECT board_id, board_title, board_content FROM board;
+</sql:query>
+
+<sql:query var="new_com_rs" dataSource="jdbc/yjfb">
+	SELECT c.com_id, m.mem_nickname, c.com_content FROM member m JOIN comment c ON m.mem_id = c.com_mem_id;
+</sql:query>
+
 <div class="row">
 	<div class="col-12">
 		<h2 class="border-bottom pb-3">Dashboard<small class="ml-3 text-secondary">notice your app data</small></h2>
@@ -54,8 +65,8 @@
 				</div>
 				<div class="col-7">
 					<div class="card-body">
-						<p class="card-text">TODAY</p>
-						<h4 class="card-title">${ t_users_rs.rowsByIndex[0][0] }</h4>
+						<p class="card-text">TOTAL</p>
+						<h4 class="card-title"><fmt:formatNumber value="${ t_users_rs.rowsByIndex[0][0] }" type="number"/></h4>
 						<p class="card-text">사용자</p>
 					</div>
 				</div>
@@ -71,8 +82,8 @@
 				</div>
 				<div class="col-7">
 					<div class="card-body">
-						<p class="card-text">TODAY</p>
-						<h4 class="card-title">${ t_bd_rs.rowsByIndex[0][0] }</h4>
+						<p class="card-text">TOTAL</p>
+						<h4 class="card-title"><fmt:formatNumber value="${ t_bd_rs.rowsByIndex[0][0] }" type="number"/></h4>
 						<p class="card-text">게시판</p>
 					</div>
 				</div>
@@ -88,8 +99,8 @@
 				</div>
 				<div class="col-7">
 					<div class="card-body">
-						<p class="card-text">TODAY</p>
-						<h4 class="card-title">${ t_cm_rs.rowsByIndex[0][0] }</h4>
+						<p class="card-text">TOTAL</p>
+						<h4 class="card-title"><fmt:formatNumber value="${ t_cm_rs.rowsByIndex[0][0] }" type="number"/></h4>
 						<p class="card-text">댓글</p>
 					</div>
 				</div>
@@ -105,7 +116,7 @@
 				</div>
 				<div class="col-7">
 					<div class="card-body" style="padding-top: 35px;">
-						<h4 class="card-title">${ t_rep_rs.rowsByIndex[0][0] }</h4>
+						<h4 class="card-title"><fmt:formatNumber value="${ t_rep_rs.rowsByIndex[0][0] }" type="number"/></h4>
 						<p class="card-text">신고</p>
 					</div>
 				</div>
@@ -282,25 +293,23 @@
 	</div>
 	<div class="col-xl-4 col-md-12 mb-3 overflow-auto">
 		<div class="text-center bg-danger" style="height: 250px;">
-			<div class="table-responsive" style="word-break: keep-all;">
-				<table class="table table-striped table-danger table-borderless table-sm">
+			<div class="bg-danger">
+				<table class="table table-hover table-danger table-sm mb-0">
 					<caption class="text-warning"><i class="fa fa-user-circle fa-2x ml-2"></i> 새 게시글</caption>
 					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">이메일</th>
-							<th scope="col">닉네임</th>
+							<th scope="col">번호</th>
+							<th scope="col">제목</th>
+							<th scope="col">내용</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:set var="mem_num" value="${ 1 }" />
-					<c:forEach var="new_mem" items="${ new_mem_rs.rowsByIndex }">
-						<tr>
-							<th scope="row"><c:out value="${ mem_num }" /></th>
-							<th>${ new_mem[0] }</th>
-							<th>${ new_mem[1] }</th>
+					<c:forEach var="new_bds" items="${ new_bd_rs.rowsByIndex }">
+						<tr onclick="location.href = '#'" class="hov">
+							<th scope="row"><c:out value="${ new_bds[0] }" /></th>
+							<th>${ new_bds[1] }</th>
+							<th><span class="new_bds">${ new_bds[2] }</span></th>
 						</tr>
-						<c:set var="mem_num" value="${ mem_num + 1 }" />
 					</c:forEach>
 					</tbody>
 				</table>
@@ -309,25 +318,23 @@
 	</div>
 	<div class="col-xl-4 col-md-12 mb-3 overflow-auto">
 		<div class="text-center bg-success" style="height: 250px;">
-			<div class="table-responsive" style="word-break: keep-all;">
-				<table class="table table-striped table-success table-borderless table-sm">
+			<div class="bg-success">
+				<table class="table table-hover table-success table-sm mb-0">
 					<caption class="text-warning"><i class="fa fa-user-circle fa-2x ml-2"></i> 새 댓글</caption>
 					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">이메일</th>
+							<th scope="col">번호</th>
 							<th scope="col">닉네임</th>
+							<th scope="col">내용</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:set var="mem_num" value="${ 1 }" />
-					<c:forEach var="new_mem" items="${ new_mem_rs.rowsByIndex }">
-						<tr>
-							<th scope="row"><c:out value="${ mem_num }" /></th>
-							<th>${ new_mem[0] }</th>
-							<th>${ new_mem[1] }</th>
+					<c:forEach var="new_coms" items="${ new_com_rs.rowsByIndex }">
+						<tr onclick="location.href = '#'" class="hov">
+							<th scope="row"><c:out value="${ new_coms[0] }" /></th>
+							<th>${ new_coms[1] }</th>
+							<th><span class="new_bds">${ new_coms[2] }</span></th>
 						</tr>
-						<c:set var="mem_num" value="${ mem_num + 1 }" />
 					</c:forEach>
 					</tbody>
 				</table>

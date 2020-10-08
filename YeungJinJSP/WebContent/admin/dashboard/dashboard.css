@@ -42,3 +42,11 @@
 	padding: 30px 15px;
 	background-color: #fff;
 }
+
+.hov:hover {
+	cursor: pointer;
+}
+
+caption {
+	caption-side: top;
+}

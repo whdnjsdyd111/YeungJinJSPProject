@@ -22,8 +22,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="../resource/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="../resource/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="../resource/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../resource/js/Chart.min.js"></script>
 <script type="text/javascript" src="../resource/js/Chart.bundle.min.js"></script>
 
