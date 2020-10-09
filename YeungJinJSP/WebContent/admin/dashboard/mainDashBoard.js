@@ -7,8 +7,17 @@ $(function() {
 		 img + '">' + "이미지</span>"
 	});
 	
+	
 	$('span[data-toggle=tooltip]').tooltip({
 		html: true,
 		boundary: 'window'
 	});
+	
+	function refresh_admin() {
+		$('.visitors_tooltip').tooltip('dispose');
+		$('#visitors').load("/YeungJinFunnyBone/admin/dashboard/visitor.jsp");
+		setTimeout(refresh_admin, 5000);
+	}
+	
+	refresh_admin();
 });

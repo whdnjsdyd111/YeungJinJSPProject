@@ -58,4 +58,45 @@ public class AdminDBBean {
 		
 		return admin_id;
 	}
+	
+	public JoinMemberAdminDataBean getAdminMember(int admin_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		JoinMemberAdminDataBean memAdmin = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT a.admin_name, m.mem_email, DATE(a.admin_reg_date), m.mem_nickname, m.mem_level, a.admin_phone FROM"
+					+ " admin a JOIN member m ON a.admin_id = m.mem_id" + 
+					" WHERE a.admin_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, admin_id);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				memAdmin = new JoinMemberAdminDataBean();
+				
+				memAdmin.setAdmin_name(rs.getString(1));
+				memAdmin.setMem_email(rs.getString(2));
+				memAdmin.setAdmin_reg_date(rs.getString(3));
+				memAdmin.setMem_nickname(rs.getString(4));
+				memAdmin.setMem_level(rs.getInt(5));
+				memAdmin.setAdmin_phone(rs.getString(6));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return memAdmin;
+	}
 }

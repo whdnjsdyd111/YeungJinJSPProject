@@ -28,7 +28,9 @@
 	%>
 	
 	<c:forEach var="i" items="${ sessionScope }">
-		<c:out value="${ i.value }" />
+		<c:out value="${ str }" />
 	</c:forEach>
+	
+	
 </body>
 </html>
