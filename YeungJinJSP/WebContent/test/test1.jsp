@@ -15,22 +15,13 @@
 <script type="text/javascript" src="../resource/js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/YeungJinFunnyBone/resource/css/indexInit.css">
-
-<style>
-
-</style>
-
 </head>
 <body>
-	<% session.setAttribute("str", "1234567890123456"); 
-		String str = "asd";
-	%>
 	
-	<c:forEach var="i" items="${ sessionScope }">
-		<c:out value="${ str }" />
-	</c:forEach>
-	
-	
+	<form action="test2.jsp">
+		로그인 : <input type="text" name="id"><br>
+		패스워드 : <input type="password" name="passwd">
+		<input type="submit" value="로그인 하기">
+	</form>
 </body>
 </html>

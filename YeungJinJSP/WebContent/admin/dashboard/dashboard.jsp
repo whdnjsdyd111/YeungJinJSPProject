@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:if test="${ empty sessionScope.YJFBID_ADMIN_SES }">
+
 	<script>
 		window.location.href = "loginForm.do";
 	</script>
@@ -32,12 +33,18 @@
 </head>
 <body>
 	<div class="container-fluid px-0">
-		<nav class="navbar navbar-expand-lg navbar-dark flex-md-row bd-navbar header">
+		<nav class="navbar navbar-expand-lg navbar-dark bd-navbar header">
 
 			<a class="navbar-brand" href="dashboard.do"> <img width="40"
 				height="40" class="mr-2" src="../resource/images/index/yjfb_logo.png">
 				YJFB
 			</a>
+				
+			<ul class="nav col nav d-flex flex-row-reverse">
+				<li class="nav-item">
+					<a class="nav-link btn btn-outline-light" href="logout.do">로그아웃</a>
+				</li>
+			</ul>
 			
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target=".sidebar"

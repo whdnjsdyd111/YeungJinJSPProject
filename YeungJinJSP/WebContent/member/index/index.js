@@ -41,5 +41,4 @@ $(function() {
 	$('.dropdown div, .dropdown button').click(function(e) {
     	e.stopPropagation();
  	});
-
 });

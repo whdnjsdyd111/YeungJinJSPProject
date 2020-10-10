@@ -372,7 +372,7 @@
 		</div>
 	</div>
 	<div class="col-md-4 col-sm-6 col-xs-12 border border-dark">
-		<h2 class="font-weight-bold p-3">접속중인 관리자</h2>
+		<h3 class="font-weight-bold p-3">접속중인 관리자</h3>
 		<div id="visitors">
 			<jsp:include page="visitor.jsp" />
 		</div>

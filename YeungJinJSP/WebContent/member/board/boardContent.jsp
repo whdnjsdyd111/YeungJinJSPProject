@@ -240,7 +240,7 @@
 	</div>
 	
 	<div class="border border-muted" id="comments_div">
-		<jsp:include page="/member/board/comment.jsp" />	
+		<jsp:include page="/member/board/comment.jsp" />
 	</div>
 </div>
 <div class="modal" tabindex="-1" id="reportModal">
