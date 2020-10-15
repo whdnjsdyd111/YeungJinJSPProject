@@ -59,7 +59,7 @@
 	<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
 		<div class="row no-gutters">
 			<div class="card w-100 flex-row text-center" style="height: 150px;">
-				<a href="#" class="stretched-link"></a>
+				<a href="memberManagement.do" class="stretched-link"></a>
 				<div class="col-5" style="background-color: #5cb85c">
 					<i class="fa fa-calendar-check-o fa-5x ml-1" style="padding-top: 35px;"></i>
 				</div>
@@ -76,7 +76,7 @@
 	<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
 		<div class="row no-gutters">
 			<div class="card w-100 flex-row text-center" style="height: 150px;">
-				<a href="#" class="stretched-link"></a>
+				<a href="contentsManagement.do" class="stretched-link"></a>
 				<div class="col-5" style="background-color: #4CB1CF">
 					<i class="fa fa-list-alt fa-5x ml-1" style="padding-top: 35px;"></i>
 				</div>
@@ -93,7 +93,7 @@
 	<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
 		<div class="row no-gutters">
 			<div class="card w-100 flex-row text-center" style="height: 150px;">
-				<a href="#" class="stretched-link"></a>
+				<a href="contentsManagement.do" class="stretched-link"></a>
 				<div class="col-5" style="background-color: #f0ad4e">
 					<i class="fa fa-comment-o fa-5x ml-1" style="padding-top: 35px;"></i>
 				</div>
@@ -110,7 +110,7 @@
 	<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
 		<div class="row no-gutters">
 			<div class="card w-100 flex-row text-center" style="height: 150px;">
-				<a href="#" class="stretched-link"></a>
+				<a href="report.do" class="stretched-link"></a>
 				<div class="col-5" style="background-color: #F0433D">
 					<i class="fa fa-fire fa-5x ml-1" style="padding-top: 35px;"></i>
 				</div>
@@ -343,7 +343,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-4 col-sm-6 col-xs-12">
+	<div class="col-md-4 col-sm-6 col-xs-12 mb-3">
 		<div class="bg-dark d-flex flex-column text-center text-light">
 			<i class="fa fa-id-badge fa-5x mt-2"></i>
 			<c:forEach var="my_info" items="${ applicationScope }">
@@ -371,10 +371,13 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div class="col-md-4 col-sm-6 col-xs-12 border border-dark">
+	<div class="col-md-4 col-sm-6 col-xs-12 mb-3">
 		<h3 class="font-weight-bold p-3">접속중인 관리자</h3>
 		<div id="visitors">
 			<jsp:include page="visitor.jsp" />
 		</div>
+	</div>
+	<div id="memo_div" class="col-xl-4 col-xs-12 mb-3">
+		<jsp:include page="memo.jsp" />
 	</div>
 </div>

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:if test="${ empty sessionScope.YJFBID_ADMIN_SES }">
-
 	<script>
 		window.location.href = "loginForm.do";
 	</script>
@@ -62,33 +61,33 @@
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="statistics.do">
 						<i class="fa fa-line-chart mr-2"></i>통계
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="memberManagement.do">
 						<i class="fa fa-users mr-2"></i>회원 관리
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="contentsManagement.do">
 						<i class="fa fa-comments mr-2"></i>컨텐츠 관리
 					</a>
 					
 				</li>
 				<li>
-					<a href="#">
+					<a href="chattingRoom.do">
 						<i class="fa fa-commenting mr-2"></i>채팅 룸
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="feedback.do">
 						<i class="fa fa-bullhorn mr-2"></i>피드백
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="report.do">
 						<i class="fa fa-fire mr-2"></i> 신고보기
 					</a>
 				</li>
@@ -96,7 +95,7 @@
 		</div>
 		
 		<div class="dashboard-content bg-light" style="min-height: 1200px">
-			<jsp:include page="mainDashBoard.jsp" />
+			<jsp:include page="${ cont }" />
 		</div>
 	</div>
 	<div>

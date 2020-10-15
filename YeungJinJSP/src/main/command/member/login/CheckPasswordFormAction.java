@@ -12,6 +12,9 @@ public class CheckPasswordFormAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
 		request.setCharacterEncoding("utf-8");
+		if(request.getSession().getAttribute("YJFBID_SES") == null)
+			return "/member/login/checkPasswordForm.jsp";
+		
 		int mem_id = (Integer) request.getSession().getAttribute("YJFBID_SES");
 		
 		MemberDataBean member = MemberDBBean.getInstance().getMember(mem_id);

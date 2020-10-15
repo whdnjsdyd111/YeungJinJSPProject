@@ -31,7 +31,7 @@ if (document.location.protocol == 'http:') {
 
     document.location.href = document.location.href.replace('http:', 'https:');
 
-}	// http 접속을 https로 바꿔주기
+}	// 시큐리티 사용 시 http를 https 로 바꿔주기
 */
 </script>
 

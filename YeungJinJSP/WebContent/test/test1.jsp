@@ -18,10 +18,8 @@
 </head>
 <body>
 	
-	<form action="test2.jsp">
-		로그인 : <input type="text" name="id"><br>
-		패스워드 : <input type="password" name="passwd">
-		<input type="submit" value="로그인 하기">
+	<form>
+		<input type="submit" formaction="test2.jsp" >
 	</form>
 </body>
 </html>

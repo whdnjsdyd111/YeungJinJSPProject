@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:if test="${ empty sessionScope.YJFBID_SES }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		window.location.href = "loginForm.do";
+	</script>
+</c:if>
     
 <script type="text/javascript" src="member/login/checkPassword.js"></script>
-    
+
 <div class="container">
 	<form autocomplete="off" class="mx-auto my-5">
 		<h1 class="text-center text-dark font-weight-bold my-3">계정 설정</h1>

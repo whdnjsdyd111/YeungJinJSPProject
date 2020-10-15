@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.command.CommandAction;
 
-public class DashBoardAction implements CommandAction {
+public class StatisticsAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		
 		String[] date = { "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" };
 		Calendar cal = Calendar.getInstance();
 		
@@ -26,6 +25,6 @@ public class DashBoardAction implements CommandAction {
 		}
 
 		request.setAttribute("dates", dates);
-		return "/admin/dashboard/mainDashBoard.jsp";
+		return "/admin/dashboard/statistics.jsp";
 	}
 }

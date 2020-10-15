@@ -113,12 +113,12 @@ public class Controller extends HttpServlet {
 		
 		try {
 			String command = request.getRequestURI();
-			
+
 			if(command.indexOf(request.getContextPath()) == 0)
 					command = command.substring(request.getContextPath().length());
 
 			com = (CommandAction) commandMap.get(command);
-			
+
 			if(com == null) {
 				dispatcher = request.getRequestDispatcher("/error/404code.jsp");
 				dispatcher.forward(request, response);
@@ -131,22 +131,20 @@ public class Controller extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if(view.equals("/error/emailFail.jsp") || view.equals("/error/DBFail.jsp")) {
+		if(view.equals("/error/emailFail.jsp") || view.equals("/error/DBFail.jsp") || view.contains("/admin/login/")) {
 			dispatcher = request.getRequestDispatcher(view);
 			dispatcher.forward(request, response);
 			return;
 		}
-		
-		if(view.contains("/admin/")) {
-			dispatcher = request.getRequestDispatcher(view);
-			dispatcher.forward(request, response);
-			return;
-		}
-		
 		
 		request.setAttribute("cont", view);
-		
-		dispatcher = request.getRequestDispatcher("/index.jsp");
-		dispatcher.forward(request, response);
+
+		if(view.contains("/admin/")) {
+			dispatcher = request.getRequestDispatcher("/admin/dashboard/index.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			dispatcher = request.getRequestDispatcher("/index.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 }
