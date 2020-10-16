@@ -8,9 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%!
-		int num = 0;
-	%>
-	<%= num %>
+	<script type="text/javascript">
+		var data = [{ 10 : '십'}];
+		
+		alert(data[0]['00']);
+		
+	</script>
 </body>
 </html>

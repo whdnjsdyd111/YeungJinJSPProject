@@ -23,11 +23,11 @@
 </sql:query>
 
 <sql:query var="chart_visit_rs" dataSource="jdbc/yjfb">
-	SELECT visit_num FROM visit WHERE visit_date >= DATE_SUB(CURDATE(), interval 7 day);
+	SELECT visit_num FROM visit WHERE visit_date >= DATE_SUB(CURDATE(), interval 6 day);
 </sql:query>
 
 <sql:query var="chart_page_view_rs" dataSource="jdbc/yjfb">
-	SELECT view_num FROM page_view WHERE view_date >= DATE_SUB(CURDATE(), interval 7 day);
+	SELECT view_num FROM page_view WHERE view_date >= DATE_SUB(CURDATE(), interval 6 day);
 </sql:query>
 
 <sql:query var="chart_boards_rs" dataSource="jdbc/yjfb">
@@ -164,13 +164,13 @@
 			datasets: [{
 				label: '방문자 수',
 				fill: false,
-				backgroundColor: ['rgba(255, 99, 132)'],
-				borderColor: ['rgba(255, 99, 132)'],
+				backgroundColor: 'rgba(255, 99, 132)',
+				borderColor: 'rgba(255, 99, 132)',
 				data: visits
 			}, {
 				label: '페이지 뷰',
-				backgroundColor: ['rgba(54, 162, 235)'],
-				borderColor: ['rgba(54, 162, 235)'],
+				backgroundColor: 'rgba(54, 162, 235)',
+				borderColor: 'rgba(54, 162, 235)',
 				fill: false,
 				data: page_views
 			}]
@@ -182,7 +182,7 @@
 			stacked: false,
 			title: {
 				display: true,
-				text: '방문자 현황'
+				text: '최근 방문자 현황'
 			},
 			scales: {
 				yAxes: [{
@@ -213,26 +213,19 @@
 		var orange_trans = [];
 		var orange = [];
 		
-		for (let i = 0; i < 7; i++) {
-			purple_trans.push('rgba(255, 159, 64, 0.2)');
-			purple.push('rgba(255, 159, 64, 1)');
-			orange_trans.push('rgba(153, 102, 255, 0.2)');
-			orange.push('rgba(153, 102, 255, 1)');
-		}
-		
 		var barChartData = {
 			labels: dates,
 	        datasets: [{
 	            label: '게시판',
 	            data: boards,
-	            backgroundColor: purple_trans,
-	            borderColor: purple,
+	            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+	            borderColor: 'rgba(255, 159, 64, 1)',
 	            borderWidth: 1
 	        }, {
 	            label: '댓글',
 	            data: comments,
-	            backgroundColor: orange_trans,
-	            borderColor: orange,
+	            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+	            borderColor: 'rgba(153, 102, 255, 1)',
 	            borderWidth: 1
 	        }],
 		}
@@ -242,7 +235,7 @@
 		    data: barChartData,
 			title: {
 				display: true,
-				text: '콘텐츠 현황'
+				text: '최근 콘텐츠 현황'
 			},
 		    options: {
 		        scales: {
