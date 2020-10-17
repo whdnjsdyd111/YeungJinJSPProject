@@ -33,6 +33,10 @@ if (document.location.protocol == 'http:') {
 
 }	// 시큐리티 사용 시 http를 https 로 바꿔주기
 */
+
+var bad_word = ['시발', '씨발', '씨빨', '개새끼', '병신', '병씬', '뼝신', '뼝씬', '좆', '지랄', '성기', '보지', '어미', '애비',
+	'fuck', 'dick'];
+
 </script>
 
 </head>

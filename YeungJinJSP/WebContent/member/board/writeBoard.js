@@ -160,6 +160,11 @@ function upload() {
 }
 
 function insert_board() {
+	for(let i = 0; i < bad_word.length; i++) {
+		$('#board_title').val($('#board_title').val().replace(bad_word[i], '**'));
+		$('#board_content').text($('#board_content').text().replace(bad_word[i], '**'));
+	}
+	
 	var query = {
 		title: $('#board_title').val(),
 		content: $('#board_content').html(),

@@ -83,6 +83,14 @@ $(function() {
 			return;
 		}
 		
+		for(let i = 0; i < bad_word.length; i++) {
+			if($(this).val().indexOf(bad_word[i]) >= 0) {
+				$(this).val($(this).val().replace(bad_word[i], ''));
+				alert("비속어는 사용하실 수 없습니다.");
+				return;
+			}
+		}
+		
 		var spe = nick.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 		
 		if(nick.length < 2|| nick.length > 10) {

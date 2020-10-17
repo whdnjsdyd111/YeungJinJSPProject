@@ -119,6 +119,10 @@ $(function() {
 					
 					var notice_content = $('#nestComCont').html().replace(span_nickname.replace('<br>', ""), "").replace(/(<([^>]+)>)/ig,"");
 					
+					for(let i = 0; i < bad_word.length; i++) {
+						$('#nestComCont').text($('#nestComCont').text().replace(bad_word[i], '**'));
+					}
+					
 					$.ajax({
 						type: "post",
 						url: "nestCommentInsert.do",
@@ -598,6 +602,11 @@ function comment_comple() {
 	var loc = href.indexOf(str);
 	var len = str.length;
 	var get = href.substr(loc + len, href.length);
+
+	
+	for(let i = 0; i < bad_word.length; i++) {
+		$('#comment_content').text($('#comment_content').text().replace(bad_word[i], '**'));
+	}
 
 	$.ajax({
 		type: "POST",
