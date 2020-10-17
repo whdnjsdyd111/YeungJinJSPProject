@@ -101,14 +101,14 @@
 				datasets: [{
 					label: "방문자 일별",
 					backgroundColor: 'rgba(255, 99, 132)',
-					borderColor: 'rgba(255, 99, 132)',
+					borderColor: 'rgba(255, 99, 132, 0.4)',
 					lineTension: 0,
 					fill: false,
 					data: visit_num
 				}, {
 					label: "페이지뷰 일별",
 					backgroundColor: 'rgba(54, 162, 235)',
-					borderColor: 'rgba(54, 162, 235)',
+					borderColor: 'rgba(54, 162, 235, 0.4)',
 					lineTension: 0,
 					fill: false,
 					data: page_view
@@ -161,15 +161,15 @@
 				labels: hour,
 				datasets: [{
 					label: "게시판",
-					backgroundColor: 'rgba(255, 99, 132)',
-					borderColor: 'rgba(255, 99, 132)',
+					backgroundColor: 'rgba(255, 159, 64)',
+					borderColor: 'rgba(255, 159, 64, 0.4)',
 					lineTension: 0,
 					fill: false,
 					data: board
 				}, {
 					label: "댓글",
-					backgroundColor: 'rgba(54, 162, 235)',
-					borderColor: 'rgba(54, 162, 235)',
+					backgroundColor: 'rgba(153, 102, 255)',
+					borderColor: 'rgba(153, 102, 255, 0.4)',
 					lineTension: 0,
 					fill: false,
 					data: comment
