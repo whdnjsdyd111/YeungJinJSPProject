@@ -94,7 +94,7 @@
 			</ul>
 		</div>
 		
-		<div class="dashboard-content bg-light" style="min-height: 1200px">
+		<div class="dashboard-content bg-light">
 			<jsp:include page="${ cont }" />
 		</div>
 	</div>

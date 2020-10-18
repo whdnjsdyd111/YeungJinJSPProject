@@ -50,3 +50,8 @@
 caption {
 	caption-side: top;
 }
+
+.chat_message {
+	display: inline-block;
+	max-width: 250px;
+}

@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import org.apache.commons.collections4.map.HashedMap;
 
 public class AdminDBBean {
 	private static AdminDBBean instance = new AdminDBBean();
@@ -98,5 +101,39 @@ public class AdminDBBean {
 		}
 		
 		return memAdmin;
+	}
+	
+	public Map<Integer, String> getAdminMap() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<Integer, String> map = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT admin_id, admin_name FROM admin";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				map = new HashedMap<>();
+				
+				do {
+					map.put(rs.getInt(1), rs.getString(2));
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return map;
 	}
 }

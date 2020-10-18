@@ -22,11 +22,11 @@ public class CommentDBBean {
 		return instance;
 	}
 	
-		private Connection getConnection() throws Exception {
-			Context initContext = new InitialContext();
-			DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/yjfb"); 
-			return ds.getConnection();
-		}
+	private Connection getConnection() throws Exception {
+		Context initContext = new InitialContext();
+		DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/yjfb"); 
+		return ds.getConnection();
+	}
 	
 	public Map<JoinMemberCommentDataBean, List<NestCommentDataBean>> getCommentList(int board_id) {
 		Connection conn = null;
