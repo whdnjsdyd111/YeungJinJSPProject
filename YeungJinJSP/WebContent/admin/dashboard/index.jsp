@@ -82,7 +82,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="feedback.do">
+					<a href="feedback.do?sort=nonProcessed">
 						<i class="fa fa-bullhorn mr-2"></i>피드백
 					</a>
 				</li>

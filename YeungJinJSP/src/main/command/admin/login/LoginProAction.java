@@ -12,12 +12,9 @@ public class LoginProAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
 		request.setCharacterEncoding("utf-8");
-		String admin_email = request.getParameter("email");
-		String admin_passwd = request.getParameter("pw");
 		
-		int admin_id = AdminDBBean.getInstance().getAdminId(admin_email, admin_passwd);
-
-		request.setAttribute("admin_id", new Integer(admin_id));
+		request.setAttribute("admin_id", new Integer(AdminDBBean.getInstance().getAdminId(request.getParameter("email"), 
+				request.getParameter("pw"))));
 		return "/admin/login/loginPro.jsp";
 	}
 }

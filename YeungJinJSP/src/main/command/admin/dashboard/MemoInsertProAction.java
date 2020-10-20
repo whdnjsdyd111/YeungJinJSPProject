@@ -11,12 +11,9 @@ public class MemoInsertProAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
 		request.setCharacterEncoding("utf-8");
-		String content = request.getParameter("content");
-		int admin_id = (Integer) request.getSession().getAttribute("YJFBID_ADMIN_SES");
-
-		int check = MemoDBBean.getInstance().memoInsert(admin_id, content);
-		
-		request.setAttribute("check", new Integer(check));
+		request.setAttribute("check", new Integer(MemoDBBean.getInstance().memoInsert(
+				(Integer) request.getSession().getAttribute("YJFBID_ADMIN_SES"), 
+				request.getParameter("content"))));
 		return "/admin/dashboard/memoInsertPro.jsp";
 	}
 }

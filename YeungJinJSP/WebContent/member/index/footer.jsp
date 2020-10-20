@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript" src="member/index/feedback.js"></script>
 <footer class="container-fluid mt-5 footer">
 	<div class="card mx-5">
 		<div class="row mb-4 ">
@@ -41,7 +42,7 @@
 			</div>
 			<div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
 				<h4 class="footer_heading pt-5 text-center">
-					<a class="badge badge-dark" href="#">문의/피드백</a>
+					<button class="badge badge-dark border-0" id="feedback">문의/피드백</button>
 				</h4>
 			</div>
 		</div>
@@ -63,3 +64,27 @@
 		</div>
 	</div>
 </footer>
+<div class="modal fade" id="feedback_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<h4 class="modal-title mb-2">피드백</h4>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">@</span>
+					</div>
+					<input type="text" class="form-control" placeholder="이메일 입력란" id="feed_email">
+				</div><br>
+				<small id="check_email" class="form-text text-muted check_small mb-2"></small>
+			</div>
+			<div class="modal-body">
+				<textarea class="w-100 rounded" style="resize: none; height: 300px;" id="feed_content"></textarea>
+				<small id="check_content" class="form-text text-muted check_small mb-2"></small>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary" id="feed_submit">제출하기</button>
+			</div>
+		</div>
+	</div>
+</div>
