@@ -20,5 +20,12 @@ $(function() {
 		window.location.href = loc + "&sort=nonRecommend";
 	});
 	
-	
+	$('.watch_content').click(function() {
+		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsModal.jsp?board_id=" + $(this).next().val());
+		$('.modal').modal();
+	});
 });
+
+function delete_board(btn) {
+	alert($(btn).prev().val());
+}

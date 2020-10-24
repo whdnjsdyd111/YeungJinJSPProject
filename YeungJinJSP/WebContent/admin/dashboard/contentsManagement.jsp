@@ -30,14 +30,14 @@
 	
 	<c:if test="${ !empty board }">
 		<c:forEach var="bd" items="${ board }">
-			<div class="row d-flex justify-content-around my-3">
+			<div class="row d-flex justify-content-around my-3" id="${ bd.board_id }">
 				<div class="col-lg-6 col-sx-4 d-flex justify-content-around mb-2 mt-1">
 					<a class="btn btn-outline-secondary col-6 mr-2" href="#${ bd.mem_id }">${ bd.mem_nickname }</a>
 					<span class="border col-6">${ bd.board_title }</span>
 				</div>
 				<button class="btn btn-outline-dark watch_content">내용 보기</button>
 				<input type="hidden" value="${ bd.board_id }" />
-				<button class="btn btn-warning delete">지우기</button>
+				<button class="btn btn-warning" onclick="delete_board(this)">지우기</button>
 			</div>
 		</c:forEach>
 	</c:if>
