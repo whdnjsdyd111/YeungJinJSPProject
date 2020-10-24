@@ -85,6 +85,48 @@ public class BoardDBBean {
 		return check;
 	}
 	
+	public List<JoinBoardContentsBean> getJoinBdMemKindOrderByReco() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardContentsBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT m.mem_id, m.mem_nickname, b.board_id, b.board_title FROM member m JOIN board b "
+					+ "ON m.mem_id = b.board_userid ORDER BY b.board_reco DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardContentsBean>();
+				
+				do {
+					JoinBoardContentsBean board = new JoinBoardContentsBean();
+					
+					board.setMem_id(rs.getInt(1));
+					board.setMem_nickname(rs.getString(2));
+					board.setBoard_id(rs.getInt(3));
+					board.setBoard_title(rs.getString(4));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
 	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindOrderByReco(int page) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -200,6 +242,48 @@ public class BoardDBBean {
 		return boardList;
 	}
 	
+	public List<JoinBoardContentsBean> getJoinBdMemKindOrderByTime() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardContentsBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT m.mem_id, m.mem_nickname, b.board_id, b.board_title FROM member m JOIN board b "
+					+ "ON m.mem_id = b.board_userid ORDER BY b.board_date DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardContentsBean>();
+				
+				do {
+					JoinBoardContentsBean board = new JoinBoardContentsBean();
+					
+					board.setMem_id(rs.getInt(1));
+					board.setMem_nickname(rs.getString(2));
+					board.setBoard_id(rs.getInt(3));
+					board.setBoard_title(rs.getString(4));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
 	public List<JoinBoardMemberKindDataBean> getJoinBdMemKindOrderByTime(int page) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -296,6 +380,48 @@ public class BoardDBBean {
 					board.setMem_level(rs.getInt(7));
 					board.setKind_name(rs.getString(8));
 					board.setKind_id(rs.getInt(9));
+					
+					boardList.add(board);
+				} while(rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return boardList;
+	}
+	
+	public List<JoinBoardContentsBean> getJoinBdMemKindOrderByNoReco() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<JoinBoardContentsBean> boardList = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT m.mem_id, m.mem_nickname, b.board_id, b.board_title FROM member m JOIN board b "
+					+ "ON m.mem_id = b.board_userid ORDER BY b.board_nonreco DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardList = new ArrayList<JoinBoardContentsBean>();
+				
+				do {
+					JoinBoardContentsBean board = new JoinBoardContentsBean();
+					
+					board.setMem_id(rs.getInt(1));
+					board.setMem_nickname(rs.getString(2));
+					board.setBoard_id(rs.getInt(3));
+					board.setBoard_title(rs.getString(4));
 					
 					boardList.add(board);
 				} while(rs.next());
