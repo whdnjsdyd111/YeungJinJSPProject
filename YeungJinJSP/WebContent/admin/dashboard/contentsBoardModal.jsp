@@ -39,7 +39,8 @@
 							<c:set var="com" value="${ entry.key }" />
 							<div class="row mb-2 pr-2">
 								<div class="col-3">
-									<a class="btn btn-outline-danger" href="#">${ com.com_mem_nickname }</a>
+									<a class="btn btn-outline-danger" 
+										href="memberManagement.do?sort=new#${ com.com_mem_id }">${ com.com_mem_nickname }</a>
 								</div>
 								<div class="col-9 border border-primary pt-2">
 									<span class="stretched-link com_id" role="button"></span>
@@ -54,7 +55,8 @@
 										<i class="fa fa-caret-right mt-2"></i>
 									</div>
 									<div class="col-3">
-										<a class="btn btn-outline-danger">${ nestcom.mem_nickname }</a>
+										<a class="btn btn-outline-danger" 
+											href="memberManagement.do?sort=new#${ nestcom.mem_id }">${ nestcom.mem_nickname }</a>
 									</div>
 									<div class="col-8 border border-primary pt-2">
 										<span class="stretched-link neCom_id" role="button"></span>

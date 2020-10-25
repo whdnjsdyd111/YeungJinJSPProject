@@ -76,7 +76,7 @@
 	<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
 		<div class="row no-gutters">
 			<div class="card w-100 flex-row text-center" style="height: 150px;">
-				<a href="contentsManagement.do" class="stretched-link"></a>
+				<a href="contentsManagement.do?search=board&sort=recent" class="stretched-link"></a>
 				<div class="col-5" style="background-color: #4CB1CF">
 					<i class="fa fa-list-alt fa-5x ml-1" style="padding-top: 35px;"></i>
 				</div>
@@ -93,7 +93,7 @@
 	<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
 		<div class="row no-gutters">
 			<div class="card w-100 flex-row text-center" style="height: 150px;">
-				<a href="contentsManagement.do" class="stretched-link"></a>
+				<a href="contentsManagement.do?search=board&sort=recent" class="stretched-link"></a>
 				<div class="col-5" style="background-color: #f0ad4e">
 					<i class="fa fa-comment-o fa-5x ml-1" style="padding-top: 35px;"></i>
 				</div>
@@ -298,7 +298,7 @@
 					</thead>
 					<tbody>
 					<c:forEach var="new_bds" items="${ new_bd_rs.rowsByIndex }">
-						<tr onclick="location.href = '#'" class="hov">
+						<tr onclick="location.href = 'contentsManagement.do?search=board&sort=recent#${ new_bds[0] }'" class="hov">
 							<th scope="row"><c:out value="${ new_bds[0] }" /></th>
 							<th>${ new_bds[1] }</th>
 							<th><span class="new_bds">${ new_bds[2] }</span></th>
@@ -323,7 +323,7 @@
 					</thead>
 					<tbody>
 					<c:forEach var="new_coms" items="${ new_com_rs.rowsByIndex }">
-						<tr onclick="location.href = '#'" class="hov">
+						<tr onclick="location.href = 'contentsManagement.do?search=comment&sort=recent#${ new_coms[0] }'" class="hov">
 							<th scope="row"><c:out value="${ new_coms[0] }" /></th>
 							<th>${ new_coms[1] }</th>
 							<th><span class="new_bds">${ new_coms[2] }</span></th>

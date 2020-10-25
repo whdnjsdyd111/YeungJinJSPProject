@@ -12,7 +12,8 @@
 	<div class="modal-content">
 		<div class="modal-header flex-column">
 			<div class="col d-flex justify-content-between">
-				<a class="modal-title font-weight-bold btn btn-outline-dark" href="#" style="font-size: 2rem">${ neCom.com_mem_nickname }</a>
+				<a class="modal-title font-weight-bold btn btn-outline-dark" 
+					href="memberManagement.do?sort=new#${ neCom.com_mem_id }" style="font-size: 2rem">${ neCom.com_mem_nickname }</a>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>

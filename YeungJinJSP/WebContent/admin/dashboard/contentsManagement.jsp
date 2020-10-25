@@ -33,7 +33,7 @@
 			<div class="row d-flex justify-content-around my-3" id="${ bd.board_id }">
 				<div class="col-lg-6 col-sx-4 d-flex justify-content-around mb-2 mt-1">
 					<div class="col">
-						<a class="btn btn-outline-secondary mr-2" href="#${ bd.mem_id }">${ bd.mem_nickname }</a>
+						<a class="btn btn-outline-secondary mr-2" href="memberManagement.do?sort=new#${ bd.mem_id }">${ bd.mem_nickname }</a>
 					</div>
 					<span class="border col-6">${ bd.board_title }</span>
 				</div>
@@ -49,7 +49,7 @@
 			<div class="row d-flex justify-content-around my-3" id="${ com.com_id }">
 				<div class="col-lg-6 col-sx-4 d-flex justify-content-around mb-2 mt-1">
 					<div class="col">
-						<a class="btn btn-outline-secondary mr-2" href="#${ com.com_id }">${ com.mem_nickname }</a>
+						<a class="btn btn-outline-secondary mr-2" href="memberManagement.do?sort=new#${ com.mem_id }">${ com.mem_nickname }</a>
 					</div>
 					<span class="border col com_content">${ com.com_content }</span>
 				</div>

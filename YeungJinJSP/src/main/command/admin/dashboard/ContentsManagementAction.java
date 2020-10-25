@@ -20,31 +20,25 @@ public class ContentsManagementAction implements CommandAction {
 		}
 		
 		if (search.equals("board")) {
-			if (sort.equals("recent")) {
+			if (sort.equals("recent"))
 				request.setAttribute("board", BoardDBBean.getInstance().getJoinBdMemKindOrderByTime());
-			} else if (sort.equals("recommend")) {
+			else if (sort.equals("recommend"))
 				request.setAttribute("board", BoardDBBean.getInstance().getJoinBdMemKindOrderByReco());
-			} else if (sort.equals("nonRecommend")) {
+			else if (sort.equals("nonRecommend"))
 				request.setAttribute("board", BoardDBBean.getInstance().getJoinBdMemKindOrderByNoReco());
-			} else {
+			else
 				request.setAttribute("none_param", new Integer(1));
-				return "/admin/dashboard/contentsManagement.jsp";
-			}
 		} else if (search.equals("comment")) {
-			if (sort.equals("recent")) {
+			if (sort.equals("recent"))
 				request.setAttribute("comment", CommentDBBean.getInstance().getCommentOrderByTime());
-			} else if (sort.equals("recommend")) {
+			else if (sort.equals("recommend"))
 				request.setAttribute("comment", CommentDBBean.getInstance().getCommentOrderByReco());
-			} else if (sort.equals("nonRecommend")) {
+			else if (sort.equals("nonRecommend"))
 				request.setAttribute("comment", CommentDBBean.getInstance().getCommentOrderByNonReco());
-			} else {
+			else
 				request.setAttribute("none_param", new Integer(1));
-				return "/admin/dashboard/contentsManagement.jsp";
-			}
-		} else {
+		} else
 			request.setAttribute("none_param", new Integer(1));
-			return "/admin/dashboard/contentsManagement.jsp";
-		}
 
 		return "/admin/dashboard/contentsManagement.jsp";
 	}

@@ -45,7 +45,8 @@
 				</button>
 			</div>
 			<div class="modal-body bg-danger text-white">
-				사용자(<label id="dialog_email"></label>)님의 계정은 아직 인증이 완료되지 않았습니다.
+				사용자(<label id="dialog_email"></label>)님의 계정은 아직 인증이 완료되지 않았습니다.<br>
+				관리자가 경고 차원에서 이메일 재요청을 하는 경우도 있으니 조심하시길 바랍니다.
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

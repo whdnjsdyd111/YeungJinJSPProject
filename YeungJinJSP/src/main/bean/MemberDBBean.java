@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -556,5 +558,140 @@ public class MemberDBBean {
 		}
 		
 		return check;
+	}
+	
+	public List<MemberDataBean> getMemberOrderByTimeDesc(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<MemberDataBean> list = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT * FROM member ORDER BY mem_date DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				
+				do {
+					MemberDataBean mem = new MemberDataBean();
+					
+					mem.setMem_id(rs.getInt(1));
+					mem.setMem_email(rs.getString(2));
+					mem.setMem_passwd(rs.getString(3));
+					mem.setMem_nickname(rs.getString(4));
+					mem.setMem_auth(rs.getByte(5));
+					mem.setMem_ex(rs.getInt(6));
+					mem.setMem_level(rs.getInt(7));
+					mem.setMem_date(rs.getTimestamp(8));
+					
+					list.add(mem);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return list;
+	}
+	
+	public List<MemberDataBean> getMemberOrderByTimeAsc(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<MemberDataBean> list = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT * FROM member ORDER BY mem_date ASC";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				
+				do {
+					MemberDataBean mem = new MemberDataBean();
+					
+					mem.setMem_id(rs.getInt(1));
+					mem.setMem_email(rs.getString(2));
+					mem.setMem_passwd(rs.getString(3));
+					mem.setMem_nickname(rs.getString(4));
+					mem.setMem_auth(rs.getByte(5));
+					mem.setMem_ex(rs.getInt(6));
+					mem.setMem_level(rs.getInt(7));
+					mem.setMem_date(rs.getTimestamp(8));
+					
+					list.add(mem);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return list;
+	}
+	
+	public List<MemberDataBean> getMemberOrderByLevel(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<MemberDataBean> list = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT * FROM member ORDER BY mem_level DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				
+				do {
+					MemberDataBean mem = new MemberDataBean();
+					
+					mem.setMem_id(rs.getInt(1));
+					mem.setMem_email(rs.getString(2));
+					mem.setMem_passwd(rs.getString(3));
+					mem.setMem_nickname(rs.getString(4));
+					mem.setMem_auth(rs.getByte(5));
+					mem.setMem_ex(rs.getInt(6));
+					mem.setMem_level(rs.getInt(7));
+					mem.setMem_date(rs.getTimestamp(8));
+					
+					list.add(mem);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return list;
 	}
 }
