@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,6 +125,49 @@ public class CommentDBBean {
 		}
 		
 		return commentMap;
+	}
+	
+	public JoinMemberCommentDataBean getCom(int com_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		JoinMemberCommentDataBean joinMemCom = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT c.com_id, m.mem_id, m.mem_nickname, m.mem_level, c.com_bd_id, c.com_content, c.com_reco, c.com_date " + 
+					"FROM member m JOIN comment c ON m.mem_id = c.com_mem_id " + 
+					"WHERE c.com_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, com_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				joinMemCom = new JoinMemberCommentDataBean();
+				
+				joinMemCom.setCom_id(rs.getInt(1));
+				joinMemCom.setCom_mem_id(rs.getInt(2));
+				joinMemCom.setCom_mem_nickname(rs.getString(3));
+				joinMemCom.setCom_mem_level(rs.getInt(4));
+				joinMemCom.setCom_db_id(rs.getInt(5));
+				joinMemCom.setCom_content(rs.getString(6));
+				joinMemCom.setCom_reco(rs.getInt(7));
+				joinMemCom.setCom_date(rs.getTimestamp(8));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return joinMemCom;
 	}
 	
 	public int commentInsert(int mem_id, int board_id, String content) {

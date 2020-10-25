@@ -21,8 +21,7 @@ $(function() {
 	});
 	
 	$('.watch_content').click(function() {
-		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsModal.jsp?board_id=" + $(this).next().val());
-		$('.modal').modal();
+		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsBoardModal.jsp?board_id=" + $(this).next().val());
 	});
 });
 
