@@ -74,15 +74,15 @@ public class NestCommentDBBean {
 		return nestList;
 	}
 	
-	public JoinMemberCommentDataBean getNestCom(int neCom_id) {
+	public JoinNestCommentContentsBean getNestCom(int neCom_id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		JoinMemberCommentDataBean joinMemCom = null;
+		JoinNestCommentContentsBean nestCom = null;
 		
 		try {
 			conn = getConnection();
-			String sql = "SELECT n.neCom_id, m.mem_id, m.mem_nickname, m.mem_level, c.com_bd_id, n.reCom_content, n.reCom_date"
+			String sql = "SELECT n.neCom_id, c.com_id, m.mem_id, m.mem_nickname, m.mem_level, c.com_bd_id, n.reCom_content, n.reCom_date"
 					+ " FROM member m JOIN comment c JOIN nestcomment n ON m.mem_id = n.mem_id AND c.com_id = n.com_id"
 					+ " WHERE n.neCom_id = ?";
 			
@@ -92,15 +92,16 @@ public class NestCommentDBBean {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				joinMemCom = new JoinMemberCommentDataBean();
+				nestCom = new JoinNestCommentContentsBean();
 				
-				joinMemCom.setCom_id(rs.getInt(1));
-				joinMemCom.setCom_mem_id(rs.getInt(2));
-				joinMemCom.setCom_mem_nickname(rs.getString(3));
-				joinMemCom.setCom_mem_level(rs.getInt(4));
-				joinMemCom.setCom_db_id(rs.getInt(5));
-				joinMemCom.setCom_content(rs.getString(6));
-				joinMemCom.setCom_date(rs.getTimestamp(7));
+				nestCom.setNeCom_id(rs.getInt(1));
+				nestCom.setCom_id(rs.getInt(2));
+				nestCom.setCom_mem_id(rs.getInt(3));
+				nestCom.setCom_mem_nickname(rs.getString(4));
+				nestCom.setCom_mem_level(rs.getInt(5));
+				nestCom.setCom_db_id(rs.getInt(6));
+				nestCom.setCom_content(rs.getString(7));
+				nestCom.setCom_date(rs.getTimestamp(8));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,7 +114,7 @@ public class NestCommentDBBean {
 				try { conn.close(); } catch(SQLException sqle) {}
 		}
 		
-		return joinMemCom;
+		return nestCom;
 	}
 	
 	public int insertNestComment(int com_id, int mem_id, String content) {

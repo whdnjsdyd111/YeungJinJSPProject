@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.bean.BoardDBBean;
+import main.bean.CommentDBBean;
 import main.command.CommandAction;
 
 public class ContentsManagementAction implements CommandAction {
@@ -30,16 +31,16 @@ public class ContentsManagementAction implements CommandAction {
 				return "/admin/dashboard/contentsManagement.jsp";
 			}
 		} else if (search.equals("comment")) {
-//			if (sort.equals("recent")) {
-//				request.setAttribute("comment", CommentDBBean.getInstance().getCommentRecentList());
-//			} else if (sort.equals("recommend")) {
-//				request.setAttribute("comment", CommentDBBean.getInstance().getCommentRecoList());
-//			} else if (sort.equals("nonRecommend")) {
-//				request.setAttribute("comment", CommentDBBean.getInstance().getCommentNonRecoList());
-//			} else {
-//				request.setAttribute("none_param", new Integer(1));
-//				return "/admin/dashboard/contentsManagement.jsp";
-//			}
+			if (sort.equals("recent")) {
+				request.setAttribute("comment", CommentDBBean.getInstance().getCommentOrderByTime());
+			} else if (sort.equals("recommend")) {
+				request.setAttribute("comment", CommentDBBean.getInstance().getCommentOrderByReco());
+			} else if (sort.equals("nonRecommend")) {
+				request.setAttribute("comment", CommentDBBean.getInstance().getCommentOrderByNonReco());
+			} else {
+				request.setAttribute("none_param", new Integer(1));
+				return "/admin/dashboard/contentsManagement.jsp";
+			}
 		} else {
 			request.setAttribute("none_param", new Integer(1));
 			return "/admin/dashboard/contentsManagement.jsp";
