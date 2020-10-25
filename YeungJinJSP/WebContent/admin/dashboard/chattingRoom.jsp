@@ -67,6 +67,14 @@
 	webSocket.onopen = function(event) { onOpen(event) };
 	webSocket.onmessage = function(event) { onMessage(event) };
 	
+	$(function() {
+		$(window).on('beforeunload', function () {
+			webSocket.send("${ admin_member.admin_name } 님이 퇴장하였습니다.\n");
+			webSocket.close();
+			console.log("웹 소켓 종료");
+		});
+	});
+
 	function onMessage(event) {
 		try {
 			let arr = JSON.parse(event.data);
@@ -86,6 +94,7 @@
 				'</div>';
 				
 			$('#chat_room').append(tag);
+			$('#chat_room').scrollTop($('#chat_room').prop('scrollHeight'));
 		} catch (error) {
 			$('#chat_room').append("<p class='bg-success rounded p-2'>" + event.data + "</p>");
 			$('#chat_room').scrollTop($('#chat_room').prop('scrollHeight'));

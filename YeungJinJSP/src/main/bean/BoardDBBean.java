@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -1235,6 +1237,42 @@ public class BoardDBBean {
 		}
 		
 		return check;
+	}
+	
+	public Set<Integer> getBoardIds(int mem_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Set<Integer> set = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT b.board_id FROM member m JOIN board b ON m.mem_id = b.board_userid WHERE m.mem_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				set = new HashSet<>();
+				
+				do {
+					set.add(rs.getInt(1));
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch (SQLException e) {}
+			if(pstmt != null)
+				try { pstmt.close(); } catch (SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch (SQLException e) {}
+		}
+		
+		return set;
 	}
 }
 	

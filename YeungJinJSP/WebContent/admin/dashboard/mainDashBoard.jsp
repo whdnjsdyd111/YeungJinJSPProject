@@ -298,7 +298,7 @@
 					</thead>
 					<tbody>
 					<c:forEach var="new_bds" items="${ new_bd_rs.rowsByIndex }">
-						<tr onclick="location.href = 'contentsManagement.do?search=board&sort=recent#${ new_bds[0] }'" class="hov">
+						<tr onclick="location.href = 'contentsManagement.do?search=board&sort=recent&board_id=${ new_bds[0] }'" class="hov">
 							<th scope="row"><c:out value="${ new_bds[0] }" /></th>
 							<th>${ new_bds[1] }</th>
 							<th><span class="new_bds">${ new_bds[2] }</span></th>
@@ -323,7 +323,7 @@
 					</thead>
 					<tbody>
 					<c:forEach var="new_coms" items="${ new_com_rs.rowsByIndex }">
-						<tr onclick="location.href = 'contentsManagement.do?search=comment&sort=recent#${ new_coms[0] }'" class="hov">
+						<tr onclick="location.href = 'contentsManagement.do?search=comment&sort=recent&com_id=${ new_coms[0] }'" class="hov">
 							<th scope="row"><c:out value="${ new_coms[0] }" /></th>
 							<th>${ new_coms[1] }</th>
 							<th><span class="new_bds">${ new_coms[2] }</span></th>

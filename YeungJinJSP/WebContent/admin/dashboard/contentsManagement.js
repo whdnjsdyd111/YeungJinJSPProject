@@ -2,7 +2,9 @@ var loc;
 var oriLoc = window.location.href;
 
 $(function() {
-	if(window.location.href.includes('sort')) {
+	
+	
+	if(oriLoc.includes('sort')) {
 		loc = oriLoc.substring(oriLoc, oriLoc.indexOf('sort') - 1);
 	} else {
 		loc = oriLoc;
@@ -28,6 +30,21 @@ $(function() {
 		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsComModal.jsp?com_id=" + $(this).next().val());
 	});
 	
+	if(oriLoc.indexOf("board_id") >= 0) {
+		let board_id = oriLoc.substring(oriLoc.indexOf("board_id=") + 9, oriLoc.length);
+		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsBoardModal.jsp?board_id=" + board_id);
+	}
+	
+	if(oriLoc.indexOf("com_id") >= 0) {
+		let com_id = oriLoc.substring(oriLoc.indexOf("com_id=") + 7, oriLoc.length);
+		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsComModal.jsp?com_id=" + com_id);
+	}
+	
+	if(oriLoc.indexOf("neCom_id") >= 0) {
+		let necom_id = oriLoc.substring(oriLoc.indexOf("neCom_id=") + 9, oriLoc.length);
+		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsNestComModal.jsp?neCom_id=" + necom_id);
+	}
+
 	$('.com_content').find('img').replaceWith(function() {
 		let img = "<img src='" + $(this).attr("src") + "' width='180' height='200' />";
 		

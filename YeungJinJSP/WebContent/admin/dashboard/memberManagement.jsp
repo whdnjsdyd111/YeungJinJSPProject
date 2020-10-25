@@ -8,6 +8,8 @@
 	</script>
 </c:if>
 
+<script type="text/javascript" src="dashboard/memberManagement.js"></script>
+
 <h2 class="mb-3">멤버 관리 페이지</h2>
 <div class="container pl-0">
 	<div class="input-group">
@@ -18,7 +20,7 @@
 			<button class="btn btn-primary"><a class="text-white" href="memberManagement.do?sort=old">오래된 회원 순</a></button>	
 		</div>
 		<div class="input-group-append">
-			<button class="btn btn-primary"><a class="text-white" href="memberManagement.do?sort=level">회원 레벨 순</a></button>	
+			<button class="btn btn-dark"><a class="text-white" href="memberManagement.do?sort=level">회원 레벨 순</a></button>	
 		</div>
 	</div>
 </div>
