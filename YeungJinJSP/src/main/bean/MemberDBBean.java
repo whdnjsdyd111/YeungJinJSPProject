@@ -694,4 +694,92 @@ public class MemberDBBean {
 		
 		return list;
 	}
+	
+	public int updateLevel(int mem_id, int level) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE member SET mem_level = ? WHERE mem_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, level);
+			pstmt.setInt(2, mem_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int updateEx(int mem_id, int ex) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE member SET mem_level = "
+					+ "(SELECT * FROM (SELECT IF(? >= mem_level * 150, mem_level + 1, mem_level) FROM member WHERE mem_id = ?) AS A), "
+					+ "mem_ex = "
+					+ "(SELECT * FROM (SELECT IF(? >= mem_level * 150, ? - mem_level * 150, ?)"
+					+ " FROM member WHERE mem_id = ?) AS A) "
+					+ "WHERE mem_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ex);
+			pstmt.setInt(2, mem_id);
+			pstmt.setInt(3, ex);
+			pstmt.setInt(4, ex);
+			pstmt.setInt(5, ex);
+			pstmt.setInt(6, mem_id);
+			pstmt.setInt(7, mem_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
+	}
+	
+	public int updateAuth(int mem_id, String auth) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "UPDATE member SET mem_auth = ? WHERE mem_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, auth);
+			pstmt.setInt(2, mem_id);
+			
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return check;
+	}
 }

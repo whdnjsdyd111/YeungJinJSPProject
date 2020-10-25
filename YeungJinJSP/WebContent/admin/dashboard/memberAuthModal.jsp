@@ -27,9 +27,9 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">레벨</span>
 						</div>
-						<input type="text" class="form-control" value="${ mem.mem_level }">
+						<input type="text" class="form-control" value="${ mem.mem_level }" id="level_form">
 						<div class="input-group-append">
-							<button type="button" class="btn btn-danger">변경</button>
+							<button type="button" class="btn btn-danger" id="level">변경</button>
 						</div>
 					</div>
 					
@@ -37,9 +37,9 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">경험치</span>
 						</div>
-						<input type="text" class="form-control" value="${ mem.mem_ex }">
+						<input type="text" class="form-control" value="${ mem.mem_ex }" id="ex_form">
 						<div class="input-group-append">
-							<button type="button" class="btn btn-danger">변경</button>
+							<button type="button" class="btn btn-danger" id="ex">변경</button>
 						</div>
 					</div>
 					
@@ -47,12 +47,22 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">이메일 인증</span>
 						</div>
-						<input type="text" class="form-control" value="${ Character.toString(mem.mem_auth) }">
+						<input type="text" class="form-control" value="${ Character.toString(mem.mem_auth) }" id="auth_form">
 						<div class="input-group-append">
-							<button type="button" class="btn btn-danger">변경</button>
+							<button type="button" class="btn btn-danger" id="auth">변경</button>
 						</div>
 					</div>
 					<p class="text-secondary text-right">Y 또는 N</p>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">메시지 보내기</span>
+						</div>
+						<input type="text" class="form-control" id="message_form" maxlength="35">
+						<div class="input-group-append">
+							<button type="button" class="btn btn-danger" id="message">보내기</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
