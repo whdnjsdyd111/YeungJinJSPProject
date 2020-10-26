@@ -9,7 +9,4 @@ $(function() {
 		$('.modal').load("/YeungJinFunnyBone/admin/dashboard/contentsNestComModal.jsp?neCom_id=" + $(this).next().val());
 	});
 	
-	$('#delete_com').click(function() {
-		alert("댓글 번호 " + $(this).next().val());
-	});
 });

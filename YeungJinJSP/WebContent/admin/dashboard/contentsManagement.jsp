@@ -19,6 +19,9 @@
 		<div class="input-group-append">
 			<button class="btn btn-primary"><a class="text-white" href="contentsManagement.do?search=comment&sort=recent">댓글/리댓</a></button>	
 		</div>
+		<div class="input-group-append">
+			<button class="btn btn-danger"><a class="text-white" href="contentsManagement.do?search=deleted&sort=recent">삭제된 콘텐츠</a></button>	
+		</div>
 	</div>
 </div>
 <div class="container border border-dark rounded overflow-auto" style="height: 350px;">
@@ -59,6 +62,60 @@
 			</div>
 		</c:forEach>
 	</c:if>
+	
+	<c:if test="${ !empty deleted }">
+		<h4 class="my-1">게시판</h4>
+		<c:forEach var="cont" items="${ deleted_board }">
+			<div class="row d-flex flex-column my-3">
+				<div class="col-12 mb-2 mt-1 d-flex justify-content-around">
+					<span class="border col-6">${ cont.cont_title }</span>
+					<span class="border col-6 com_content">${ cont.cont_content }</span>
+				</div>
+				<div class="col-12 d-flex justify-content-around">
+					<span class="ml-2">#${ cont.cont_id }</span>
+					<a class="btn btn-outline-secondary mr-2" href="memberManagement.do?sort=new#${ cont.mem_id }">${ cont.mem_nickname }</a>
+					<button class="btn btn-warning restore_board">복구</button>
+					<input type="hidden" value="${ cont.cont_id }" />
+					<button class="btn btn-danger comple_delete_board">완전 삭제</button>
+				</div>
+			</div>
+		</c:forEach>
+		
+		<hr>
+		<h4 class="my-1">댓글</h4>
+		<c:forEach var="cont" items="${ deleted_comment }">
+			<div class="row d-flex justify-content-around my-3">
+				<div class="col-lg-6 col-sx-4 d-flex justify-content-around mb-2 mt-1">
+					<div class="col">
+						<a class="btn btn-outline-secondary mr-2" href="memberManagement.do?sort=new#${ cont.mem_id }">${ cont.mem_nickname }</a>
+						<span class="ml-2">#${ cont.cont_id }</span>
+					</div>
+					<span class="border col com_content">${ cont.cont_content }</span>
+				</div>
+				<button class="btn btn-warning restore_comment">복구</button>
+				<input type="hidden" value="${ cont.cont_id }" />
+				<button class="btn btn-danger comple_delete_comment">완전 삭제</button>
+			</div>
+		</c:forEach>
+		
+		<hr>
+		<h4 class="my-1">리댓</h4>
+		<c:forEach var="cont" items="${ deleted_nestcomment }">
+			<div class="row d-flex justify-content-around my-3">
+				<div class="col-lg-6 col-sx-4 d-flex justify-content-around mb-2 mt-1">
+					<div class="col">
+						<a class="btn btn-outline-secondary mr-2" href="memberManagement.do?sort=new#${ cont.mem_id }">${ cont.mem_nickname }</a>
+						<span class="ml-2">#${ cont.cont_id }</span>
+					</div>
+					<span class="border col com_content">${ cont.cont_content }</span>
+				</div>
+				<button class="btn btn-warning restore_nestcomment">복구</button>
+				<input type="hidden" value="${ cont.cont_id }" />
+				<button class="btn btn-danger comple_delete_nestcomment">완전 삭제</button>
+			</div>
+		</c:forEach>
+	</c:if>
+	
 </div>
 <div class="modal" tabindex="-1">
 	

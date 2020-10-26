@@ -56,8 +56,7 @@
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-danger" id="show_board">소속 게시판 보기</button>
 				<input type="hidden" value="${ com.com_db_id }">
-				<button type="button" class="btn btn-warning" id="delete_com">지우기</button>
-				<input type="hidden" value="${ com.com_id }">
+				<button type="button" class="btn btn-warning" onclick="delete_comment(this)">지우기</button>
 			</div>
 		</div>
 	</div>

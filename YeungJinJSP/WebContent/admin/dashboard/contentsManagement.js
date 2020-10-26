@@ -56,12 +56,204 @@ $(function() {
 		html: true,
 		boundary: 'window'
 	});
+	
+	$('.restore_board').click(function() {
+		if(confirm("복구 하시겠습니까?")) {
+			$.ajax({
+				type: "post",
+				data: {
+					board_id: $(this).next().val()
+				},
+				url: "restoreContents.do",
+				success: function(data) {
+					var str1 = "<p id='ck'>";
+					var str2 = "restore_contents</p>";
+					var loc1 = data.indexOf(str1);
+					var loc2 = data.indexOf(str2);
+					var len = str1.length;
+					var check = data.substr(loc1 + len, loc2 - (loc1 + len));
+					
+					if(check == "1") {
+						alert("복구 완료하였습니다.");
+						window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+					} else
+						alert("다시 시도해주십시오.");
+				}
+			});
+		}
+	});
+	
+	$('.restore_comment').click(function() {
+		if(confirm("복구 하시겠습니까?")) {
+			$.ajax({
+				type: "post",
+				data: {
+					com_id: $(this).next().val()
+				},
+				url: "restoreContents.do",
+				success: function(data) {
+					var str1 = "<p id='ck'>";
+					var str2 = "restore_contents</p>";
+					var loc1 = data.indexOf(str1);
+					var loc2 = data.indexOf(str2);
+					var len = str1.length;
+					var check = data.substr(loc1 + len, loc2 - (loc1 + len));
+					
+					if(check == "1") {
+						alert("복구 완료하였습니다.");
+						window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+					} else 
+						alert("상위 콘텐츠가 삭제되어있습니다. 번호 : " + check);
+				}
+			});
+		}
+	});
+	
+	$('.restore_nestcomment').click(function() {
+		if(confirm("복구 하시겠습니까?")) {
+			$.ajax({
+				type: "post",
+				data: {
+					neCom_id: $(this).next().val()
+				},
+				url: "restoreContents.do",
+				success: function(data) {
+					var str1 = "<p id='ck'>";
+					var str2 = "restore_contents</p>";
+					var loc1 = data.indexOf(str1);
+					var loc2 = data.indexOf(str2);
+					var len = str1.length;
+					var check = data.substr(loc1 + len, loc2 - (loc1 + len));
+					
+					if(check == "1") {
+						alert("복구 완료하였습니다.");
+						window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+					} else
+						alert("상위 콘텐츠가 삭제되어있습니다. 번호 : " + check);
+				}
+			});
+		}
+	});
+	
+	$('.comple_delete_board').click(function() {
+		if(confirm("하위 콘텐츠들도 모두 삭제됩니다. 정말 삭제하시겠습니까?")) {
+			$.ajax({
+				type: "post",
+				data: {
+					board_id: $(this).prev().val()
+				},
+				url: "compleDeleteContents.do",
+				success: function(data) {
+					var str = "<p id='ck'>";
+					var loc = data.indexOf(str);
+					var len = str.length;
+					var check = data.substr(loc + len, 1);
+					
+					if(check == "1") {
+						alert("삭제 완료하였습니다.");
+						window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+					} else
+						alert("다시 시도해주십시오.");
+				}
+			});
+		}
+	});
+	
+	$('.comple_delete_comment').click(function() {
+		if(confirm("하위 콘텐츠들도 모두 삭제됩니다. 정말 삭제하시겠습니까?")) {
+			$.ajax({
+				type: "post",
+				data: {
+					com_id: $(this).prev().val()
+				},
+				url: "compleDeleteContents.do",
+				success: function(data) {
+					var str = "<p id='ck'>";
+					var loc = data.indexOf(str);
+					var len = str.length;
+					var check = data.substr(loc + len, 1);
+					
+					if(check == "1") {
+						alert("삭제 완료하였습니다.");
+						window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+					} else
+						alert("다시 시도해주십시오.");
+				}
+			});
+		}
+	});
+	
+	$('.comple_delete_nestcomment').click(function() {
+		if(confirm("정말 삭제하시겠습니까?")) {
+			$.ajax({
+				type: "post",
+				data: {
+					neCom_id: $(this).prev().val()
+				},
+				url: "compleDeleteContents.do",
+				success: function(data) {
+					var str = "<p id='ck'>";
+					var loc = data.indexOf(str);
+					var len = str.length;
+					var check = data.substr(loc + len, 1);
+					
+					if(check == "1") {
+						alert("삭제 완료하였습니다.");
+						window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+					} else
+						alert("다시 시도해주십시오.");
+				}
+			});
+		}
+	});
 });
 
 function delete_board(btn) {
-	alert("게시판 번호 " + $(btn).prev().val());
+	if(confirm("해당 콘텐츠를 지우시겠습니까?")) {
+		$.ajax({
+			type: "post",
+			url: "deleteContents.do",
+			data: {
+				board_id: $(btn).prev().val()
+			},
+			success: function(data) {
+				var str = "<p id='ck'>";
+				var loc = data.indexOf(str);
+				var len = str.length;
+				var check = data.substr(loc + len, 1);
+				
+				if(check == "1"){
+					alert("지우기 완료하였습니다. 삭제된 컨텐츠에서 확인 가능합니다.");
+					window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+				} else {
+					alert("지우기 실패하였습니다. 다시 시도해주십시오.");
+				}
+			}
+		});
+	}
 }
 
 function delete_comment(btn) {
-	alert("댓글 번호 " + $(btn).prev().val());
+	if(confirm("해당 콘텐츠를 지우시겠습니까?")) {
+		$.ajax({
+			type: "post",
+			url: "deleteContents.do",
+			data: {
+				com_id: $(btn).prev().val()
+			},
+			success: function(data) {
+				var str = "<p id='ck'>";
+				var loc = data.indexOf(str);
+				var len = str.length;
+				var check = data.substr(loc + len, 1);
+				
+				if(check == "1"){
+					alert("지우기 완료하였습니다. 삭제된 컨텐츠에서 확인 가능합니다.");
+					window.location.href = "contentsManagement.do?search=deleted&sort=recent";
+				} else {
+					alert("지우기 실패하였습니다. 다시 시도해주십시오.");
+				}
+			}
+		});
+	}
 }
