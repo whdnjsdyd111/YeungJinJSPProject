@@ -30,7 +30,7 @@
 				<span>${ feedback.feed_date }</span>
 			</div>
 			<button class="btn btn-outline-dark watch_content">내용 보기</button>
-			<input type="hidden" value="${ feedback.feed_content }" />
+			<div class="d-none">${ feedback.feed_content }</div>
 			<button class="btn btn-danger process">처리하기</button>
 			<input type="hidden" value="${ feedback.feed_id }" />
 			<button class="btn btn-warning delete">지우기</button>
@@ -45,7 +45,7 @@
 				<span>${ feedback.feed_date }</span>
 			</div>
 			<button class="btn btn-outline-dark watch_content">내용 보기</button>
-			<input type="hidden" value="${ feedback.feed_content }" />
+			<div class="d-none">${ feedback.feed_content }</div>
 			<button class="btn btn-success">처리완료<i class="fa fa-check-square ml-2"></i></button>
 		</div>	
 	</c:forEach>
@@ -61,7 +61,7 @@
 			  </button>
 			</div>
 			<div class="modal-body">
-			  <span id="feed_content"></span>
+			  <div id="feed_content"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>

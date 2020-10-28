@@ -34,7 +34,17 @@ public class DeletedContentsDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT deleted_nestComment SELECT * FROM" + 
+			
+			String sql = "INSERT admin_notice(mem_id, notice_content) SELECT * FROM (SELECT board_userid FROM board "
+					+ "WHERE board_id = ?) AS A, (SELECT '관리자에 의해 콘텐츠가 삭제되었습니다. [게시판 # " + board_id + "]') AS B";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_id);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			sql = "INSERT deleted_nestComment SELECT * FROM" + 
 				" (SELECT * FROM nestcomment WHERE com_id IN (SELECT com_id FROM comment WHERE com_bd_id = ?)) AS A," + 
 				" (SELECT 'N') AS N";
 			
@@ -105,7 +115,17 @@ public class DeletedContentsDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT deleted_nestcomment" + 
+			
+			String sql = "INSERT admin_notice(mem_id, notice_content) SELECT * FROM (SELECT com_mem_id FROM comment "
+					+ "WHERE com_id = ?) AS A, (SELECT '관리자에 의해 콘텐츠가 삭제되었습니다. [댓글 # " + com_id + "]') AS B";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, com_id);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			sql = "INSERT deleted_nestcomment" + 
 				" SELECT * FROM (SELECT * FROM nestcomment WHERE com_id = ?) AS A, (SELECT 'N') AS N";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -159,7 +179,17 @@ public class DeletedContentsDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT deleted_nestcomment" + 
+
+			String sql = "INSERT admin_notice(mem_id, notice_content) SELECT * FROM (SELECT mem_id FROM nestcomment "
+					+ "WHERE necom_id = ?) AS A, (SELECT '관리자에 의해 콘텐츠가 삭제되었습니다. [리댓 # " + neCom_id + "]') AS B";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, neCom_id);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			sql = "INSERT deleted_nestcomment" + 
 				" SELECT * FROM (SELECT * FROM nestcomment WHERE necom_id = ?) AS A, (SELECT 'Y') AS Y";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -320,7 +350,17 @@ public class DeletedContentsDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT board SELECT * FROM deleted_board WHERE board_id = ?";
+			
+			String sql = "INSERT admin_notice(mem_id, notice_content) SELECT * FROM (SELECT board_userid FROM deleted_board "
+					+ "WHERE board_id = ?) AS A, (SELECT '관리자에 의해 콘텐츠가 복구되었습니다. [게시판 # " + board_id + "]') AS B";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_id);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			sql = "INSERT board SELECT * FROM deleted_board WHERE board_id = ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, board_id);
@@ -393,7 +433,17 @@ public class DeletedContentsDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT comment " + 
+			
+			String sql = "INSERT admin_notice(mem_id, notice_content) SELECT * FROM (SELECT com_mem_id FROM deleted_comment "
+					+ "WHERE com_id = ?) AS A, (SELECT '관리자에 의해 콘텐츠가 복구되었습니다. [댓글 # " + com_id + "]') AS B";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, com_id);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			sql = "INSERT comment " + 
 				"SELECT com_id, com_mem_id, com_bd_id, com_content, " + 
 				"com_reco, com_date FROM deleted_comment WHERE com_id = ?";
 			
@@ -469,7 +519,17 @@ public class DeletedContentsDBBean {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT nestcomment " + 
+			
+			String sql = "INSERT admin_notice(mem_id, notice_content) SELECT * FROM (SELECT mem_id FROM deleted_nestcomment "
+					+ "WHERE necom_id = ?) AS A, (SELECT '관리자에 의해 콘텐츠가 복구되었습니다. [리댓 # " + neCom_id + "]') AS B";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, neCom_id);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			sql = "INSERT nestcomment " + 
 					"SELECT necom_id, com_id, mem_id, recom_content, recom_date " + 
 					"FROM deleted_nestcomment WHERE necom_id = ?";
 				

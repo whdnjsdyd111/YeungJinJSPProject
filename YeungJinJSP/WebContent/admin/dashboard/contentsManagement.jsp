@@ -68,7 +68,7 @@
 		<c:forEach var="cont" items="${ deleted_board }">
 			<div class="row d-flex flex-column my-3">
 				<div class="col-12 mb-2 mt-1 d-flex justify-content-around">
-					<span class="border col-6">${ cont.cont_title }</span>
+					<span class="border col-6 pt-4">${ cont.cont_title }</span>
 					<span class="border col-6 com_content">${ cont.cont_content }</span>
 				</div>
 				<div class="col-12 d-flex justify-content-around">

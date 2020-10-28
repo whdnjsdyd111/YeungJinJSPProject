@@ -1,6 +1,6 @@
 $(function() {
 	$('.watch_content').click(function() {
-		$('#feed_content').text($(this).next().val());
+		$('#feed_content').html($(this).next().html());
 		$('.modal').modal('show');
 	});
 	
