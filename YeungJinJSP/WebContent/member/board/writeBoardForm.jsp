@@ -48,7 +48,7 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text">https://</span>
 		</div>
-		<input id="insert_img" class="input-group-append form-control" type="text" class="custom-file-input" placeholder="사진 또는 동영상 링크 입력">
+		<input id="insert_img" class="input-group-append form-control" type="text" class="custom-file-input" placeholder="사진 링크 입력">
 	</div>
 	
 	<div class="w-100 border border-dark rounded write_content_top">
