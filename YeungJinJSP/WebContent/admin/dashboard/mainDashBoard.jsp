@@ -39,15 +39,15 @@
 </sql:query>
 
 <sql:query var="new_mem_rs" dataSource="jdbc/yjfb">
-	SELECT mem_email, mem_nickname FROM member WHERE mem_date > '2020-08-01';
+	SELECT mem_email, mem_nickname FROM member WHERE DATE(mem_date) = DATE(now());
 </sql:query>
 
 <sql:query var="new_bd_rs" dataSource="jdbc/yjfb">
-	SELECT board_id, board_title, board_content FROM board;
+	SELECT board_id, board_title, board_content FROM board WHERE DATE(board_date) = DATE(now());
 </sql:query>
 
 <sql:query var="new_com_rs" dataSource="jdbc/yjfb">
-	SELECT c.com_id, m.mem_nickname, c.com_content FROM member m JOIN comment c ON m.mem_id = c.com_mem_id;
+	SELECT c.com_id, m.mem_nickname, c.com_content FROM member m JOIN comment c ON m.mem_id = c.com_mem_id WHERE DATE(com_date) = DATE(now());
 </sql:query>
 
 <div class="row">
