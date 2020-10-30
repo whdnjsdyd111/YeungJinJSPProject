@@ -3,11 +3,9 @@ package main.command.member.board;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.bean.AES256Util;
 import main.bean.CommentDBBean;
 import main.bean.MemberDBBean;
 import main.bean.NoticeDBBean;
-import main.bean.SHA256;
 import main.command.CommandAction;
 
 public class CommentInsertAction implements CommandAction {

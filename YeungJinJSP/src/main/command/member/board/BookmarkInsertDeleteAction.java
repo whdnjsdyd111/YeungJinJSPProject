@@ -3,9 +3,7 @@ package main.command.member.board;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.bean.AES256Util;
 import main.bean.BookmarkDBBean;
-import main.bean.SHA256;
 import main.command.CommandAction;
 
 public class BookmarkInsertDeleteAction implements CommandAction {

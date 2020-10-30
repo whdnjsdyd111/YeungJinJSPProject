@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.bean.MemberDBBean;
-import main.bean.MemberDataBean;
 import main.command.CommandAction;
 
 public class CheckPasswordProAction implements CommandAction {

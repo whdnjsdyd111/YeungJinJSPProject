@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.bean.AdminDBBean;
-import main.bean.MemberDBBean;
 import main.command.CommandAction;
 
 public class LoginProAction implements CommandAction {

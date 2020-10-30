@@ -3,8 +3,6 @@ package main.command.admin.dashboard;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
-
 import main.bean.BoardDBBean;
 import main.bean.CommentDBBean;
 import main.bean.DeletedContentsDBBean;

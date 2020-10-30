@@ -3,7 +3,6 @@ package main.command.member.board;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.bean.AES256Util;
 import main.bean.BoardDBBean;
 import main.bean.BoardDataBean;
 import main.bean.BookmarkDBBean;
@@ -12,7 +11,6 @@ import main.bean.MemberDBBean;
 import main.bean.MemberDataBean;
 import main.bean.PageViewDBBean;
 import main.bean.RecommendDBBean;
-import main.bean.SHA256;
 import main.command.CommandAction;
 
 public class BoardContentAction implements CommandAction {
