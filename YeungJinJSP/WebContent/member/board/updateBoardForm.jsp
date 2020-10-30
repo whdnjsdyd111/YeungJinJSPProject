@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
+<sql:query var="admin" dataSource="jdbc/yjfb">
+	SELECT admin_id FROM admin WHERE admin_id = ?
+	<sql:param value="${ sessionScope.YJFBID_SES }" />
+</sql:query>
 
 <script type="text/javascript" src="member/board/updateBoard.js"></script>
 
@@ -48,6 +54,18 @@
 			</c:if>
 			<c:if test="${ board.board_kind != 500 }">
 				<option value="500">코로나 뉴스</option>
+			</c:if>
+			<c:if test="${ board.board_kind == 600 }">
+				<option value="600" selected="selected">공지사항</option>
+			</c:if>
+			<c:if test="${ board.board_kind != 600 }">
+				<option value="600">공지사항</option>
+			</c:if>
+			<c:if test="${ board.board_kind == 700 }">
+				<option value="700" selected="selected">소식</option>
+			</c:if>
+			<c:if test="${ board.board_kind != 700 }">
+				<option value="700">소식</option>
 			</c:if>
 		</select>
 	</div>

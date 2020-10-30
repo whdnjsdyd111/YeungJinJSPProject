@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
+<sql:query var="admin" dataSource="jdbc/yjfb">
+	SELECT admin_id FROM admin WHERE admin_id = ?
+	<sql:param value="${ sessionScope.YJFBID_SES }" />
+</sql:query>
+
 <script type="text/javascript" src="member/board/writeBoard.js"></script>
 <c:if test="${ empty sessionScope.YJFBID_SES }">
 	<script>
@@ -20,6 +27,10 @@
 			<option value="300">공포</option>
 			<option value="400">만화</option>
 			<option value="500">코로나 뉴스</option>
+			<c:if test="${ !empty admin.rowsByIndex[0][0] }">
+				<option value="600">공지사항</option>
+				<option value="700">소식</option>
+			</c:if>
 		</select>
 	</div>
 	

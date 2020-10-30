@@ -27,6 +27,38 @@ public class AdminDBBean {
 		return ds.getConnection();
 	}
 	
+	public int checkAdminId(int id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int admin_id = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT admin_id FROM admin WHERE admin_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				admin_id = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException e) {}
+			if(pstmt != null )
+				try { pstmt.close(); } catch(SQLException e) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException e) {}
+		}
+		
+		return admin_id;
+	}
+	
 	public int getAdminId(String email, String passwd) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
