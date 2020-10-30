@@ -40,9 +40,7 @@
 						<small id="check_mail_pass" class="form-text text-muted check_small mt-1 mb-3"></small>
 						
 					</div>
-					<div class="container d-flex flex-column my-3">
-						<label>비밀번호를 잊으셨습니까?<a href="#"
-							class="btn btn-outline-primary mx-3 btn-sm">비밀번호 찾기</a></label>
+					<div class="container d-flex flex-column my-3">	
 						<button type="button" id="loginBtn" disabled="disabled"	class="btn btn-success my-3 col w-50 btn-lg">로그인</button>
 					</div>
 			
