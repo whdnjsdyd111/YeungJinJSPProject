@@ -164,7 +164,7 @@ function upload() {
 					$('#img' + i).removeAttr('id');
 				}
 			}
-			
+			update_board();
 		}
 	});
 }
