@@ -36,44 +36,12 @@
 	
 	<c:set var="loop_flag" value="false" />
 	<c:forEach var="i" begin="0" end="2" step="1" varStatus="status">
-		<c:if test="${ notices.size() + admin_notices.size() == i }">
-			<c:set var="loop_flag" value="true" />
-		</c:if>
-		<c:if test="${ not loop_flag }">
-			<c:if test="${ admin_notices.size() > i }">
-				<c:set var="admin_notice" value="${ admin_notices.get(i) }" />
-				<div class="row no-gutters bg-light border border-white border-left-0 border-right-0">
-					<div class="col-10 p-4 bg-highlight d-flex flex-column">
-						<div>
-							<span class="text-info mr-2">관리자 메시지</span>
-							<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ admin_notice.notice_date }">
-								<button class="btn" style="pointer-events: none; vertical-align: inherit;" type="button">
-									<%
-										long time = new Timestamp(System.currentTimeMillis()).getTime() - 
-											((AdminNoticeDataBean) pageContext.getAttribute("admin_notice")).getNotice_date().getTime();
-									
-										out.print(
-											(time / 1000 < 60) ? time / 1000 + "초 전" : (time / 1000 / 60 < 60) ? time / 1000 / 60 + "분 전"
-													: (time / 1000 / 60 / 60 < 24) ? time / 1000 / 60 / 60 + "시간 전" : time / 1000 / 60 / 60 / 24 + "일 전"
-												);
-									%>
-								</button>
-							</span>
-						</div>
-						<div>
-							<span>${ admin_notice.notice_content }</span>
-						</div>
-					</div>
-					<div class="col-2 bg-highlight d-flex">
-						<button type="button" class="close m-auto delete_admin_notice" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<input type="hidden" value=${ admin_notice.notice_id } />
-					</div>
-				</div>
+		<c:if test="${ empty admin_notices && !empty notices }">
+			<c:if test="${ notices.size() == i }">
+				<c:set var="loop_flag" value="true" />
 			</c:if>
-			<c:if test="${ admin_notices.size() <= i }">
-				<c:set var="notice" value="${ notices.get(i - admin_notices.size()) }" />
+			<c:if test="${ not loop_flag }">
+				<c:set var="notice" value="${ notices.get(i) }" />
 				<c:if test="${ notice.kind_id == 100 }">
 					<div class="row no-gutters bg-light border border-white border-left-0 border-right-0">
 						<div class="col-10 p-4 bg-highlight d-flex flex-column">
@@ -108,7 +76,8 @@
 							<button type="button" class="close m-auto delete_notice" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<input type="hidden" name="notice" value="${ notice.board_id }" />
+							<input type="hidden" name="board" value="${ notice.board_id }" />
+							<input type="hidden" name="kind" value="${ notice.kind_id }" />
 						</div>
 					</div>
 				</c:if>
@@ -162,7 +131,136 @@
 					</div>
 				</c:if>
 			</c:if>
-				
+		</c:if>
+		<c:if test="${ !empty admin_notices }">
+			<c:if test="${ notices.size() + admin_notices.size() == i }">
+				<c:set var="loop_flag" value="true" />
+			</c:if>
+			<c:if test="${ not loop_flag }">
+				<c:if test="${ admin_notices.size() > i }">
+					<c:set var="admin_notice" value="${ admin_notices.get(i) }" />
+					<div class="row no-gutters bg-danger border border-white border-left-0 border-right-0">
+						<div class="col-10 p-4 bg-highlight d-flex flex-column">
+							<div>
+								<span class="text-info mr-2">관리자 메시지</span>
+								<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ admin_notice.notice_date }">
+									<button class="btn" style="pointer-events: none; vertical-align: inherit;" type="button">
+										<%
+											long time = new Timestamp(System.currentTimeMillis()).getTime() - 
+												((AdminNoticeDataBean) pageContext.getAttribute("admin_notice")).getNotice_date().getTime();
+										
+											out.print(
+												(time / 1000 < 60) ? time / 1000 + "초 전" : (time / 1000 / 60 < 60) ? time / 1000 / 60 + "분 전"
+														: (time / 1000 / 60 / 60 < 24) ? time / 1000 / 60 / 60 + "시간 전" : time / 1000 / 60 / 60 / 24 + "일 전"
+													);
+										%>
+									</button>
+								</span>
+							</div>
+							<div>
+								<span>${ admin_notice.notice_content }</span>
+							</div>
+						</div>
+						<div class="col-2 bg-highlight d-flex">
+							<button type="button" class="close m-auto delete_admin_notice" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<input type="hidden" value=${ admin_notice.notice_id } />
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${ admin_notices.size() <= i }">
+					<c:set var="notice" value="${ notices.get(i - admin_notices.size()) }" />
+					<c:if test="${ notice.kind_id == 100 }">
+						<div class="row no-gutters bg-light border border-white border-left-0 border-right-0">
+							<div class="col-10 p-4 bg-highlight d-flex flex-column">
+								<div>
+									<span class="text-info mr-2">댓글</span><span>${ notice.notice_content }</span>
+								</div>
+								<div>
+									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ notice.notice_date }">
+										<button class="btn" style="pointer-events: none; vertical-align: inherit;" type="button">
+											<%
+												long time = new Timestamp(System.currentTimeMillis()).getTime() - 
+													((NoticeDataBean) pageContext.getAttribute("notice")).getNotice_date().getTime();
+											
+												out.print(
+													(time / 1000 < 60) ? time / 1000 + "초 전" : (time / 1000 / 60 < 60) ? time / 1000 / 60 + "분 전"
+															: (time / 1000 / 60 / 60 < 24) ? time / 1000 / 60 / 60 + "시간 전" : time / 1000 / 60 / 60 / 24 + "일 전"
+														);
+											%>
+										</button>
+									</span>
+									<span><i class="fa fa-comments-o mr-2"></i>${ notice.notice_number }</span>
+									<sql:query var="rs_reco" dataSource="jdbc/yjfb">
+										SELECT board_reco, board_nonReco FROM board WHERE board_id = ?
+										<sql:param value="${ notice.board_id }" />
+									</sql:query>
+									<span><i class="fa fa-thumbs-o-up mx-2"></i>${ rs_reco.rowsByIndex[0][0] }</span>
+									<span><i class="fa fa-thumbs-o-down mx-2"></i>${ rs_reco.rowsByIndex[0][1] }</span>
+								</div>
+						    	<a href="boardContent.do?bdNum=${ notice.board_id }#start_com" class="stretched-link"></a>
+							</div>
+							<div class="col-2 bg-highlight d-flex">
+								<button type="button" class="close m-auto delete_notice" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<input type="hidden" name="board" value="${ notice.board_id }" />
+								<input type="hidden" name="kind" value="${ notice.kind_id }" />
+							</div>
+						</div>
+					</c:if>
+			
+					<c:if test="${ notice.kind_id == 200 }">
+						<div class="row no-gutters bg-light border border-white border-left-0 border-right-0">
+							<div class="col-10 p-4 bg-highlight d-flex flex-column">
+								<div>
+									<span class="text-info mr-2">리댓</span>
+									<span>
+										<sql:query var="rs_title" dataSource="jdbc/yjfb">
+											SELECT board_title, INSERT(board_title, 14, CHAR_LENGTH(board_title), '..') FROM board WHERE board_id = ?
+											<sql:param value="${ notice.board_id }" />
+										</sql:query>
+										${ rs_title.rowsByIndex[0][0] }
+									</span>
+								</div>
+								<div>
+									<span>${ notice.notice_content }</span>
+								</div>
+								<div>
+									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${ notice.notice_date }">
+										<button class="btn" style="pointer-events: none; vertical-align: inherit;" type="button">
+											<%
+												long time = new Timestamp(System.currentTimeMillis()).getTime() - 
+													((NoticeDataBean) pageContext.getAttribute("notice")).getNotice_date().getTime();
+											
+												out.print(
+													(time / 1000 < 60) ? time / 1000 + "초 전" : (time / 1000 / 60 < 60) ? time / 1000 / 60 + "분 전"
+															: (time / 1000 / 60 / 60 < 24) ? time / 1000 / 60 / 60 + "시간 전" : time / 1000 / 60 / 60 / 24 + "일 전"
+														);
+											%>
+										</button>
+									</span>
+									<c:if test="${ notice.notice_number > 1 }">
+										<span>그 외 <i class="fa fa-commenting-o mr-2"></i>${ notice.notice_number }</span>
+									</c:if>
+									<c:if test="${ notice.notice_number == 1 }">
+										<span><i class="fa fa-commenting-o mr-2"></i>${ notice.notice_number }</span>
+									</c:if>
+								</div>
+						    	<a href="boardContent.do?bdNum=${ notice.board_id }#start_com" class="stretched-link"></a>
+							</div>
+							<div class="col-2 bg-highlight d-flex">
+								<button type="button" class="close m-auto delete_notice" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<input type="hidden" name="board" value="${ notice.board_id }" />
+								<input type="hidden" name="kind" value="${ notice.kind_id }" />
+							</div>
+						</div>
+					</c:if>
+				</c:if>
+			</c:if>
 		</c:if>
 	</c:forEach>
 	<c:if test="${ notices.size() + admin_notices.size() > 3 }">
