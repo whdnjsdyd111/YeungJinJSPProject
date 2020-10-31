@@ -72,10 +72,10 @@
 	
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
-			<span class="input-group-text"><i class="fa fa-upload mr-2"></i>업로드</span>
+			<button class="btn btn-outline-secondary" type="button" id="upload_image"><i class="fa fa-upload mr-2"></i>업로드</button>
 		</div>
 		<div class="custom-file">
-			<input type="file" class="custom-file-input">
+			<input type="file" class="custom-file-input" accept="image/*;capture=camera" id="file_image">
 			<label class="custom-file-label">이미지 삽입<i class="fa fa-file-image-o ml-2"></i></label>
 		</div>
 	</div>

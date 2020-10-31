@@ -39,7 +39,7 @@
 			 <button class="btn btn-outline-secondary" type="button" id="upload_image"><i class="fa fa-upload mr-2"></i>업로드</button>
 		</div>
 		<div class="custom-file">
-			<input type="file" class="custom-file-input" accept="image/*" id="file_image" capture="camera">
+			<input type="file" class="custom-file-input" accept="image/*;capture=camera" id="file_image">
 			<label class="custom-file-label" for="file_image">이미지 삽입<i class="fa fa-file-image-o ml-2"></i></label>
 		</div>
 	</div>

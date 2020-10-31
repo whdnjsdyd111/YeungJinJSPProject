@@ -73,7 +73,7 @@ body {
 			<p>입력하신 정보들은 DB에서 삭제되어 다시 진행하셔야 합니다.
 			<div class="text-center mt-4 mb-5">
 				<a class="btn btn-success send px-3"
-					href="mainBoard.do?kind=all&sort=pop"> <i
+					href="mainBoard.do?kind=all&sort=recent"> <i
 					class="fa fa-long-arrow-left mr-1"></i>메인으로 가기
 				</a>
 

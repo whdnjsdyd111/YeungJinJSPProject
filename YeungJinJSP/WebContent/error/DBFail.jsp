@@ -64,7 +64,7 @@ body {
 			<h3>데이베이스 시스템에 오류가 발생하였습니다!</h3>
 			<div class="text-center mt-4 mb-5">
 				<a class="btn btn-success send px-3"
-					href="mainBoard.do?kind=all&sort=pop"> <i
+					href="mainBoard.do?kind=all&sort=recent"> <i
 					class="fa fa-long-arrow-left mr-1"></i>메인으로 가기
 				</a>
 

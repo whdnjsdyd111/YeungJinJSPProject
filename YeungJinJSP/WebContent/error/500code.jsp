@@ -115,7 +115,7 @@ body {
                 <h1 class="not-found">505</h1>
                 <h3>서버에 문제가 발생하였습니다!</h3>
                 <div class="text-center mt-4 mb-5"> 
-                	<a class="btn btn-success send px-3" href="mainBoard.do?kind=all&sort=pop">
+                	<a class="btn btn-success send px-3" href="mainBoard.do?kind=all&sort=recent">
                 		<i class="fa fa-long-arrow-left mr-1"></i>메인으로 가기</a> 
         
             	</div>

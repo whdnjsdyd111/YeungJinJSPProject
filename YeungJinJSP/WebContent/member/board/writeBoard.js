@@ -5,6 +5,7 @@ var total_file = 0;
 var image_files = [];
 
 $(function() {
+	
 	var checkload = true;
 	
     $("#complete").click(function () {
@@ -17,13 +18,6 @@ $(function() {
 
 	$('#back').click(function() {
 		window.history.back();
-	});
-	
-	$('#complete').click(function() {
-		checkAll();
-		if(check_title && check_content) {
-			upload();
-		}
 	});
 	
 	$('#insert_img').keydown(function(key) {
@@ -43,6 +37,13 @@ $(function() {
 		
 		$('#insert_img').val(image_link);
 		
+	});
+	
+	$('#complete').click(function() {
+		checkAll();
+		if(check_title && check_content) {
+			upload();
+		}
 	});
 	
 	$(".custom-file-input").on("change", function() {
@@ -151,6 +152,7 @@ function upload() {
 			for(let i = 0; i < total_file; i++) {
 				if($('#img' + i).attr('src')) {
 					$('#img' + i).attr('src', check_files[index1--].trim().replace(/\\/gi, '/'));
+					$('#img' + i).removeAttr('id');
 				}
 			}
 			

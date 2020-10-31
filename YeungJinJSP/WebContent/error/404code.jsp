@@ -74,7 +74,7 @@ body {
         <span class="oops-text">페이지를 찾을 수 없습니다!</span>
         <h4 class="not-found-text mt-4">접속하신 페이지의 주소가 잘못되었거나 삭제되었습니다!<br>페이지를 정확하게 입력했는지 확인해주십시오!</h4>
         <div class="text-center mt-4 mb-5"> 
-	        <a class="btn btn-success send px-3" href="mainBoard.do?kind=all&sort=pop">
+	        <a class="btn btn-success send px-3" href="mainBoard.do?kind=all&sort=recent">
 	        	<i class="fa fa-long-arrow-left mr-1"></i>메인으로 가기
 	        </a>
         </div>
